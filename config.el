@@ -225,7 +225,7 @@
         gptel-model 'gpt-4o))
     (setq gptel-backend my-gptel-perplexity
           gptel-model 'sonar-pro)
-    
+
 (add-to-list 'load-path "/home/vukini/repos/paredit")
   (autoload 'enable-paredit-mode "paredit"
     "Turn on pseudo-structural editing of Lisp Code"

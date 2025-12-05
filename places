@@ -1,11 +1,11 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
 (("/home/vukini/.emacs.d/"
   (dired-filename . "/home/vukini/.emacs.d/."))
- ("/home/vukini/" (dired-filename . "/home/vukini/.ghcup"))
+ ("/home/vukini/" (dired-filename . "/home/vukini/.gforth-history"))
  ("/home/vukini/p/R/" (dired-filename . "/home/vukini/p/R/.."))
  ("/home/vukini/.emacs.d/.saves/"
   (dired-filename
-   . "/home/vukini/.emacs.d/.saves/!home!vukini!.config!qtile!config.py.~1~"))
+   . "/home/vukini/.emacs.d/.saves/!home!vukini!.emacs.d!.git!COMMIT_EDITMSG.~3~"))
  ("/home/vukini/.config/" (dired-filename . "/home/vukini/.config/go"))
  ("/home/vukini/.config/dunst/"
   (dired-filename . "/home/vukini/.config/dunst/dunstrc"))
@@ -17,7 +17,8 @@
  ("/home/vukini/repos/glibc/"
   (dired-filename . "/home/vukini/repos/glibc/config.make.in"))
  ("/home/vukini/repos/glibc/configure" . 2654)
- ("/home/vukini/General/" . 1640)
+ ("/home/vukini/General/"
+  (dired-filename . "/home/vukini/General/termux-notes.md"))
  ("/home/vukini/General/Computing/Racket/Racket-Scheme.md" . 383)
  ("/home/vukini/p/c/" (dired-filename . "/home/vukini/p/c/hello"))
  ("/home/vukini/p/c/make/"
@@ -43,7 +44,7 @@
   (dired-filename . "/home/vukini/repos/herbstluftwm/INSTALL"))
  ("/home/vukini/bin/scratchpad" . 685)
  ("/home/vukini/repos/herbstluftwm/INSTALL" . 1195)
- ("/home/vukini/.emacs.d/init.el" . 117)
+ ("/home/vukini/.emacs.d/init.el" . 119)
  ("/home/vukini/.emacs.d/custom-vars.el" . 32)
  ("/home/vukini/.bashrc" . 2627)
  ("/home/vukini/p/racket/"
