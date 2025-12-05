@@ -296,7 +296,7 @@ https://paredit.org/cgit/paredit/tree/
 [[eww:https://github.com/roelvandijk/emacs-haskell-unicode-input-method][emacs-haskell-unicode-input-method
 https://github.com/roelvandijk/emacs-haskell-unicode-input-method]]
 
-Please clone this repo in the ~/.emacs.d/local.
+Please clone this repo in the ~/.emacs.d/local. I have to still work out how to add it as a submodule. 
 
 To manually enable use M-x set-input-method or C-x RET C-\ with haskell-unicode.
 Note that the elisp file must be evaluated for this to work.
