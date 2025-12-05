@@ -1,0 +1,35 @@
+# Byte-compiled / native-compiled files
+*.elc
+*.eln
+
+# Backups and auto-saves
+*~
+\#*\#
+.\#*
+
+# Emacs state
+.cache
+.emacs.desktop
+.emacs.desktop.lock
+auto-save-list/
+tramp/
+eshell/history
+projectile-bookmarks.eld
+recentf
+url/cache/
+.lsp-session-v1
+places
+transient
+url
+
+# Package and build artifacts
+elpa/
+straight/
+eln-cache/
+var/
+lib/
+emacs-haskell-unicode-input-method/
+
+# Org / misc noise
+.org-id-locations
+*_archive
