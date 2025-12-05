@@ -292,8 +292,7 @@ https://paredit.org/cgit/paredit/tree/
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 #+END_SRC
-**
-emacs-haskell-unicode-method
+** emacs-haskell-unicode-method
 [[eww:https://github.com/roelvandijk/emacs-haskell-unicode-input-method][emacs-haskell-unicode-input-method]]
 To manually enable use M-x set-input-method or C-x RET C-\ with haskell-unicode.
 Note that the elisp file must be evaluated for this to work.
