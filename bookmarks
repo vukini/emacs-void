@@ -1,0 +1,63 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Interactive Codes"
+ (front-context-string . "\n22.2.2 Code Cha")
+ (rear-context-string . "fining Commands\n")
+ (position . 1304888)
+ (last-modified 26921 43243 81483 893000)
+ (filename . "/usr/share/info/elisp")
+ (info-node . "Interactive Codes")
+ (handler . Info-bookmark-jump))
+("p"
+ (filename . "~/p/")
+ (front-context-string . "elisp\n  drwxr-xr")
+ (rear-context-string . "96 Nov 28 10:01 ")
+ (position . 319)
+ (last-modified 26921 42624 459096 728000))
+("config.org"
+ (filename . "~/.emacs.d/config.org")
+ (front-context-string . "essage \"3-------")
+ (rear-context-string . "window -1)))\n\n(m")
+ (position . 1128)
+ (last-modified 26921 37000 616939 757000))
+("Books"
+ (filename . "~/Books/")
+ (front-context-string . "emacs\n  drwxr-xr")
+ (rear-context-string . "96 Nov 19 12:32 ")
+ (position . 912)
+ (last-modified 26921 35285 504032 368000))
+("elisp-intro-interactive"
+ (front-context-string . "Using ‘Interacti")
+ (rear-context-string . "example.  *Note ")
+ (position . 125439)
+ (last-modified 26920 45284 140586 872000)
+ (filename . "/usr/share/info/eintr")
+ (info-node . "Interactive Options")
+ (handler . Info-bookmark-jump))
+("dotfiles"
+ (filename . "~/General/Computing/Emacs/Emacs-DotFiles.md")
+ (front-context-string . "---\ncreated: 202")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26907 53046 609759 994000))
+("General"
+ (filename . "~/General/")
+ (front-context-string . ".obsidian\n  drwx")
+ (rear-context-string . "96 Nov 17 23:38 ")
+ (position . 177)
+ (last-modified 26907 53018 551938 140000))
+("init.el"
+ (filename . "~/.emacs.d/init.el")
+ (front-context-string)
+ (rear-context-string . " work right.\n )\n")
+ (position . 937)
+ (last-modified 26907 52957 123303 480000))
+("Emacs-DotFiles.md"
+ (filename . "~/General/Computing/Emacs/Emacs-DotFiles.md")
+ (front-context-string . "\n;;;;;;;;;;;;;;;")
+ (rear-context-string . "Setting Theme\")\n")
+ (position . 623)
+ (last-modified 26907 52951 451556 234000))
+)

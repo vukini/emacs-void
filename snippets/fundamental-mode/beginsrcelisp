@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: beginsrcelisp
+# key: srclisp
+# --
+#+BEGIN_SRC elisp :load no
+(message ”this is a test.~%”)
+#+END_SRC

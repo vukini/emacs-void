@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: bs
+# key: bs
+# --
+#+BEGIN_SRC elisp :load no
+#+END_SRC
