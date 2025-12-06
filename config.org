@@ -11,7 +11,18 @@ if you don't see any, the file needs to be translated / generated with:
   (message "----------------------------")
 #+END_SRC
 *** Added a load path for local files.
-Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository. 
+Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository.
+
+We also stop annoy bell noises.
+
+We also enable `save-place-mode` to:
+
+Automatically save place in files, so that visiting them later
+(even during a different Emacs session) automatically moves point
+to the saved position, when the file is first found.  Uses the
+value of buffer-local variable save-place-mode to determine whether to
+save position or not.
+
 #+BEGIN_SRC elisp :load no 
   (add-to-list 'load-path "~/.emacs.d/local")
   (setq ring-bell-function 'ingore)
