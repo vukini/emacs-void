@@ -7,9 +7,9 @@ if you don't see any, the file needs to be translated / generated with:
 
 #+BEGIN_SRC elisp :load no
   (message "This is from config.org --> config.el")
-  (message "Your in lenovo VOID")
+  (message "you are in %s" (shell-command-to-string "uname -a")) 
   (message "----------------------------")
-#+END_SRC
+ #+END_SRC
 *** Added a load path for local files.
 Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository.
 
@@ -29,16 +29,7 @@ We remove menu bars, tool bars, and scroll bars. Re-enable them by commmenting o
 
 #+BEGIN_SRC elisp :load no 
   (add-to-list 'load-path "~/.emacs.d/local")
-  (setq ring-bell-function 'ingore)
-  (setq visible-bell t)
-  (setq inhibit-startup-screen t)    ; Disables the startup splash screen
-  (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
-  (setq inhibit-startup-message t)   ; Disables the startup message
-  (setq initial-scratch-message nil) ; Removes the initial scratch message
-  (save-place-mode 1)
-  (menu-bar-mode -1)		
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
+  
 #+END_SRC
 *** Uniquify
 https://elpa.gnu.org/packages/uniquify-files.html
