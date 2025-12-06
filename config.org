@@ -8,6 +8,7 @@ if you don't see any, the file needs to be translated / generated with:
 #+BEGIN_SRC elisp :load no
   (message "This is from config.org --> config.el")
   (message "you are in %s" (shell-command-to-string "uname -a")) 
+  (message "Sytem type %s %s" system-type system-configuration)
   (message "----------------------------")
  #+END_SRC
 *** Added a load path for local files.
@@ -315,6 +316,20 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
             gptel-model 'sonar-pro)
       
 #+END_SRC
+*** Avy - jump to characters on screen
+#+BEGIN_SRC elisp :load no
+(use-package avy
+  :ensure t
+  :config
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g f") 'avy-goto-line)
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+  (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+  (avy-setup-default)
+  (global-set-key (kbd "C-c C-j") 'avy-resume))
+#+END_SRC
+
 ** paredit
 https://paredit.org/cgit/paredit/tree/
 #+BEGIN_SRC elisp :load no
