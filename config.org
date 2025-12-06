@@ -1,11 +1,18 @@
 * Emacs Initialization
 ** Setup
-Here we set up 
+Here we initialize Emacs. We start by issuing some Welcome Messages. These should show in *Messages* buffer.
+if you don't see any, the file needs to be translated / generated with:
+
+`M-x org-babel-load-file`
+
 #+BEGIN_SRC elisp :load no
-  (message "This is from config.org")
+  (message "This is from config.org --> config.el")
   (message "Your in lenovo VOID")
-  (message "Early Work")
   (message "----------------------------")
+#+END_SRC
+*** Added a load path for local files.
+Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository. 
+#+BEGIN_SRC elisp :load no 
   (add-to-list 'load-path "~/.emacs.d/local")
   (setq ring-bell-function 'ingore)
   (setq visible-bell t)
@@ -13,11 +20,15 @@ Here we set up
 #+END_SRC
 *** Uniquify
 https://elpa.gnu.org/packages/uniquify-files.html
+
 file locaton: /usr/share/emacs/30.2/lisp/
-try `M-x find-library` to read the source
+
+try `M-x find-library` to read the source.
+
 In Emacs, “uniquify” is the built-in mechanism for making buffer names distinct when multiple buffers
 visit files with the same filename. When you have, say, two different `init.lua` files open from
 different directories, uniquify adjusts the buffer names so you can tell them apart at a glance
+
 #+BEGIN_SRC elisp :load no
   (require 'uniquify)
 #+END_SRC
@@ -52,6 +63,7 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
   (unless package-archive-contents
     (package-refresh-contents))
 #+END_SRC
+
 ** Window Management
 #+BEGIN_SRC elisp :load no
 (message "2----------------------------")

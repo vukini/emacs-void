@@ -1,17 +1,22 @@
-(message "This is from config.org")
+(message "This is from config.org --> config.el")
 (message "Your in lenovo VOID")
-(message "Early Work")
 (message "----------------------------")
+
 (add-to-list 'load-path "~/.emacs.d/local")
 (setq ring-bell-function 'ingore)
 (setq visible-bell t)
 (save-place-mode 1)
+
 (require 'uniquify)
+
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
-(menu-bar-mode -1)
+;(global-set-key (kbd "C-\\") 'comment-region)
+;(global-set-key (kbd "C-M-\\") 'uncomment-region)
+(menu-bar-mode -1)		
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(windmove-default-keybindings) ;; usually Shift+arrow keys
 (setq inhibit-startup-screen t)    ; Disables the startup splash screen
 (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
 (setq inhibit-startup-message t)   ; Disables the startup message
@@ -42,7 +47,7 @@
 (rc/require-theme 'gruber-darker)
 ;;(load-theme 'leuven-dark)
 (rc/require 'which-key)
-(which-key-mode)
+(which-key-mode)			
 (rc/require 'projectile)
 (rc/require 'vertico)
 (vertico-mode 1)
@@ -78,7 +83,7 @@
   :custom
   ;; Your Obsidian vault root
   (obsidian-directory "~/General")        ;; vault = ~/General [web:12]
-  ;; Inbox folder inside the vault
+   ;; Inbox folder inside the vault
   (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes [web:12]
   (markdown-enable-wiki-links t)
   (obsidian-create-unfound-files-in-inbox t)
@@ -177,9 +182,10 @@
   :init
   (setq magit-save-repository-buffers 'dontask ; save without asking
 	  magit-no-confirm '(stage-all-changes)) ; fewer prompts
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1
 	  magit-section-visibility-indicator nil
 	  magit-diff-refine-hunk 'all)
+  (setq magit-bury-buffer-function 'magit-restore-window-configuration)
   (setq magit-repository-directories '(("~/p" . 2)
 					 ("~/repos" . 2)))
   :config
@@ -189,6 +195,9 @@
     :ensure t
     :commands (lsp lsp-deferred)
     :hook ((prog-mode . lsp-deferred))
+    :config
+    (with-eval-after-load 'lsp-mode
+      (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
     :init (setq lsp-keymap-prefix "C-c l"))
   
   (use-package lsp-ui :ensure t :commands lsp-ui-mode)
