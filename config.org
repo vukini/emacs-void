@@ -1,5 +1,6 @@
 * Emacs Initialization
 ** Setup
+Here we set up 
 #+BEGIN_SRC elisp :load no
   (message "This is from config.org")
   (message "Your in lenovo VOID")
@@ -9,7 +10,19 @@
   (setq ring-bell-function 'ingore)
   (setq visible-bell t)
   (save-place-mode 1)
+#+END_SRC
+*** Uniquify
+https://elpa.gnu.org/packages/uniquify-files.html
+file locaton: /usr/share/emacs/30.2/lisp/
+try `M-x find-library` to read the source
+In Emacs, “uniquify” is the built-in mechanism for making buffer names distinct when multiple buffers
+visit files with the same filename. When you have, say, two different `init.lua` files open from
+different directories, uniquify adjusts the buffer names so you can tell them apart at a glance
+#+BEGIN_SRC elisp :load no
   (require 'uniquify)
+#+END_SRC
+
+#+BEGIN_SRC elisp :load no
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
   ;(global-set-key (kbd "C-\\") 'comment-region)
@@ -17,6 +30,7 @@
   (menu-bar-mode -1)		
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
+  (windmove-default-keybindings) ;; usually Shift+arrow keys
   (setq inhibit-startup-screen t)    ; Disables the startup splash screen
   (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
   (setq inhibit-startup-message t)   ; Disables the startup message
@@ -97,7 +111,7 @@
     :custom
     ;; Your Obsidian vault root
     (obsidian-directory "~/General")        ;; vault = ~/General [web:12]
-    ;; Inbox folder inside the vault
+     ;; Inbox folder inside the vault
     (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes [web:12]
     (markdown-enable-wiki-links t)
     (obsidian-create-unfound-files-in-inbox t)
@@ -217,11 +231,12 @@
       :init
       (setq magit-save-repository-buffers 'dontask ; save without asking
     	  magit-no-confirm '(stage-all-changes)) ; fewer prompts
-      (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
+      (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1
     	  magit-section-visibility-indicator nil
     	  magit-diff-refine-hunk 'all)
+      (setq magit-bury-buffer-function 'magit-restore-window-configuration)
       (setq magit-repository-directories '(("~/p" . 2)
-  					 ("~/repos" . 2)))
+    					 ("~/repos" . 2)))
       :config
       (global-set-key (kbd "C-x g") #'magit-status))
   #+END_SRC
@@ -233,11 +248,15 @@
       :ensure t
       :commands (lsp lsp-deferred)
       :hook ((prog-mode . lsp-deferred))
+      :config
+      (with-eval-after-load 'lsp-mode
+        (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
       :init (setq lsp-keymap-prefix "C-c l"))
     
     (use-package lsp-ui :ensure t :commands lsp-ui-mode)
     (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
-  
+
+    
 #+END_SRC
 **** exec-path
 #+BEGIN_SRC elisp :load no
