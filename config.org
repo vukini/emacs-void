@@ -13,7 +13,9 @@ if you don't see any, the file needs to be translated / generated with:
 *** Added a load path for local files.
 Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository.
 
-We also stop annoy bell noises.
+We also stop annoy bell noises and inhibit all start screens.
+
+We ensure that inital scratch message has no text in the buffer, leaving a clean interface. 
 
 We also enable `save-place-mode` to:
 
@@ -23,11 +25,20 @@ to the saved position, when the file is first found.  Uses the
 value of buffer-local variable save-place-mode to determine whether to
 save position or not.
 
+We remove menu bars, tool bars, and scroll bars. Re-enable them by commmenting out each line if you need.
+
 #+BEGIN_SRC elisp :load no 
   (add-to-list 'load-path "~/.emacs.d/local")
   (setq ring-bell-function 'ingore)
   (setq visible-bell t)
+  (setq inhibit-startup-screen t)    ; Disables the startup splash screen
+  (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
+  (setq inhibit-startup-message t)   ; Disables the startup message
+  (setq initial-scratch-message nil) ; Removes the initial scratch message
   (save-place-mode 1)
+  (menu-bar-mode -1)		
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
 #+END_SRC
 *** Uniquify
 https://elpa.gnu.org/packages/uniquify-files.html
@@ -49,18 +60,13 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
   (global-set-key (kbd "C--") 'text-scale-decrease)
   ;(global-set-key (kbd "C-\\") 'comment-region)
   ;(global-set-key (kbd "C-M-\\") 'uncomment-region)
-  (menu-bar-mode -1)		
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
+
   (windmove-default-keybindings) ;; usually Shift+arrow keys
-  (setq inhibit-startup-screen t)    ; Disables the startup splash screen
-  (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
-  (setq inhibit-startup-message t)   ; Disables the startup message
-  (setq initial-scratch-message nil) ; Removes the initial scratch message
+
   (desktop-save-mode 1)
   (setq desktop-path '("~/.emacs.d/local/"))
   ;;(evil-mode nil)
-  (save-place-mode t)
+
   (server-start)
   (setq package-archives
         '(("gnu"       . "https://elpa.gnu.org/packages/")
