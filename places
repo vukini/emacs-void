@@ -1,11 +1,11 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
 (("/home/vukini/.emacs.d/"
-  (dired-filename . "/home/vukini/.emacs.d/."))
+  (dired-filename . "/home/vukini/.emacs.d/.."))
  ("/home/vukini/" (dired-filename . "/home/vukini/.gforth-history"))
  ("/home/vukini/p/R/" (dired-filename . "/home/vukini/p/R/.."))
  ("/home/vukini/.emacs.d/.saves/"
   (dired-filename
-   . "/home/vukini/.emacs.d/.saves/!home!vukini!.emacs.d!.git!COMMIT_EDITMSG.~3~"))
+   . "/home/vukini/.emacs.d/.saves/!home!vukini!.emacs.d!.git!COMMIT_EDITMSG.~2~"))
  ("/home/vukini/.config/" (dired-filename . "/home/vukini/.config/go"))
  ("/home/vukini/.config/dunst/"
   (dired-filename . "/home/vukini/.config/dunst/dunstrc"))
@@ -27,7 +27,6 @@
  ("/home/vukini/p/c/make/Makefile" . 129)
  ("/home/vukini/.emacs.d/snippets/org-mode/beginsrc" . 74)
  ("/home/vukini/p/" (dired-filename . "/home/vukini/p/neovim"))
- ("/home/vukini/.emacs.d/config.org" . 32)
  ("/home/vukini/p/purescript/"
   (dired-filename . "/home/vukini/p/purescript/.psc-ide-port"))
  ("/home/vukini/p/purescript/Euler/src/"
@@ -44,22 +43,21 @@
   (dired-filename . "/home/vukini/repos/herbstluftwm/INSTALL"))
  ("/home/vukini/bin/scratchpad" . 685)
  ("/home/vukini/repos/herbstluftwm/INSTALL" . 1195)
- ("/home/vukini/.emacs.d/init.el" . 119)
- ("/home/vukini/.emacs.d/custom-vars.el" . 32)
- ("/home/vukini/.bashrc" . 2627)
- ("/home/vukini/p/racket/"
-  (dired-filename . "/home/vukini/p/racket/test.rkt"))
- ("/home/vukini/p/racket/test.rkt" . 70)
+ ("/home/vukini/.emacs.d/config.org" . 11852)
+ ("/home/vukini/.emacs.d/init.el" . 117)
  ("/home/vukini/repos/herbstluftwm/src/command.h" . 4965)
  ("/home/vukini/repos/herbstluftwm/src/command.cpp" . 2672)
  ("/home/vukini/p/purescript/Euler/spago.dhall" . 594)
+ ("/home/vukini/.emacs.d/custom-vars.el" . 32)
+ ("/home/vukini/.emacs.d/bookmarks" . 251)
  ("/home/vukini/.emacs.d/snippets/fundamental-mode/beginsrcelisp" . 61)
  ("/home/vukini/p/ruby/sinatra/t1/"
   (dired-filename . "/home/vukini/p/ruby/sinatra/t1/views"))
  ("/home/vukini/p/ruby/sinatra/t1/views/"
   (dired-filename . "/home/vukini/p/ruby/sinatra/t1/views/layout.erb"))
  ("/home/vukini/p/ruby/sinatra/t1/app.rb" . 518)
- ("/home/vukini/.sbclrc" . 454) ("/home/vukini/.config/lxc/" . 130)
+ ("/home/vukini/.bashrc" . 367) ("/home/vukini/.sbclrc" . 454)
+ ("/home/vukini/.config/lxc/" . 130)
  ("/home/vukini/.config/lxc/default.conf" . 59)
  ("/sudo:root@voikid:/etc/subuid" . 40)
  ("/home/vukini/General/termux-notes.md" . 296)

@@ -1,6 +1,6 @@
 (message "init.el is loading...")
 (setq ring-bell-function 'ingore)  ;Stop the bell sound
-(setq visible-bell) ; Show a visible bell instead 
+(setq visible-bell t)                ; Show a visible bell instead 
 (setq inhibit-startup-screen t)    ; Disables the startup splash screen
 (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
 (setq inhibit-startup-message t)   ; Disables the startup message

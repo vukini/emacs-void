@@ -14,7 +14,8 @@
 	 gruber-darker-theme kind-icon lsp-ivy lsp-mode lsp-ui
 	 lua-mode magit marginalia markdown-mode obsidian orderless
 	 pdf-tools php-mode projectile purescript-mode racket-mode
-	 rfc-mode vertico vterm yasnippet yasnippet-snippets)))
+	 rfc-mode slime true vertico vterm yasnippet
+	 yasnippet-snippets)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -2,7 +2,15 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Interactive Codes"
+(("(elisp) System Interface"
+ (front-context-string . "User Identificat")
+ (rear-context-string . "nd of system.\n* ")
+ (position . 3936040)
+ (last-modified 26932 20511 254468 836000)
+ (filename . "/usr/share/info/elisp")
+ (info-node . "System Interface")
+ (handler . Info-bookmark-jump))
+("Interactive Codes"
  (front-context-string . "\n22.2.2 Code Cha")
  (rear-context-string . "fining Commands\n")
  (position . 1304888)

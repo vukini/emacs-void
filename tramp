@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <25/12/01 21:41:47 ~/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <25/12/06 21:43:31 ~/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; Run `M-x tramp-cleanup-all-connections' instead.
 

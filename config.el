@@ -1,31 +1,19 @@
 (message "This is from config.org --> config.el")
-(message "Your in lenovo VOID")
+(message "you are in %s" (shell-command-to-string "uname -a")) 
+(message "Sytem type %s %s" system-type system-configuration)
 (message "----------------------------")
-
 (add-to-list 'load-path "~/.emacs.d/local")
-(setq ring-bell-function 'ingore)
-(setq visible-bell t)
-(save-place-mode 1)
-
-(require 'uniquify)
-
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 ;(global-set-key (kbd "C-\\") 'comment-region)
 ;(global-set-key (kbd "C-M-\\") 'uncomment-region)
-(menu-bar-mode -1)		
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
 (windmove-default-keybindings) ;; usually Shift+arrow keys
-(setq inhibit-startup-screen t)    ; Disables the startup splash screen
-(setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)
-(setq inhibit-startup-message t)   ; Disables the startup message
-(setq initial-scratch-message nil) ; Removes the initial scratch message
 (desktop-save-mode 1)
-(setq desktop-path '("~/.emacs.d/local/"))
 ;;(evil-mode nil)
-(save-place-mode t)
 (server-start)
+
+(require 'uniquify)
+
 (setq package-archives
       '(("gnu"       . "https://elpa.gnu.org/packages/")
         ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
@@ -34,6 +22,7 @@
         ("org"       . "https://orgmode.org/elpa/")))
 
 (package-initialize)
+(setq use-package-always-ensure t)
 (require 'package)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -152,6 +141,23 @@
   ;; Optional defaults
   (setq-default pdf-view-display-size 'fit-page))
 
+(message "lsp-mode")
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-defered)
+  :hook ((python-mode . lsp)
+         (go-mode . lsp)
+         (c-mode . lsp)
+         (c++-mode . lsp))
+  :config
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
+  :init
+  (setq lsp-keymap-prefix "C-c l"))
+  
+  (use-package lsp-ui :ensure t :commands lsp-ui-mode)
+  (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+
 (message "Yasnippet")
   (use-package yasnippet
     :ensure t
@@ -163,19 +169,13 @@
     :ensure t
     :after yasnippet)
 
+(message "go-mode")
 ;; (message ”this is from go lsp”)
 ;; (use-package go-mode
 ;;   :ensure t
 ;;   :mode "\.go\'")
 
-(use-package lsp-mode
-  :ensure t
-  :hook ((python-mode . lsp)
-         (go-mode . lsp)
-         (c-mode . lsp)
-         (c++-mode . lsp))
-  :commands lsp)
-
+(message "Magit")
 (use-package magit
   :ensure t
   :commands (magit-status magit-blame-addition)
@@ -191,21 +191,13 @@
   :config
   (global-set-key (kbd "C-x g") #'magit-status))
 
-(use-package lsp-mode
-    :ensure t
-    :commands (lsp lsp-deferred)
-    :hook ((prog-mode . lsp-deferred))
-    :config
-    (with-eval-after-load 'lsp-mode
-      (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
-    :init (setq lsp-keymap-prefix "C-c l"))
-  
-  (use-package lsp-ui :ensure t :commands lsp-ui-mode)
-  (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+(message "PureScript")
 
+(message "exec-path-from-shell")
 (use-package exec-path-from-shell
   :ensure t)
 
+(message "gptel")
 (use-package gptel
   :ensure t
   :config
@@ -233,9 +225,22 @@
     (setq gptel-backend my-gptel-openai
         gptel-model 'gpt-4o))
     (setq gptel-backend my-gptel-perplexity
-          gptel-model 'sonar-pro)
+          gptel-model 'sonar-pro))
 
-(add-to-list 'load-path "/home/vukini/repos/paredit")
+(message "Avy")
+(use-package avy
+  :ensure t
+  :config
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g f") 'avy-goto-line)
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+  (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+  (avy-setup-default)
+  (global-set-key (kbd "C-c C-j") 'avy-resume))
+
+(message "Paredit")
+  (add-to-list 'load-path "/home/vukini/repos/paredit")
   (autoload 'enable-paredit-mode "paredit"
     "Turn on pseudo-structural editing of Lisp Code"
     t)
@@ -250,7 +255,19 @@
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 
+(message "Haskell Unicode")
 (add-to-list 'load-path "~/.emacs.d/local/emacs-haskell-unicode-input-method")
 (require 'haskell-unicode-input-method)
 (add-hook 'haskell-mode-hook 
   (lambda () (set-input-method "haskell-unicode")))
+
+;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+;  ;; Replace "sbcl" with the path to your implementation
+;  (setq inferior-lisp-program "sbcl")
+
+(use-package slime
+  :ensure true
+  :init
+  (setq inferior-lisp-program "sbcl")
+  :config
+  (slime-setup '(slime-fancy)))

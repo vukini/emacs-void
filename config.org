@@ -1,17 +1,11 @@
 * Emacs Initialization
 ** Setup
+*** On loading
 Here we initialize Emacs. We start by issuing some Welcome Messages. These should show in *Messages* buffer.
 if you don't see any, the file needs to be translated / generated with:
 
 `M-x org-babel-load-file`
 
-#+BEGIN_SRC elisp :load no
-  (message "This is from config.org --> config.el")
-  (message "you are in %s" (shell-command-to-string "uname -a")) 
-  (message "Sytem type %s %s" system-type system-configuration)
-  (message "----------------------------")
- #+END_SRC
-*** Added a load path for local files.
 Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository.
 
 We also stop annoy bell noises and inhibit all start screens.
@@ -25,13 +19,24 @@ Automatically save place in files, so that visiting them later
 to the saved position, when the file is first found.  Uses the
 value of buffer-local variable save-place-mode to determine whether to
 save position or not.
-
 We remove menu bars, tool bars, and scroll bars. Re-enable them by commmenting out each line if you need.
 
-#+BEGIN_SRC elisp :load no 
+#+BEGIN_SRC elisp :load no
+  (message "This is from config.org --> config.el")
+  (message "you are in %s" (shell-command-to-string "uname -a")) 
+  (message "Sytem type %s %s" system-type system-configuration)
+  (message "----------------------------")
   (add-to-list 'load-path "~/.emacs.d/local")
-  
-#+END_SRC
+  (global-set-key (kbd "C-=") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+  ;(global-set-key (kbd "C-\\") 'comment-region)
+  ;(global-set-key (kbd "C-M-\\") 'uncomment-region)
+  (windmove-default-keybindings) ;; usually Shift+arrow keys
+  (desktop-save-mode 1)
+  ;;(evil-mode nil)
+  (server-start)  
+  #+END_SRC
+
 *** Uniquify
 https://elpa.gnu.org/packages/uniquify-files.html
 
@@ -46,20 +51,9 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+BEGIN_SRC elisp :load no
   (require 'uniquify)
 #+END_SRC
-
+*** Setup packages
 #+BEGIN_SRC elisp :load no
-  (global-set-key (kbd "C-=") 'text-scale-increase)
-  (global-set-key (kbd "C--") 'text-scale-decrease)
-  ;(global-set-key (kbd "C-\\") 'comment-region)
-  ;(global-set-key (kbd "C-M-\\") 'uncomment-region)
 
-  (windmove-default-keybindings) ;; usually Shift+arrow keys
-
-  (desktop-save-mode 1)
-  (setq desktop-path '("~/.emacs.d/local/"))
-  ;;(evil-mode nil)
-
-  (server-start)
   (setq package-archives
         '(("gnu"       . "https://elpa.gnu.org/packages/")
           ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
@@ -68,18 +62,19 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
           ("org"       . "https://orgmode.org/elpa/")))
 
   (package-initialize)
+  (setq use-package-always-ensure t)
   (require 'package)
   (unless package-archive-contents
     (package-refresh-contents))
 #+END_SRC
 
-** Window Management
+*** Window Management
 #+BEGIN_SRC elisp :load no
 (message "2----------------------------")
 ;(global-set-key (kbd "M-o") 'other-window)
 ;(global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 #+END_SRC
-** Loading files with rc.el
+*** Loading files with rc.el
 #+BEGIN_SRC elisp :load no
   (load "rc.el")
   (message "Setting Theme")
@@ -105,7 +100,6 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 
 
   #+END_SRC
-** Use-Package Sections
 *** Custom File
 #+BEGIN_SRC elisp :load no
   (message "Loading custom-file")
@@ -125,6 +119,7 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
      kept-old-versions 2
      version-control t)       ; use versioned backups
 #+END_SRC
+** Use-Package Sections
 *** Obsidian
 #+BEGIN_SRC elisp :load no
   (use-package obsidian
@@ -213,6 +208,34 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
     ;; Optional defaults
     (setq-default pdf-view-display-size 'fit-page))
 #+END_SRC
+*** lsp-mode
+#+BEGIN_SRC elisp :load no
+      (message "lsp-mode")
+      (use-package lsp-mode
+        :ensure t
+        :commands (lsp lsp-defered)
+        :hook ((python-mode . lsp)
+               (go-mode . lsp)
+               (c-mode . lsp)
+               (c++-mode . lsp))
+        :config
+        (with-eval-after-load 'lsp-mode
+          (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
+        :init
+        (setq lsp-keymap-prefix "C-c l"))
+        
+        (use-package lsp-ui :ensure t :commands lsp-ui-mode)
+        (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+      
+#+END_SRC
+
+Some notes, not evaluated:
+(with-eval-after-load 'lsp-mode
+  ;; Do not try to LSP Lisp or Emacs Lisp
+  (add-to-list 'lsp-disabled-clients 'lsp-clients-emacs-lisp)
+  (add-hook 'lisp-mode-hook #'(lambda () (setq-local lsp-mode nil)))
+  (add-hook 'emacs-lisp-mode-hook #'(lambda () (setq-local lsp-mode nil))))
+
 *** yassnippet
 #+BEGIN_SRC elisp :load no
   (message "Yasnippet")
@@ -228,64 +251,46 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+END_SRC
 *** go-mode
 #+BEGIN_SRC elisp :load no
+  (message "go-mode")
   ;; (message ”this is from go lsp”)
   ;; (use-package go-mode
   ;;   :ensure t
   ;;   :mode "\.go\'")
 
   #+END_SRC
-*** lsp-mode
-#+BEGIN_SRC elisp :load no 
-  (use-package lsp-mode
-    :ensure t
-    :hook ((python-mode . lsp)
-           (go-mode . lsp)
-           (c-mode . lsp)
-           (c++-mode . lsp))
-    :commands lsp)
-#+END_SRC
 *** Magit
 #+BEGIN_SRC elisp :load no
-    (use-package magit
-      :ensure t
-      :commands (magit-status magit-blame-addition)
-      :init
-      (setq magit-save-repository-buffers 'dontask ; save without asking
-    	  magit-no-confirm '(stage-all-changes)) ; fewer prompts
-      (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1
-    	  magit-section-visibility-indicator nil
-    	  magit-diff-refine-hunk 'all)
-      (setq magit-bury-buffer-function 'magit-restore-window-configuration)
-      (setq magit-repository-directories '(("~/p" . 2)
-    					 ("~/repos" . 2)))
-      :config
-      (global-set-key (kbd "C-x g") #'magit-status))
+    (message "Magit")
+  (use-package magit
+    :ensure t
+    :commands (magit-status magit-blame-addition)
+    :init
+    (setq magit-save-repository-buffers 'dontask ; save without asking
+  	  magit-no-confirm '(stage-all-changes)) ; fewer prompts
+    (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1
+  	  magit-section-visibility-indicator nil
+  	  magit-diff-refine-hunk 'all)
+    (setq magit-bury-buffer-function 'magit-restore-window-configuration)
+    (setq magit-repository-directories '(("~/p" . 2)
+  					 ("~/repos" . 2)))
+    :config
+    (global-set-key (kbd "C-x g") #'magit-status))
   #+END_SRC
   
 **** purescript
 #+BEGIN_SRC elisp :load no
-
-  (use-package lsp-mode
-      :ensure t
-      :commands (lsp lsp-deferred)
-      :hook ((prog-mode . lsp-deferred))
-      :config
-      (with-eval-after-load 'lsp-mode
-        (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
-      :init (setq lsp-keymap-prefix "C-c l"))
-    
-    (use-package lsp-ui :ensure t :commands lsp-ui-mode)
-    (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
-
-    
+  (message "PureScript")
+  
 #+END_SRC
 **** exec-path
 #+BEGIN_SRC elisp :load no
-(use-package exec-path-from-shell
-  :ensure t)
+    (message "exec-path-from-shell")
+  (use-package exec-path-from-shell
+    :ensure t)
 #+END_SRC
 **** gptel
 #+BEGIN_SRC elisp :load no
+    (message "gptel")
   (use-package gptel
     :ensure t
     :config
@@ -313,40 +318,58 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
       (setq gptel-backend my-gptel-openai
           gptel-model 'gpt-4o))
       (setq gptel-backend my-gptel-perplexity
-            gptel-model 'sonar-pro)
+            gptel-model 'sonar-pro))
       
 #+END_SRC
 *** Avy - jump to characters on screen
 #+BEGIN_SRC elisp :load no
-(use-package avy
-  :ensure t
-  :config
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  (global-set-key (kbd "C-'") 'avy-goto-char-2)
-  (global-set-key (kbd "M-g f") 'avy-goto-line)
-  (global-set-key (kbd "M-g w") 'avy-goto-word-1)
-  (global-set-key (kbd "M-g e") 'avy-goto-word-0)
-  (avy-setup-default)
-  (global-set-key (kbd "C-c C-j") 'avy-resume))
+    (message "Avy")
+  (use-package avy
+    :ensure t
+    :config
+    (global-set-key (kbd "C-:") 'avy-goto-char)
+    (global-set-key (kbd "C-'") 'avy-goto-char-2)
+    (global-set-key (kbd "M-g f") 'avy-goto-line)
+    (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+    (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+    (avy-setup-default)
+    (global-set-key (kbd "C-c C-j") 'avy-resume))
+#+END_SRC
+
+*** Slime Common Lisp
+#+BEGIN_SRC elisp :load no
+  ;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  ;  ;; Replace "sbcl" with the path to your implementation
+  ;  (setq inferior-lisp-program "sbcl")
+
+  (use-package slime
+    :ensure true
+    :init
+    (setq inferior-lisp-program "sbcl")
+    :config
+    (slime-setup '(slime-fancy)))
+
+
 #+END_SRC
 
 ** paredit
 https://paredit.org/cgit/paredit/tree/
 #+BEGIN_SRC elisp :load no
-  (add-to-list 'load-path "/home/vukini/repos/paredit")
-  (autoload 'enable-paredit-mode "paredit"
-    "Turn on pseudo-structural editing of Lisp Code"
-    t)
-  (add-hook 'M-mode-hook 'enable-paredit-mode)
+    (message "Paredit")
+    (add-to-list 'load-path "/home/vukini/repos/paredit")
+    (autoload 'enable-paredit-mode "paredit"
+      "Turn on pseudo-structural editing of Lisp Code"
+      t)
+    (add-hook 'M-mode-hook 'enable-paredit-mode)
 
-    (eval-after-load 'paredit
-      '(progn
-         (define-key paredit-mode-map (kbd "ESC M-A-C-s-)")
-          'paredit-dwim)))
-  (add-hook 'racket-mode-hook #'paredit-mode)
-  (add-hook 'racket-repl-mode-hook #'paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-(add-hook 'lisp-mode-hook 'enable-paredit-mode)
+      (eval-after-load 'paredit
+        '(progn
+           (define-key paredit-mode-map (kbd "ESC M-A-C-s-)")
+            'paredit-dwim)))
+    (add-hook 'racket-mode-hook #'paredit-mode)
+    (add-hook 'racket-repl-mode-hook #'paredit-mode)
+    (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 #+END_SRC
 ** emacs-haskell-unicode-method
 [[eww:https://github.com/roelvandijk/emacs-haskell-unicode-input-method][emacs-haskell-unicode-input-method
@@ -365,11 +388,12 @@ A sequence like <= is ambiguous and can mean either ⇐ or ≤.
 Typing it presents you with a choice. Type 1 or 2 to select an option or keep typing to use the default option.
 
 #+BEGIN_SRC elisp :load no
+    (message "Haskell Unicode")
   (add-to-list 'load-path "~/.emacs.d/local/emacs-haskell-unicode-input-method")
   (require 'haskell-unicode-input-method)
   (add-hook 'haskell-mode-hook 
     (lambda () (set-input-method "haskell-unicode")))
-  
+
 #+END_SRC
 ** I would like to read my gmail in emacs, please give detailed instructions for full set up.
 Assume I already have emacs on Void linux.
