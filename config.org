@@ -1,40 +1,35 @@
+# -*- mode: org; eval: (org-src-mode); -*-
 * Emacs Initialization
 ** Setup
 *** On loading
-Here we initialize Emacs. We start by issuing some Welcome Messages. These should show in *Messages* buffer.
+When Emacs first loaded, it loaded ~/.emacs.d/init.el, which then in turn loads, this file.
+
+Here we continue to initialize Emacs.
+We start by issuing some Welcome Messages.
+These should show in *Messages* buffer.
 if you don't see any, the file needs to be translated / generated with:
 
 `M-x org-babel-load-file`
 
-Often we want to load files we have put there ourselves, manually. for example, rc.el in this repository.
+Often we want to load files we have put there ourselves, manually.
+For example, rc.el in this repository in `~/.emacs.d/local`.
 
-We also stop annoy bell noises and inhibit all start screens.
-
-We ensure that inital scratch message has no text in the buffer, leaving a clean interface. 
-
-We also enable `save-place-mode` to:
-
-Automatically save place in files, so that visiting them later
-(even during a different Emacs session) automatically moves point
-to the saved position, when the file is first found.  Uses the
-value of buffer-local variable save-place-mode to determine whether to
-save position or not.
-We remove menu bars, tool bars, and scroll bars. Re-enable them by commmenting out each line if you need.
+Finally we start the server process.
 
 #+BEGIN_SRC elisp :load no
   (message "This is from config.org --> config.el")
   (message "you are in %s" (shell-command-to-string "uname -a")) 
   (message "Sytem type %s %s" system-type system-configuration)
   (message "----------------------------")
+
   (add-to-list 'load-path "~/.emacs.d/local")
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
-  ;(global-set-key (kbd "C-\\") 'comment-region)
-  ;(global-set-key (kbd "C-M-\\") 'uncomment-region)
-  (windmove-default-keybindings) ;; usually Shift+arrow keys
-  (desktop-save-mode 1)
-  ;;(evil-mode nil)
-  (server-start)  
+  ;;(global-set-key (kbd "C-\\") 'comment-region)
+  ;;(global-set-key (kbd "C-M-\\") 'uncomment-region)
+  ;;currently commented as using M-; 'comment-dwim (do what i mean)
+  ;;(evil-mode nil) 
+  (server-start)                                    ;; Do I really need this?  
   #+END_SRC
 
 *** Uniquify
@@ -61,20 +56,20 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
           ("elpa-devel". "https://elpa.gnu.org/devel/")
           ("org"       . "https://orgmode.org/elpa/")))
 
-  (package-initialize)
-  (setq use-package-always-ensure t)
-  (require 'package)
+  (package-initialize) ;this loads the installed packages and activates them
+  (setq use-package-always-ensure t) ; ensures that packages not installed are
+  (require 'package) ; use C-h P (to describe packages)
   (unless package-archive-contents
     (package-refresh-contents))
 #+END_SRC
 
 *** Window Management
 #+BEGIN_SRC elisp :load no
-(message "2----------------------------")
-;(global-set-key (kbd "M-o") 'other-window)
-;(global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
+(message "Window Management")
+;(global-set-key (kbd "M-\\") 'other-window)
+(global-set-key (kbd "M-\\") (lambda () (interactive) (other-window -1)))
 #+END_SRC
-*** Loading files with rc.el
+***Loading files with rc.el
 #+BEGIN_SRC elisp :load no
   (load "rc.el")
   (message "Setting Theme")
@@ -126,9 +121,9 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
     :ensure t
     :custom
     ;; Your Obsidian vault root
-    (obsidian-directory "~/General")        ;; vault = ~/General [web:12]
+    (obsidian-directory "~/General")        ;; vault = ~/General 
      ;; Inbox folder inside the vault
-    (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes [web:12]
+    (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
     (markdown-enable-wiki-links t)
     (obsidian-create-unfound-files-in-inbox t)
     :config
@@ -144,7 +139,7 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+END_SRC
 *** Corfu
 #+BEGIN_SRC elisp :load no
-  (message "4----------------------------")
+  (message "Corfu!")
   (use-package corfu
     :ensure t
     :init
@@ -155,9 +150,13 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
     (corfu-preselect-first t))
 #+END_SRC
 *** Cape
+  https://github.com/minad/cape
+
+  Completion at Point 
 #+BEGIN_SRC elisp :load no
   (use-package cape
     :ensure t
+    :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
     :after corfu)
 #+END_SRC
 *** Orderless
@@ -167,7 +166,7 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
     :custom
     (completion--styles '(orderless basic))
     (completion-category-defaults nil)
-    (completion-category-overrides '((file (styles basic partial-completion)))))
+    (co mpletion-category-overrides '((file (styles basic partial-completion)))))
 #+END_SRC
 *** Kind Icon
 #+BEGIN_SRC elisp :load no
