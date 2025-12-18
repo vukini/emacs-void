@@ -1,16 +1,19 @@
 (message "This is from config.org --> config.el")
-(message "you are in %s" (shell-command-to-string "uname -a")) 
-(message "Sytem type %s %s" system-type system-configuration)
-(message "----------------------------")
-(add-to-list 'load-path "~/.emacs.d/local")
-(global-set-key (kbd "C-=") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-;(global-set-key (kbd "C-\\") 'comment-region)
-;(global-set-key (kbd "C-M-\\") 'uncomment-region)
-(windmove-default-keybindings) ;; usually Shift+arrow keys
-(desktop-save-mode 1)
-;;(evil-mode nil)
-(server-start)
+  (message "you are in %s" (shell-command-to-string "uname -a")) 
+  (message "Sytem type %s %s" system-type system-configuration)
+  (message "----------------------------")
+
+;;  (setq debug-on-error t)
+
+  (add-to-list 'load-path "~/.emacs.d/local")
+  (global-set-key (kbd "C-=") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+  ;;(global-set-key (kbd "C-\\") 'comment-region)
+  ;;(global-set-key (kbd "C-M-\\") 'uncomment-region)
+  ;;currently commented as using M-; 'comment-dwim (do what i mean)
+  ;;(evil-mode nil) 
+  ;;(server-start)                                    ;; Do I really need this?  
+  (hl-line-mode t)
 
 (require 'uniquify)
 
@@ -21,25 +24,26 @@
         ("elpa-devel". "https://elpa.gnu.org/devel/")
         ("org"       . "https://orgmode.org/elpa/")))
 
-(package-initialize)
-(setq use-package-always-ensure t)
-(require 'package)
+(package-initialize) ;this loads the installed packages and activates them
+(setq use-package-always-ensure t) ; ensures that packages not installed are
+(require 'package) ; use C-h P (to describe packages)
 (unless package-archive-contents
   (package-refresh-contents))
 
-(message "2----------------------------")
-;(global-set-key (kbd "M-o") 'other-window)
-;(global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
+(message "Window Management")
+;(global-set-key (kbd "M-\\") 'other-window)
+(global-set-key (kbd "M-\\") (lambda () (interactive) (other-window -1)))
 
 (load "rc.el")
 (message "Setting Theme")
 (rc/require-theme 'gruber-darker)
 ;;(load-theme 'leuven-dark)
+
 (rc/require 'which-key)
 (which-key-mode)			
+
 (rc/require 'projectile)
-(rc/require 'vertico)
-(vertico-mode 1)
+
 (rc/require
  'lua-mode
  'less-css-mode
@@ -49,9 +53,12 @@
  'go-mode
  'php-mode
  'racket-mode
- 'rfc-mode)
+ 'rfc-mode) 
 (setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
 (add-hook 'racket-mode-hook #'racket-xp-mode)
+(add-hook 'racket-repl-mode-hook
+	  (lambda ()
+	    (keymap-set racket-repl-mode-map (kbd "RET") 'racket-repl-submit)))
 
 (message "Loading custom-file")
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
@@ -67,27 +74,7 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
-(use-package obsidian
-  :ensure t
-  :custom
-  ;; Your Obsidian vault root
-  (obsidian-directory "~/General")        ;; vault = ~/General [web:12]
-   ;; Inbox folder inside the vault
-  (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes [web:12]
-  (markdown-enable-wiki-links t)
-  (obsidian-create-unfound-files-in-inbox t)
-  :config
-  (global-obsidian-mode t)
-  (obsidian-backlinks-mode t)
-  :bind
-  (:map obsidian-mode-map
-        ("C-c C-n" . obsidian-capture)
-        ("C-c C-l" . obsidian-insert-link)
-        ("C-c C-o" . obsidian-follow-link-at-point)
-        ("C-c C-j" . obsidian-jump)
-        ("C-c C-b" . obsidian-backlink-jump)))
-
-(message "4----------------------------")
+(message "Corfu!")
 (use-package corfu
   :ensure t
   :init
@@ -97,22 +84,42 @@
   (corfu-cycle t)
   (corfu-preselect-first t))
 
+;  (rc/require 'vertico)
+;  (vertico-mode 1)
+(use-package vertico
+  :custom
+  (vertico-scroll-margin 0) ;; Different scroll margin
+  (vertico-count 15) ;; Show more candidates
+  (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init
+  (vertico-mode))
+
+(use-package savehist
+      :init
+      (savehist-mode))
+
+;; ;; Emacs minibuffer configurations.
+;; (use-package emacs
+;;   :custom
+;;   ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
+;;   ;; to switch display modes.
+;;   (context-menu-mode t)
+;;   ;; Support opening new minibuffers from inside existing minibuffers.
+;;   (enable-recursive-minibuffers t)
+;;   ;; Hide commands in M-x which do not work in the current mode.  Vertico
+;;   ;; commands are hidden in normal buffers. This setting is useful beyond
+;;   ;; Vertico.
+;;   (read-extended-command-predicate #'command-completion-default-include-p)
+;;   ;; Do not allow the cursor in the minibuffer prompt
+;;   (minibuffer-prompt-properties
+;;    '(read-only t cursor-intangible t face minibuffer-prompt)))
+
 (use-package cape
   :ensure t
+  :init
+  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
   :after corfu)
-
-(use-package orderless
-  :ensure t
-  :custom
-  (completion--styles '(orderless basic))
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles basic partial-completion)))))
-
-(use-package kind-icon
-  :ensure t
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package embark
   :ensure t
@@ -121,11 +128,18 @@
    ("C-;" . embark-dwim)))
 
 (use-package consult :ensure t)
+
 (use-package marginalia
-  :ensure t
-  :init (marginalia-mode))
+   :ensure t
+   :init (marginalia-mode))
 
 (setq projectile-project-search-path '("~/p/" "~/apps/" ("~/repos" . 1)))
+
+(use-package kind-icon
+   :ensure t
+   :after corfu
+   :config
+   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (message "PDF Tools")
 (use-package pdf-tools
@@ -142,21 +156,25 @@
   (setq-default pdf-view-display-size 'fit-page))
 
 (message "lsp-mode")
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-defered)
-  :hook ((python-mode . lsp)
-         (go-mode . lsp)
-         (c-mode . lsp)
-         (c++-mode . lsp))
-  :config
-  (with-eval-after-load 'lsp-mode
-    (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
-  :init
-  (setq lsp-keymap-prefix "C-c l"))
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :commands (lsp lsp-defered)
+;;   :hook ((python-mode . lsp)
+;;          (go-mode . lsp)
+;;          (c-mode . lsp)
+;;          (c++-mode . lsp)
+;;  (lsp-completion-mode . my/lsp-use-orderless))
+;;   :config
+;;   (with-eval-after-load 'lsp-mode
+;;     (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
+;;   :init
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   (defun my/lsp-use-orderless ()
+;;     (setf (alist-get 'style (alist-get 'lsp-capf completion-category-defaults))
+;;       '(orderless))))
   
-  (use-package lsp-ui :ensure t :commands lsp-ui-mode)
-  (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+;;   (use-package lsp-ui :ensure t :commands lsp-ui-mode)
+;;   (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
 
 (message "Yasnippet")
   (use-package yasnippet
@@ -239,6 +257,18 @@
   (avy-setup-default)
   (global-set-key (kbd "C-c C-j") 'avy-resume))
 
+;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  ;  ;; Replace "sbcl" with the path to your implementation
+(setq inferior-lisp-program "sbcl")
+(slime-setup '(slime-fancy))
+(add-hook 'slime-load-hook
+	    (lambda ()
+	      (define-key
+	       slime-prefix-map
+	       (kbd "M-h")
+	       'slime-documentation-lookup)))
+(load "/home/vukini/quicklisp/clhs-use-local.el" t)
+
 (message "Paredit")
   (add-to-list 'load-path "/home/vukini/repos/paredit")
   (autoload 'enable-paredit-mode "paredit"
@@ -261,13 +291,77 @@
 (add-hook 'haskell-mode-hook 
   (lambda () (set-input-method "haskell-unicode")))
 
-;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
-;  ;; Replace "sbcl" with the path to your implementation
-;  (setq inferior-lisp-program "sbcl")
-
-(use-package slime
-  :ensure true
-  :init
-  (setq inferior-lisp-program "sbcl")
+(use-package obsidian
+  :ensure t
+  :custom
+  ;; Your Obsidian vault root
+  (obsidian-directory "~/General")        ;; vault = ~/General 
+   ;; Inbox folder inside the vault
+  (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
+  (markdown-enable-wiki-links t)
+  (obsidian-create-unfound-files-in-inbox t)
+  (obsidian-use-update-timer`nil)
+  (obsidian-use-pcache t)
   :config
-  (slime-setup '(slime-fancy)))
+  (global-obsidian-mode t)
+  (obsidian-backlinks-mode t)
+  (markdown-enable-wiki-links t)
+  :bind
+  (:map obsidian-mode-map
+        ("C-c C-n" . obsidian-capture)
+        ("C-c C-l" . obsidian-insert-wikilink)
+        ("C-c C-o" . obsidian-follow-link-at-point)
+        ("C-c C-j" . obsidian-jump)
+        ("C-c C-b" . obsidian-backlink-jump)))
+
+(defun my-obsidian-move-current-file ()
+(interactive)
+(let* ((vault obsidian-directory)
+       (name  (file-name-nondirectory (buffer-file-name)))
+       (new   (expand-file-name name vault)))
+  (write-file new)
+  (obsidian-update)))
+
+(message "Orderless")
+(use-package orderless
+  :ensure t
+  :custom
+  (setq completion--styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-pcm-leading-wildcard t))
+(setq completion-styles '(orderless basic))
+
+(message "emacs reader")
+;(setq package-vc-allow-build-commands t)
+;(add-to-list 'load-path "~/.emacs.d/local/emacs-reader")
+;(require 'reader)
+
+(message "nov.el")
+;  (use-package nov
+;    :ensure t
+;    :mode '("\\.epub\\'" . nov-mode))
+(message "nov.el")
+
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode))
+
+(message "python mode")
+(use-package python
+:mode ("\\.py\\'" . python-mode)
+:interpreter ("python" . python-mode)
+:custom
+;; Always use python3 REPL
+(python-shell-interpreter "ipython")
+(python-shell-interpreter-args "-i --simple-prompt")
+;; Disable native shell completion; let LSP/Corfu handle it
+(python-shell-completion-native-enable nil)
+(python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
+:hook
+;; LSP on Python files
+(python-mode . eglot-ensure)
+;; Example: enable indentation, etc. here if you want
+)
+
+

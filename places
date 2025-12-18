@@ -1,8 +1,80 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/vukini/.emacs.d/"
-  (dired-filename . "/home/vukini/.emacs.d/.."))
- ("/home/vukini/" (dired-filename . "/home/vukini/.gforth-history"))
- ("/home/vukini/p/R/" (dired-filename . "/home/vukini/p/R/.."))
+(("/home/vukini/p/lisp/"
+  (dired-filename . "/home/vukini/p/lisp/hello.lisp"))
+ ("/home/vukini/repos/"
+  (dired-filename . "/home/vukini/repos/stumpwm"))
+ ("/home/vukini/p/lisp/hello.lisp" . 23)
+ ("/home/vukini/.stumpwmrc" . 1037)
+ ("/home/vukini/.emacs.d/init.el" . 1355)
+ ("/home/vukini/General/"
+  (dired-filename . "/home/vukini/General/home"))
+ ("/home/vukini/General/Daily/2025-12-07.md" . 70)
+ ("/home/vukini/General/Notes/learning obsidian mode in emacs.md"
+  . 721)
+ ("/home/vukini/quicklisp/slime-helper.el" . 1342)
+ ("/home/vukini/quicklisp/"
+  (dired-filename . "/home/vukini/quicklisp/slime-helper.el"))
+ ("/home/vukini/General/Daily/" . 2688)
+ ("/home/vukini/General/Daily/2025/"
+  (dired-filename
+   . "/home/vukini/General/Daily/2025/2025-11-India-Jaipur-Delhi-Travel.md"))
+ ("/home/vukini/.xinitrc" . 138)
+ ("/home/vukini/p/c/" (dired-filename . "/home/vukini/p"))
+ ("/home/vukini/p/" (dired-filename . "/home/vukini/p/c"))
+ ("/home/vukini/.emacs.d/config.org" . 16127)
+ ("/home/vukini/General/void-notes.md" . 70)
+ ("/home/vukini/.emacs.d/custom-vars.el" . 33)
+ ("/home/vukini/.emacs.d/local/emacs-haskell-unicode-input-method/haskell-unicode-input-method.el"
+  . 348)
+ ("/home/vukini/" (dired-filename . "/home/vukini/test.ipynb"))
+ ("/home/vukini/notebooks/"
+  (dired-filename . "/home/vukini/notebooks/test.ipynb"))
+ ("/opt/calibre/bin/" (dired-filename . "/opt/calibre"))
+ ("/opt/calibre/" (dired-filename . "/opt"))
+ ("/opt/" (dired-filename . "/opt/calibre"))
+ ("/home/vukini/Books/emacs/"
+  (dired-filename
+   . "/home/vukini/Books/emacs/hacking-your-way-emacs.epub"))
+ ("/home/vukini/.stumpwm.d/modules/"
+  (dired-filename . "/home/vukini/.stumpwm.d/modules/pamixer"))
+ ("/home/vukini/.stumpwm.d/modules/pamixer/"
+  (dired-filename
+   . "/home/vukini/.stumpwm.d/modules/pamixer/README.md"))
+ ("/home/vukini/.stumpwm.d/modules/pamixer/README.md" . 412)
+ ("/home/vukini/.stumpwm.d/modules/pamixer/pamixer.asd" . 19)
+ ("/home/vukini/.stumpwm.d/modules/pamixer/pamixer.lisp" . 901)
+ ("/home/vukini/.stumpwm.d/notes.md" . 477)
+ ("/home/vukini/General/Daily/2025-12-10.md" . 744)
+ ("/home/vukini/repos/loving-common-lisp/README.md" . 2441)
+ ("/home/vukini/.sbclrc" . 493)
+ ("/home/vukini/Books/modern-networking.epub" . 280)
+ ("/home/vukini/Books/python/djangoforbeginners.epub" . 10677)
+ ("/home/vukini/Books/python/learnpython_inweekend_pt1.epub" . 631)
+ ("/home/vukini/Books/ai/wizards-lens.epub" . 1479)
+ ("/home/vukini/General/Computing/Lisp/CommonLisp/loving-common-lisp.md"
+  . 84)
+ ("/home/vukini/repos/loving-common-lisp/"
+  (dired-filename . "/home/vukini/repos/loving-common-lisp/.git"))
+ ("/home/vukini/Books/"
+  (dired-filename . "/home/vukini/Books/common-lisp"))
+ ("/home/vukini/Books/common-lisp/"
+  (dired-filename . "/home/vukini/Books/common-lisp/lovinglisp.pdf"))
+ ("/usr/local/share/emacs/31.0.50/lisp/touch-screen.el.gz" . 5344)
+ ("/home/vukini/Books/math/linalgebra-book-extras.zip" . 344)
+ ("/home/vukini/Books/common-lisp/practical_common_lisp/introduction-why-lisp.html"
+  . 3443)
+ ("/home/vukini/.emacs.d/config.el" . 1592)
+ ("/home/vukini/p/py/" . 412)
+ ("/home/vukini/Books/epubs-books/"
+  (dired-filename . "/home/vukini/Books/epubs-books/psprimer.epub"))
+ ("/home/vukini/p/lua/lib1.lua" . 98)
+ ("/home/vukini/p/lua/"
+  (dired-filename . "/home/vukini/p/lua/lib1.lua"))
+ ("/home/vukini/Books/epubs-books/thezenprogrammer.epub" . 1163)
+ ("/home/vukini/p/py/hello.py" . 63)
+ ("/usr/local/share/info/stumpwm.info" . 118)
+ ("/home/vukini/.emacs.d/" (dired-filename . "/home/vukini"))
+ ("/home/vukini/p/R/" (dired-filename . "/home/vukini/p"))
  ("/home/vukini/.emacs.d/.saves/"
   (dired-filename
    . "/home/vukini/.emacs.d/.saves/!home!vukini!.emacs.d!.git!COMMIT_EDITMSG.~2~"))
@@ -17,16 +89,12 @@
  ("/home/vukini/repos/glibc/"
   (dired-filename . "/home/vukini/repos/glibc/config.make.in"))
  ("/home/vukini/repos/glibc/configure" . 2654)
- ("/home/vukini/General/"
-  (dired-filename . "/home/vukini/General/termux-notes.md"))
  ("/home/vukini/General/Computing/Racket/Racket-Scheme.md" . 383)
- ("/home/vukini/p/c/" (dired-filename . "/home/vukini/p/c/hello"))
  ("/home/vukini/p/c/make/"
   (dired-filename . "/home/vukini/p/c/make/.git"))
  ("/home/vukini/p/c/make/test.c" . 81)
  ("/home/vukini/p/c/make/Makefile" . 129)
  ("/home/vukini/.emacs.d/snippets/org-mode/beginsrc" . 74)
- ("/home/vukini/p/" (dired-filename . "/home/vukini/p/neovim"))
  ("/home/vukini/p/purescript/"
   (dired-filename . "/home/vukini/p/purescript/.psc-ide-port"))
  ("/home/vukini/p/purescript/Euler/src/"
@@ -38,26 +106,21 @@
  ("/home/vukini/p/purescript/Euler/index.html" . 172)
  ("/home/vukini/.config/herbstluftwm/autostart" . 561)
  ("/home/vukini/repos/herbstluftwm/src/"
-  (dired-filename . "/home/vukini/repos/herbstluftwm/src/.."))
+  (dired-filename . "/home/vukini/repos/herbstluftwm"))
  ("/home/vukini/repos/herbstluftwm/"
   (dired-filename . "/home/vukini/repos/herbstluftwm/INSTALL"))
  ("/home/vukini/bin/scratchpad" . 685)
  ("/home/vukini/repos/herbstluftwm/INSTALL" . 1195)
- ("/home/vukini/.emacs.d/config.org" . 11852)
- ("/home/vukini/.emacs.d/init.el" . 117)
  ("/home/vukini/repos/herbstluftwm/src/command.h" . 4965)
  ("/home/vukini/repos/herbstluftwm/src/command.cpp" . 2672)
  ("/home/vukini/p/purescript/Euler/spago.dhall" . 594)
- ("/home/vukini/.emacs.d/custom-vars.el" . 32)
- ("/home/vukini/.emacs.d/bookmarks" . 251)
  ("/home/vukini/.emacs.d/snippets/fundamental-mode/beginsrcelisp" . 61)
  ("/home/vukini/p/ruby/sinatra/t1/"
   (dired-filename . "/home/vukini/p/ruby/sinatra/t1/views"))
  ("/home/vukini/p/ruby/sinatra/t1/views/"
   (dired-filename . "/home/vukini/p/ruby/sinatra/t1/views/layout.erb"))
  ("/home/vukini/p/ruby/sinatra/t1/app.rb" . 518)
- ("/home/vukini/.bashrc" . 367) ("/home/vukini/.sbclrc" . 454)
- ("/home/vukini/.config/lxc/" . 130)
+ ("/home/vukini/.bashrc" . 367) ("/home/vukini/.config/lxc/" . 130)
  ("/home/vukini/.config/lxc/default.conf" . 59)
  ("/sudo:root@voikid:/etc/subuid" . 40)
  ("/home/vukini/General/termux-notes.md" . 296)
@@ -68,14 +131,9 @@
  ("/home/vukini/p/c/hello/"
   (dired-filename . "/home/vukini/p/c/hello/hello.c"))
  ("/home/vukini/p/c/hello/hello.c" . 171)
- ("/home/vukini/Books/" (dired-filename . "/home/vukini/Books/emacs"))
- ("/home/vukini/Books/emacs/"
-  (dired-filename . "/home/vukini/Books/emacs/literate-elisp.pdf"))
  ("/home/vukini/.emacs.d/init-backup" . 981)
  ("/home/vukini/General/Notes/Plato.md" . 131)
  ("/home/vukini/p/ruby/sinatra/t1/views/layout.erb" . 587)
- ("/home/vukini/p/py/" (dired-filename . "/home/vukini/p/py/hello.py"))
- ("/home/vukini/p/py/hello.py" . 27)
  ("/home/vukini/.config/ghostty/"
   (dired-filename . "/home/vukini/.config/ghostty/config"))
  ("/home/vukini/.config/ghostty/config" . 621)

@@ -2,7 +2,37 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("(elisp) System Interface"
+(("lovinglisp.pdf"
+  (filename . "~/Books/common-lisp/lovinglisp.pdf")
+  (position . 1)
+  (last-modified 26938 13578 195337 478000)
+  (page . 23)
+  (slice)
+  (size . 2.43921568627451)
+  (origin 0.08042895442359249 . 0.20248575867426202)
+  (handler . pdf-view-bookmark-jump-handler))
+("Practical Common Lisp"
+ (front-context-string . "ntroduction: Why")
+ (rear-context-string . "s legs yet.\n\n1 I")
+ (position . 2030)
+ (last-modified 26937 3345 594089 862000)
+ (location . "file:///home/vukini/Books/common-lisp/practical_common_lisp/index.html")
+ (handler . eww-bookmark-jump))
+(".stumpwmrc"
+ (filename . "~/.stumpwmrc")
+ (front-context-string . ")\n            (\"")
+ (rear-context-string . "(\"M->\"   . \"End\"")
+ (position . 1037)
+ (last-modified 26936 64806 348829 666000))
+("(stumpwm) Top"
+ (front-context-string . "\nThis document e")
+ (rear-context-string . "ir),  Up: (dir)\n")
+ (position . 1196)
+ (last-modified 26936 64399 927874 103000)
+ (filename . "/usr/local/share/info/stumpwm")
+ (info-node . "Top")
+ (handler . Info-bookmark-jump))
+("(elisp) System Interface"
  (front-context-string . "User Identificat")
  (rear-context-string . "nd of system.\n* ")
  (position . 3936040)

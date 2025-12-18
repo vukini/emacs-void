@@ -22,6 +22,9 @@
 (scroll-bar-mode -1)
 (windmove-default-keybindings) ;; usually Shift+arrow keys
 (desktop-save-mode 1)
+(message "Requiring Org")
 (require 'org)  ;; ensure Org is available
+(message "Tangling....")
 (org-babel-load-file (expand-file-name "config.org" user-emacs-directory)) ;launch config.org
 
+(put 'set-goal-column 'disabled nil)

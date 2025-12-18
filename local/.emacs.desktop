@@ -2,462 +2,510 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Dec  6 21:42:21 2025
+;; Created Thu Dec 11 19:54:44 2025
 ;; Desktop file format version 208
-;; Emacs version 30.2
+;; Emacs version 31.0.50
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26932 27389 215861 297000) (desktop . "208") "vukini@voikid" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font . "-PfEd-DejaVu Sans Mono-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 1) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#e4e4ef") (background-color . "#181818") (mouse-color . "OrangeRed") (border-color . "#101010") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height) (alpha) (alpha-background) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (sticky) (shaded) (use-frame-synchronization) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#ffdd33") (font-parameter) (environment) (last-focus-update . t) (modeline . t) (unsplittable) (frameset--id . "B7F1-29D5-3A4F-4656") (frameset--mini t . t) (display . ":0.0") (dnd-root-window-position) (icon-name) (explicit-name) (height . 31) (width . 117) (left . 0) (top . 540)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 32) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 952) (pixel-height . 510) (total-width . 119) (total-height . 30) (normal-height . 1.0) (normal-width . 1.0) (buffer "config.org" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 nil nil) (vscroll . 0) (dedicated) (point . 11852) (start . 11077)) (prev-buffers ("*Messages*" 3699 66280) ("config.org" 544 1132))))])
+(setq desktop-saved-frameset [frameset 1 (26938 59716 762117 333000) (desktop . "208") "vukini@voikid" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font . "-PfEd-DejaVu Sans Mono-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#e4e4ef") (background-color . "#181818") (mouse-color . "black") (border-color . "#101010") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 16) (alpha) (alpha-background) (borders-respect-alpha-background) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (use-frame-synchronization) (skip-taskbar) (z-group) (cursor-color . "#ffdd33") (display-type . color) (background-mode . dark) (font-parameter) (sticky) (shaded) (last-focus-update . t) (dnd-root-window-position) (fullscreen-restore) (frameset--id . "6B7B-76CF-A353-58D5") (frameset--mini t . t) (height . 62) (width . 238) (modeline . t) (unsplittable) (left . 0) (top . 19) (icon-name) (display . ":0.0") (explicit-name)) ((min-height . 4) (min-width . 20) (min-height-ignore . 3) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 51) (min-pixel-width-ignore . 64) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1920) (pixel-height . 1037) (total-width . 240) (total-height . 61) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1160) (pixel-height . 1037) (total-width . 145) (total-height . 61) (normal-height . 1.0) (normal-width . 0.6041666666666663) (buffer "config.org" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 16543) (start . 15972)) (prev-buffers ("*info*" 145747 147622) ("lovinglisp.pdf" 1 1))) (leaf (last . t) (pixel-width . 760) (pixel-height . 1037) (total-width . 95) (total-height . 61) (normal-height . 1.0) (normal-width . 0.3958333333333337) (buffer "*shell*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 653) (start . 1)) (prev-buffers ("*eshell*" 1 698) ("void-notes.md" 8145 8826) ("init.el" 1 982) ("config.org" 1 1335) ("lovinglisp.pdf" 1 1)))) (((minibuffer . t) (display-type . mono) (background-mode . dark) (cursor-color . "#ffdd33") (menu-bar-lines . 0) (tool-bar-lines . 0) (vertical-scroll-bars) (foreground-color . "#e4e4ef") (background-color . "#181818") (border-color . "#101010") (font . "tty") (height . 25) (width . 80) (modeline . t) (unsplittable) (visibility . t) (no-accept-focus) (frameset--id . "DE6A-B0A8-7578-C4A0") (frameset--mini t) (tab-bar-lines . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 80) (pixel-height . 24) (total-width . 80) (total-height . 24) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '(#("yas" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("lsp" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("R" 0 1 (isearch-case-fold-search nil isearch-regexp-function nil)) #("scr" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("pure" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("M-" 0 2 (isearch-case-fold-search nil isearch-regexp-function nil)) #("evil" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("ev" 0 2 (isearch-case-fold-search t isearch-regexp-function nil)) #("obs" 0 3 (isearch-case-fold-search t isearch-regexp-function nil))))
-(setq regexp-search-ring '(#("\\<\n\\>" 0 5 (isearch-case-fold-search nil))))
-(setq register-alist '((113) (48 . #("obsidian-mode-map " 0 18 (fontified t)))))
-(setq file-name-history '("~/.emacs.d/config.org" "~/repos/herbstluftwm/src/command.cpp" "~/repos/herbstluftwm/src/" "~/bin/scratchpad" "~/.config/herbstluftwm/autostart" "~/p/purescript/Euler/index.html" "~/p/purescript/Euler/" "~/p/purescript/Euler/src/Euler.purs" "~/p/purescript/Euler/src/" "~/p/purescript/" "~/p/purescript/euler/" "~/p/purescript/euler/src/Euler.purs" "~/p/purescript/euler/src" "~/p/purescript/hello/" "~/p/purescript/euler/" "~/p/purescript/output" "~/.emacs.d/snippets/org-mode/beginsrc" "~/p/purescript/hello.purs" "~/p/purescript/hello.ps" "~/.emacs.d/config.org" "~/p/purescript/hello.ps" "~/p/c/make/Makefile" "~/p/c/make/" "~/p/c/make/test.c" "~/p/c/make/" "~/p/c/make/Makefile" "~/p/c/make" "~/p/c/" "~/General/" "~/repos/glibc/" "~/p/" "~/.emacs.d/config.org" "~/p/go/hello.go" "~/p/go" "~/p/" "~/.emacs.d/config.org" "~/.emacs.d/snippets/org-mode/beginsrc" "~/.emacs.d/config.org" "~/.emacs.d/init.org" "~/General/Notes/If.md" "~/.config/dunst/dunstrc" "~/.config/dunst" "~/.config/" "~/p/R/" "~/p/R/test.r" "~/p/R/" "~/p/R" "~/p/" "~/.emacs.d/" "~/.emacs.d/local/" "~/.emacs.d/local/.emacs.desktop" "~/.emacs.d/local/"))
+(setq search-ring '(#("xrand" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("xr" 0 2 (isearch-case-fold-search t isearch-regexp-function nil)) #("xrandr" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) "speedb" #("modeline" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("formatter" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) "stum" #("b" 0 1 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/.emacs.d/local/" "/usr/local/share/info/\n\n\n\n" "/opt/" "~/Books/" "~/repos/loving-common-lisp/" "~/.sbclrc" "~/repos/loving-common-lisp/" "~/repos/" "~/General/Computing/Lisp/CommonLisp/loving-common-lisp.md" "~/.stumpwm.d/notes.md" "~/General/Daily/2025-12-10.md" "~/.stumpwm.d/modules/pamixer/pamixer.lisp" "~/.stumpwm.d/modules/pamixer/" "~/.stumpwm.d/modules/" "~/Books/common-lisp/practical_common_lisp/index.html" "~/.stumpwmrc" "~/p/racket/" "~/" "~/.emacs.d/config.org" "~/p/lisp/hello.lisp" "~/.emacs.d/config.org" "~/quicklisp/slime-helper.el" "~/quicklisp/" "~/repos/" "~/p/lisp/hello.lisp" "~/p/lisp" "~/p/" "~/General/Daily/" "~/General/Daily/2025/" "~/General/Daily/" "~/.xinitrc" "~/.stumpwmrc" "/usr/local/share/info/stumpwm.info"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
   "/home/vukini/.emacs.d/config.org"
   "config.org"
   'org-mode
-  '(corfu-mode yas-minor-mode font-lock-mode auto-revert-mode)
-  11852
-  '(11464 nil)
+  '(hl-line-mode font-lock-mode org-src-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  16543
+  '(16073 nil)
   nil
   nil
-  '((tab-width . 8) (buffer-display-time 26932 27122 437736 90000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (10022 9543 8483 8347 7838 7149 6905 1132 32 6591 1962 1 6602 6517 6522 6463))))
-
-(desktop-create-buffer 208
-  "/home/vukini/repos/herbstluftwm/INSTALL"
-  "INSTALL"
-  'fundamental-mode
-  '(corfu-mode font-lock-mode auto-revert-mode)
-  1195
-  '(1195 nil)
-  nil
-  nil
-  '((buffer-display-time 26932 1609 126031 291000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/bin/scratchpad"
-  "scratchpad"
-  'sh-mode
-  '(corfu-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-managed-mode lsp-mode font-lock-mode sh-electric-here-document-mode yas-minor-mode)
-  685
-  '(774 nil)
-  nil
-  nil
-  '((buffer-display-time 26932 12971 407320 921000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (739 687 1691 1726))))
-
-(desktop-create-buffer 208
-  nil
-  "herbstluftwm"
-  'dired-mode
-  '(font-lock-mode)
-  791
-  '(nil nil)
-  t
-  '("/home/vukini/repos/herbstluftwm/")
-  '((buffer-display-time 26932 1608 273731 175000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "src"
-  'dired-mode
-  '(font-lock-mode)
-  140
-  '(8671 nil)
-  t
-  '("/home/vukini/repos/herbstluftwm/src/")
-  '((buffer-display-time 26932 1572 928842 317000))
-  '((mark-ring (9325))))
-
-(desktop-create-buffer 208
-  "/home/vukini/.config/herbstluftwm/autostart"
-  "autostart"
-  'sh-mode
-  '(corfu-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-managed-mode lsp-mode font-lock-mode auto-revert-mode sh-electric-here-document-mode yas-minor-mode)
-  561
-  '(1 nil)
-  nil
-  nil
-  '((buffer-display-time 26932 1480 410591 8000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/purescript/Euler/index.html"
-  "index.html"
-  'mhtml-mode
-  '(corfu-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-managed-mode lsp-mode font-lock-mode yas-minor-mode)
-  172
-  '(1 nil)
-  nil
-  nil
-  '((buffer-display-time 26931 25828 930258 798000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (1))))
-
-(desktop-create-buffer 208
-  nil
-  "Euler"
-  'dired-mode
-  '(font-lock-mode)
-  871
-  '(1 nil)
-  t
-  '("/home/vukini/p/purescript/Euler/")
-  '((buffer-display-time 26931 25733 744937 961000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/purescript/Euler/src/Main.purs"
-  "Main.purs"
-  'purescript-mode
-  '(corfu-mode lsp-completion-mode lsp-lens-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-managed-mode lsp-mode font-lock-mode yas-minor-mode)
-  110
-  '(36 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26931 25712 830145 463000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (109 110 154 110))))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/purescript/Euler/src/Euler.purs"
-  "Euler.purs"
-  'purescript-mode
-  '(corfu-mode lsp-completion-mode lsp-lens-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-managed-mode lsp-mode font-lock-mode yas-minor-mode)
-  181
-  '(198 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26931 25274 624973 285000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (198 178))))
-
-(desktop-create-buffer 208
-  nil
-  "src"
-  'dired-mode
-  '(font-lock-mode)
-  244
-  '(nil nil)
-  t
-  '("/home/vukini/p/purescript/Euler/src/")
-  '((buffer-display-time 26931 25132 14671 834000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "purescript"
-  'dired-mode
-  '(font-lock-mode)
-  179
-  '(1 nil)
-  t
-  '("/home/vukini/p/purescript/")
-  '((buffer-display-time 26931 25095 147630 299000))
-  '((mark-ring (1 1))))
-
-(desktop-create-buffer 208
-  nil
-  "p"
-  'dired-mode
-  '(font-lock-mode)
-  744
-  '(nil nil)
-  t
-  '("/home/vukini/p/")
-  '((buffer-display-time 26931 21513 578693 598000) (overwrite-mode))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/.emacs.d/snippets/org-mode/beginsrc"
-  "beginsrc"
-  'snippet-mode
-  '(corfu-mode font-lock-mode yas-minor-mode auto-revert-mode)
-  74
-  '(75 nil)
-  nil
-  nil
-  '((buffer-display-time 26931 20865 755555 61000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (66 66 76 76 88 66))))
+  '((tab-width . 8) (buffer-display-time 26938 59713 855058 920000) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t))
+  '((mark-ring (1128 1150 1150 15891 16363 16298 16553))))
 
 (desktop-create-buffer 208
   nil
   "*info*"
   'Info-mode
-  '(isearch-fold-quotes-mode font-lock-mode)
-  1305787
+  '(hl-line-mode text-scale-mode eldoc-mode font-lock-mode isearch-fold-quotes-mode)
+  147622
+  '(136985 nil)
+  t
+  '("/usr/local/share/info/emacs" "Minibuffer Edit" ((history ("/usr/local/share/info/emacs" "Minibuffer File" 142280) ("/usr/local/share/info/emacs" "Basic Minibuffer" 139682) ("/usr/local/share/info/emacs" "Minibuffer" 137264) ("/usr/local/share/info/emacs" "Repeating" 136295) ("/usr/local/share/info/emacs" "Minibuffer" 136948) ("/usr/local/share/info/emacs" "Repeating" 133908) ("/usr/local/share/info/emacs" "Arguments" 129659) ("/usr/local/share/info/emacs" "Position Info" 125600) ("/usr/local/share/info/emacs" "Arguments" 129659) ("/usr/local/share/info/emacs" "Repeating" 135340) ("/usr/local/share/info/emacs" "Arguments" 132321) ("/usr/local/share/info/emacs" "Position Info" 128805) ("/usr/local/share/info/emacs" "Arguments" 129659) ("/usr/local/share/info/emacs" "Position Info" 129570) ("/usr/local/share/info/emacs" "Continuation Lines" 124440) ("/usr/local/share/info/emacs" "Blank Lines" 122534) ("/usr/local/share/info/emacs" "Basic Help" 120861) ("/usr/local/share/info/emacs" "Basic Files" 120706) ("/usr/local/share/info/emacs" "Basic Undo" 119062) ("/usr/local/share/info/emacs" "Erasing" 116494) ("/usr/local/share/info/emacs" "Moving Point" 114386) ("/usr/local/share/info/emacs" "Inserting Text" 107434) ("/usr/local/share/info/emacs" "Basic" 102028) ("/usr/local/share/info/emacs" "Exiting" 101710) ("/usr/local/share/info/emacs" "Entering Emacs" 98441) ("/usr/local/share/info/emacs" "On-Screen Keyboards" 94317) ("/usr/local/share/info/emacs" "Touchscreens" 90995) ("/usr/local/share/info/emacs" "Other Input" 87289) ("/usr/local/share/info/emacs" "Commands" 86311) ("/usr/local/share/info/emacs" "Top" 2923) ("dir" "Top" 1775) ("/usr/share/info/elisp" "Top" 3077) ("/usr/share/info/elisp" "System Interface" 3935975) ("/usr/share/info/elisp" "Top" 1112) ("/usr/share/info/gforth" "Top" 1640) ("/usr/local/share/info/speedbar" "Introduction" 4665) ("/usr/local/share/info/speedbar" "Index" 74921) ("/usr/local/share/info/speedbar" "Top" 3335) ("/usr/local/share/info/speedbar" "Buffer Mode" 20735) ("/usr/local/share/info/speedbar" "Index" 77969) ("/usr/local/share/info/speedbar" "GNU Free Documentation License" 70310) ("/usr/local/share/info/speedbar" "Creating a display" 45325) ("/usr/local/share/info/speedbar" "Tagging Extensions" 40118) ("/usr/local/share/info/speedbar" "Major Display Modes" 38877) ("/usr/local/share/info/speedbar" "Minor Display Modes" 34931) ("/usr/local/share/info/speedbar" "Extending" 32363) ("/usr/local/share/info/speedbar" "Hooks" 31161) ("/usr/local/share/info/speedbar" "Version Control" 29849) ("/usr/local/share/info/speedbar" "Tag Hierarchy Methods" 29139) ("/usr/local/share/info/speedbar" "Frames Windows and Faces" 27395) ("/usr/local/share/info/speedbar" "Customizing" 24918) ("/usr/local/share/info/speedbar" "GDB" 24137) ("/usr/local/share/info/speedbar" "Info" 23544) ("/usr/local/share/info/speedbar" "RMAIL" 22654) ("/usr/local/share/info/speedbar" "Minor Modes" 21820) ("/usr/local/share/info/speedbar" "Buffer Mode" 20866) ("/usr/local/share/info/speedbar" "File Key Bindings" 20270) ("/usr/local/share/info/speedbar" "Hidden Files" 18078) ("/usr/local/share/info/speedbar" "Directory Display" 16258) ("/usr/local/share/info/speedbar" "File Mode" 14437) ("/usr/local/share/info/speedbar" "Displays Submenu" 13755) ("/usr/local/share/info/speedbar" "Mouse Bindings" 12157) ("/usr/local/share/info/speedbar" "Basic Visuals" 11891) ("/usr/local/share/info/speedbar" "Basic Key Bindings" 7382) ("/usr/local/share/info/speedbar" "Basic Navigation" 5567) ("/usr/local/share/info/speedbar" "Introduction" 4478) ("/usr/local/share/info/speedbar" "Top" 2895) ("dir" "Top" 5093) ("dir" "Top" 35018) ("/usr/local/share/info/stumpwm" "Top" 1286) ("/usr/local/share/info/stumpwm" "Key Bindings" 28923) ("/usr/local/share/info/stumpwm" "List of Default Keybindings" 29551) ("/usr/local/share/info/stumpwm" "Key Bindings" 28732) ("/usr/local/share/info/stumpwm" "Top" 1284) ("dir" "Top" 8217))))
+  '((tab-width . 8) (buffer-display-time 26938 59474 898566 242000) (buffer-file-coding-system . utf-8-unix) (fill-column . 36) (case-fold-search . t))
+  '((mark-ring (136874 130928 130775 125600 111293 100766 100169 99229 98996 90743 90322 90322 90322 90323 90294 89407))))
+
+(desktop-create-buffer 208
+  "/home/vukini/General/void-notes.md"
+  "void-notes.md"
+  'markdown-mode
+  '(hl-line-mode text-scale-mode font-lock-mode yas-minor-mode eldoc-mode corfu-mode)
+  8826
+  '(8680 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26938 24086 800095 974000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (8658 8306 8435 8322 1 8144 8145 8016 8015 7984 7921 7920 7685 7685 6780 8826))))
+
+(desktop-create-buffer 208
+  "/home/vukini/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(hl-line-mode font-lock-mode paredit-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  982
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 26938 19178 536927 956000) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/common-lisp/lovinglisp.pdf"
+  "lovinglisp.pdf"
+  'pdf-view-mode
+  '(pdf-view-themed-minor-mode font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
+  1
   '(1 nil)
   t
-  '("/usr/share/info/elisp" "Interactive Codes" ((history ("/usr/share/info/elisp" "Using Interactive" 1299358) ("/usr/share/info/eintr" "Interactive Options" 125454) ("/usr/share/info/eintr" "Top" 1550))))
-  '((tab-width . 8) (buffer-display-time 26930 41410 186608 560000) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t))
-  '((mark-ring (1299345 1306684 1310654))))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/c/make/Makefile"
-  "Makefile"
-  'makefile-gmake-mode
-  '(corfu-mode yas-minor-mode font-lock-mode auto-revert-mode)
-  129
-  '(128 nil)
   nil
-  nil
-  '((indent-tabs-mode . t) (buffer-display-time 26932 26847 20197 341000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (9 90 90 128 128 96 129 129))))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/c/make/test.c"
-  "test.c"
-  'c-mode
-  '(corfu-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode lsp-mode yas-minor-mode font-lock-mode auto-revert-mode)
-  81
-  '(81 nil)
-  nil
-  nil
-  '((buffer-display-time 26930 43150 732994 201000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
+  '((buffer-display-time 26938 15730 813094 39000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring (1 1))))
 
 (desktop-create-buffer 208
   nil
-  "make"
+  "common-lisp"
   'dired-mode
-  '(font-lock-mode)
-  172
+  '(pdf-occur-dired-minor-mode eldoc-mode font-lock-mode)
+  793
   '(nil nil)
   t
-  '("/home/vukini/p/c/make/")
-  '((buffer-display-time 26930 42688 313241 954000))
+  '("/home/vukini/Books/common-lisp/")
+  '((buffer-display-time 26937 42368 380079 967000))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  "c"
+  "Books"
   'dired-mode
-  '(font-lock-mode)
-  170
+  '(pdf-occur-dired-minor-mode eldoc-mode font-lock-mode)
+  411
   '(nil nil)
   t
-  '("/home/vukini/p/c/")
-  '((buffer-display-time 26930 42632 557432 362000))
+  '("/home/vukini/Books/")
+  '((buffer-display-time 26937 42365 266570 4000))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  "*eww*<2>"
-  'eww-mode
-  '(font-lock-mode)
-  41
-  '(41 nil)
+  "loving-common-lisp"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  191
+  '(nil nil)
   t
-  '(:history ((:title "Enter the void" :url "https://voidlinux.org/")) :history-position 0)
-  '((buffer-display-time 26930 41428 208101 964000) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t))
+  '("/home/vukini/repos/loving-common-lisp/")
+  '((buffer-display-time 26937 42363 353984 345000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/General/Computing/Lisp/CommonLisp/loving-common-lisp.md"
+  "loving-common-lisp.md"
+  'markdown-mode
+  '(font-lock-mode yas-minor-mode eldoc-mode corfu-mode)
+  84
+  '(52 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26937 42345 116152 390000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1 1 52))))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/ai/data-scienc-project.pdf"
+  "data-scienc-project.pdf"
+  'pdf-view-mode
+  '(pdf-view-themed-minor-mode font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
+  1
+  '(1 nil)
+  t
+  nil
+  '((buffer-display-time 26937 42335 436097 219000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/ai/wizards-lens.epub"
+  "wizards-lens.epub"
+  'nov-mode
+  '(text-scale-mode font-lock-mode eldoc-mode)
+  1479
+  '(1 nil)
+  t
+  nil
+  '((buffer-display-time 26937 42363 353985 963000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring (780))))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/python/learnpython_inweekend_pt1.epub"
+  "learnpython_inweekend_pt1.epub"
+  'nov-mode
+  '(text-scale-mode font-lock-mode eldoc-mode)
+  631
+  '(631 nil)
+  t
+  nil
+  '((buffer-display-time 26937 41921 210241 891000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring (630 1 828 610 746 976 1316 630))))
+
+(desktop-create-buffer 208
+  nil
+  "General"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  1907
+  '(nil nil)
+  t
+  '("/home/vukini/General/")
+  '((buffer-display-time 26937 41320 7356 69000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/python/djangoforbeginners.epub"
+  "djangoforbeginners.epub"
+  'nov-mode
+  '(font-lock-mode eldoc-mode)
+  10677
+  '(1 nil)
+  t
+  nil
+  '((buffer-display-time 26937 41309 804207 163000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring (10677))))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/math/intro_statistics.pdf"
+  "intro_statistics.pdf"
+  'pdf-view-mode
+  '(font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-display-time 26937 41207 987615 535000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/math/linalgebra.pdf"
+  "linalgebra.pdf"
+  'pdf-view-mode
+  '(font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-display-time 26937 41173 637750 136000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/math/logic.epub"
+  "logic.epub"
+  'nov-mode
+  '(font-lock-mode eldoc-mode)
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-display-time 26937 41164 988526 607000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/math/nescience.pdf"
+  "nescience.pdf"
+  'pdf-view-mode
+  '(font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-display-time 26937 41161 307999 892000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/common-lisp/C Programming Notes for Professionals.pdf"
+  "C Programming Notes for Professionals.pdf"
+  'pdf-view-mode
+  '(font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-display-time 26937 41158 376330 621000) (buffer-file-coding-system . no-conversion))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
   "*eww*"
   'eww-mode
-  '(font-lock-mode)
+  '(text-scale-mode eldoc-mode font-lock-mode)
+  411
+  '(411 nil)
+  t
+  '(:history ((:point 1 :url "file:///home/vukini/Books/common-lisp/practical_common_lisp/introduction-why-lisp.html" :title "Introduction: Why Lisp?") (:point 1 :url "file:///home/vukini/Books/common-lisp/practical_common_lisp/index.html" :title "Practical Common Lisp")) :history-position nil)
+  '((buffer-display-time 26937 41138 751986 230000) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/Books/stumpwm-git.pdf"
+  "stumpwm-git.pdf"
+  'pdf-view-mode
+  '(font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
   1
   '(nil nil)
   t
-  '(:history ((:title "" :url "https://beautifulracket.com/")) :history-position 0)
-  '((buffer-display-time 26930 41240 186193 585000) (truncate-lines . t))
+  nil
+  '((buffer-display-time 26937 41005 569097 567000) (buffer-file-coding-system . no-conversion))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/home/vukini/General/Computing/Racket/Racket-Scheme.md"
-  "Racket-Scheme.md"
-  'markdown-mode
-  '(corfu-mode yas-minor-mode eldoc-mode font-lock-mode)
-  383
-  '(356 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-display-time 26930 41216 91246 83000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "General"
-  'dired-mode
-  '(font-lock-mode)
-  1640
-  '(nil nil)
+  "/home/vukini/Books/modern-networking.epub"
+  "modern-networking.epub"
+  'nov-mode
+  '(text-scale-mode font-lock-mode eldoc-mode)
+  280
+  '(384 nil)
   t
-  '("/home/vukini/General/")
-  '((buffer-display-time 26930 41101 878912 775000))
-  '((mark-ring nil)))
+  nil
+  '((buffer-display-time 26937 40992 457080 886000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring (403 403 280))))
 
 (desktop-create-buffer 208
-  "/home/vukini/repos/glibc/configure"
-  "configure"
-  'sh-mode
-  '(corfu-mode yas-minor-mode sh-electric-here-document-mode auto-revert-mode font-lock-mode)
-  2654
-  '(641 nil)
-  nil
-  nil
-  '((buffer-display-time 26930 39276 396568 377000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (2654))))
-
-(desktop-create-buffer 208
-  nil
-  "glibc"
-  'dired-mode
-  '(font-lock-mode)
-  2322
-  '(nil nil)
-  t
-  '("/home/vukini/repos/glibc/")
-  '((buffer-display-time 26929 61123 273043 200000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/elisp/demo.el"
-  "demo.el"
-  'emacs-lisp-mode
-  '(corfu-mode yas-minor-mode eldoc-mode font-lock-mode)
-  265
-  '(265 nil)
-  nil
-  nil
-  '((buffer-display-time 26929 53851 894097 605000) (buffer-file-coding-system . prefer-utf-8-unix))
-  '((mark-ring (206 265 234 208 265))))
-
-(desktop-create-buffer 208
-  nil
-  "elisp"
-  'dired-mode
-  '(font-lock-mode)
-  126
-  '(nil nil)
-  t
-  '("/home/vukini/p/elisp/")
-  '((buffer-display-time 26932 26452 563049 510000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/p/go/hello.go"
-  "hello.go"
-  'go-mode
-  '(corfu-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-lens-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode yas-minor-mode lsp-mode font-lock-mode auto-revert-mode)
+  "/home/vukini/Books/TheCuisBook.pdf"
+  "TheCuisBook.pdf"
+  'pdf-view-mode
+  '(font-lock-mode pdf-cache-prefetch-minor-mode pdf-misc-context-menu-minor-mode pdf-sync-minor-mode pdf-annot-minor-mode pdf-misc-menu-bar-minor-mode pdf-misc-size-indication-minor-mode pdf-outline-minor-mode pdf-misc-minor-mode pdf-links-minor-mode pdf-isearch-minor-mode pdf-history-minor-mode pdf-view-dark-minor-mode eldoc-mode)
   1
-  '(1 nil)
-  nil
-  nil
-  '((indent-tabs-mode . t) (buffer-display-time 26929 52400 443927 264000) (overwrite-mode))
-  '((mark-ring (1 1 1 1))))
-
-(desktop-create-buffer 208
-  nil
-  "go"
-  'dired-mode
-  '(font-lock-mode)
-  171
-  '(171 nil)
+  '(nil nil)
   t
-  '("/home/vukini/p/go/")
-  '((buffer-display-time 26929 51197 493717 87000) (overwrite-mode))
+  nil
+  '((buffer-display-time 26937 40987 280262 52000) (buffer-file-coding-system . no-conversion))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  nil
-  "config.org"
-  'dired-mode
-  '(font-lock-mode)
-  95
-  '(95 nil)
-  t
-  '("/home/vukini/.emacs.d/config.org")
-  '((buffer-display-time 26929 47578 193324 178000) (overwrite-mode))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/vukini/.config/dunst/dunstrc"
-  "dunstrc"
+  "/home/vukini/.sbclrc"
+  ".sbclrc"
   'fundamental-mode
-  '(corfu-mode font-lock-mode)
-  560
+  '(font-lock-mode eldoc-mode corfu-mode)
+  493
+  '(542 nil)
+  nil
+  nil
+  '((buffer-display-time 26937 35885 665162 866000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (542 658 658 658 658 658))))
+
+(desktop-create-buffer 208
+  "/home/vukini/repos/loving-common-lisp/README.md"
+  "README.md"
+  'markdown-mode
+  '(text-scale-mode font-lock-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  2441
+  '(2129 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26937 21883 858882 543000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1806 259 697 933 1805 832 902 1806 2351 2284 2441))))
+
+(desktop-create-buffer 208
+  "/home/vukini/General/Daily/2025-12-10.md"
+  "2025-12-10.md"
+  'markdown-mode
+  '(font-lock-mode yas-minor-mode eldoc-mode corfu-mode)
+  744
+  '(737 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26937 21596 93351 204000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (484 448 549 418 316 1 1 1 450 450 450 635 448 744 744 744))))
+
+(desktop-create-buffer 208
+  nil
+  "repos"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  979
+  '(nil nil)
+  t
+  '("/home/vukini/repos/")
+  '((buffer-display-time 26937 18734 23694 16000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "lisp"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  173
+  '(nil nil)
+  t
+  '("/home/vukini/p/lisp/")
+  '((buffer-display-time 26937 18670 59345 573000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "p"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  694
+  '(nil nil)
+  t
+  '("/home/vukini/p/")
+  '((buffer-display-time 26937 18654 8396 43000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/.stumpwmrc"
+  ".stumpwmrc"
+  'lisp-mode
+  '(font-lock-mode slime-autodoc-mode slime-trace-dialog-minor-mode slime-mode paredit-mode yas-minor-mode eldoc-mode corfu-mode)
+  1
+  '(2872 nil)
+  nil
+  nil
+  '((buffer-display-time 26937 18622 324565 57000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (2993 3011 1824 891 443 1182 1182 2993 3011 2711 3011 3011 3011 1182 1182 3011))))
+
+(desktop-create-buffer 208
+  "/home/vukini/.stumpwm.d/notes.md"
+  "notes.md"
+  'markdown-mode
+  '(font-lock-mode yas-minor-mode eldoc-mode corfu-mode)
+  477
   '(1 nil)
   nil
   nil
-  '((buffer-display-time 26929 46244 399920 518000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1))))
+  '((tab-width . 4) (buffer-display-time 26937 17936 450014 945000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
+  "/home/vukini/.stumpwm.d/modules/pamixer/pamixer.lisp"
+  "pamixer.lisp"
+  'lisp-mode
+  '(font-lock-mode slime-autodoc-mode slime-trace-dialog-minor-mode slime-mode paredit-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  901
+  '(55 nil)
   nil
-  "dunst"
-  'dired-mode
-  '(font-lock-mode)
-  132
-  '(132 nil)
-  t
-  '("/home/vukini/.config/dunst/")
-  '((buffer-display-time 26929 46169 884380 15000) (overwrite-mode))
+  nil
+  '((buffer-display-time 26937 7384 100627 531000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (42 159 617 548 1158 2173 2242 42 901))))
+
+(desktop-create-buffer 208
+  "/home/vukini/.stumpwm.d/modules/pamixer/pamixer.asd"
+  "pamixer.asd"
+  'lisp-mode
+  '(font-lock-mode slime-autodoc-mode slime-trace-dialog-minor-mode slime-mode paredit-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  19
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 26937 4912 136405 911000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/.stumpwm.d/modules/pamixer/README.md"
+  "README.md"
+  'markdown-mode
+  '(font-lock-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  412
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26937 4898 869228 218000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  ".config"
+  "pamixer"
   'dired-mode
-  '(font-lock-mode)
-  861
-  '(861 nil)
-  t
-  '("/home/vukini/.config/")
-  '((buffer-display-time 26929 46164 406727 549000) (overwrite-mode))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  ".saves"
-  'dired-mode
-  '(font-lock-mode)
-  293
+  '(pdf-occur-dired-minor-mode eldoc-mode font-lock-mode)
+  242
   '(nil nil)
   t
-  '("/home/vukini/.emacs.d/.saves/")
-  '((buffer-display-time 26929 40747 774174 933000) (overwrite-mode))
+  '("/home/vukini/.stumpwm.d/modules/pamixer/")
+  '((buffer-display-time 26937 4710 607844 301000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/vukini/.stumpwm.d/modules/pamixer/package.lisp"
+  "package.lisp"
+  'lisp-mode
+  '(font-lock-mode slime-autodoc-mode slime-trace-dialog-minor-mode slime-mode paredit-mode yas-minor-mode eldoc-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 26937 4703 776782 64000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  "R"
+  "modules"
   'dired-mode
-  '(font-lock-mode)
-  120
-  '(120 nil)
-  t
-  '("/home/vukini/p/R/")
-  '((buffer-display-time 26929 43097 437250 875000) (overwrite-mode))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "~"
-  'dired-mode
-  '(font-lock-mode)
-  1661
+  '(pdf-occur-dired-minor-mode eldoc-mode font-lock-mode)
+  182
   '(nil nil)
   t
-  '("/home/vukini/")
-  '((buffer-display-time 26929 43167 188901 999000) (overwrite-mode))
+  '("/home/vukini/.stumpwm.d/modules/")
+  '((buffer-display-time 26937 4659 603331 840000))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  ".emacs.d"
+  "emacs"
   'dired-mode
-  '(font-lock-mode)
-  124
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  544
   '(nil nil)
   t
-  '("/home/vukini/.emacs.d/")
-  '((buffer-display-time 26932 27018 711980 682000) (overwrite-mode))
+  '("/home/vukini/Books/emacs/")
+  '((buffer-display-time 26937 35450 511500 3000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "opt"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  146
+  '(nil nil)
+  t
+  '("/opt/")
+  '((buffer-display-time 26938 35978 26515 538000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "calibre"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  109
+  '(nil nil)
+  t
+  '("/opt/calibre/")
+  '((buffer-display-time 26938 35978 924587 753000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "bin"
+  'dired-mode
+  '(eldoc-mode font-lock-mode pdf-occur-dired-minor-mode)
+  115
+  '(nil nil)
+  t
+  '("/opt/calibre/bin/")
+  '((buffer-display-time 26938 35979 500645 659000))
   '((mark-ring nil)))
 

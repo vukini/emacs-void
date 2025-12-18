@@ -21,15 +21,14 @@ Finally we start the server process.
   (message "you are in %s" (shell-command-to-string "uname -a")) 
   (message "Sytem type %s %s" system-type system-configuration)
   (message "----------------------------")
-
+  ;;  (setq debug-on-error t)
   (add-to-list 'load-path "~/.emacs.d/local")
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
-  ;;(global-set-key (kbd "C-\\") 'comment-region)
-  ;;(global-set-key (kbd "C-M-\\") 'uncomment-region)
   ;;currently commented as using M-; 'comment-dwim (do what i mean)
   ;;(evil-mode nil) 
-  (server-start)                                    ;; Do I really need this?  
+  ;;(server-start)                                    ;; Do I really need this?  
+  (hl-line-mode t)
   #+END_SRC
 
 *** Uniquify
@@ -48,7 +47,6 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+END_SRC
 *** Setup packages
 #+BEGIN_SRC elisp :load no
-
   (setq package-archives
         '(("gnu"       . "https://elpa.gnu.org/packages/")
           ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
@@ -57,7 +55,7 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
           ("org"       . "https://orgmode.org/elpa/")))
 
   (package-initialize) ;this loads the installed packages and activates them
-  (setq use-package-always-ensure t) ; ensures that packages not installed are
+  (setq use-package-always-ensure t) ; ensures that packages not installed are installed
   (require 'package) ; use C-h P (to describe packages)
   (unless package-archive-contents
     (package-refresh-contents))
@@ -69,38 +67,11 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 ;(global-set-key (kbd "M-\\") 'other-window)
 (global-set-key (kbd "M-\\") (lambda () (interactive) (other-window -1)))
 #+END_SRC
-***Loading files with rc.el
-#+BEGIN_SRC elisp :load no
-  (load "rc.el")
-  (message "Setting Theme")
-  (rc/require-theme 'gruber-darker)
-  ;;(load-theme 'leuven-dark)
-  (rc/require 'which-key)
-  (which-key-mode)			
-  (rc/require 'projectile)
-  (rc/require 'vertico)
-  (vertico-mode 1)
-  (rc/require
-   'lua-mode
-   'less-css-mode
-   'cmake-ts-mode
-   'markdown-mode
-   ;'purescript-mode
-   'go-mode
-   'php-mode
-   'racket-mode
-   'rfc-mode)
-  (setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
-  (add-hook 'racket-mode-hook #'racket-xp-mode)
-
-
-  #+END_SRC
 *** Custom File
 #+BEGIN_SRC elisp :load no
   (message "Loading custom-file")
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
   (load-file custom-file)
-
 #+END_SRC
 *** Backup Directory
 #+BEGIN_SRC elisp :load no
@@ -114,29 +85,30 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
      kept-old-versions 2
      version-control t)       ; use versioned backups
 #+END_SRC
-** Use-Package Sections
-*** Obsidian
+** Packages
+*** Loading files with rc.el
 #+BEGIN_SRC elisp :load no
-  (use-package obsidian
-    :ensure t
-    :custom
-    ;; Your Obsidian vault root
-    (obsidian-directory "~/General")        ;; vault = ~/General 
-     ;; Inbox folder inside the vault
-    (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
-    (markdown-enable-wiki-links t)
-    (obsidian-create-unfound-files-in-inbox t)
-    :config
-    (global-obsidian-mode t)
-    (obsidian-backlinks-mode t)
-    :bind
-    (:map obsidian-mode-map
-          ("C-c C-n" . obsidian-capture)
-          ("C-c C-l" . obsidian-insert-link)
-          ("C-c C-o" . obsidian-follow-link-at-point)
-          ("C-c C-j" . obsidian-jump)
-          ("C-c C-b" . obsidian-backlink-jump)))
-#+END_SRC
+  (load "rc.el")
+  (message "Setting Theme")
+  (rc/require-theme 'gruber-darker)
+  ;;(load-theme 'leuven-dark)
+
+  (rc/require 'which-key)
+  (which-key-mode)			
+
+  (rc/require 'projectile)
+
+  (rc/require
+   'lua-mode
+   'less-css-mode
+   'cmake-ts-mode
+   'markdown-mode
+   ;'purescript-mode
+   'go-mode
+   'php-mode
+   'rfc-mode)
+
+  #+END_SRC
 *** Corfu
 #+BEGIN_SRC elisp :load no
   (message "Corfu!")
@@ -149,48 +121,90 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
     (corfu-cycle t)
     (corfu-preselect-first t))
 #+END_SRC
-*** Cape
-  https://github.com/minad/cape
+*** Vertico
+#+BEGIN_SRC elisp :load no
+      ;  (rc/require 'vertico)
+      ;  (vertico-mode 1)
+      (use-package vertico
+        :custom
+        (vertico-scroll-margin 0) ;; Different scroll margin
+        (vertico-count 15) ;; Show more candidates
+        (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+        (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+        :init
+        (vertico-mode))  
+#+END_SRC
+*** Savehist
+#+BEGIN_SRC elisp :load no
+  (use-package savehist
+        :init
+        (savehist-mode))
+#+END_SRC
+*** Use package emacs
+Currently commented out
+#+BEGIN_SRC elisp :load no
+  ;; ;; Emacs minibuffer configurations.
+  ;; (use-package emacs
+  ;;   :custom
+  ;;   ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
+  ;;   ;; to switch display modes.
+  ;;   (context-menu-mode t)
+  ;;   ;; Support opening new minibuffers from inside existing minibuffers.
+  ;;   (enable-recursive-minibuffers t)
+  ;;   ;; Hide commands in M-x which do not work in the current mode.  Vertico
+  ;;   ;; commands are hidden in normal buffers. This setting is useful beyond
+  ;;   ;; Vertico.
+  ;;   (read-extended-command-predicate #'command-completion-default-include-p)
+  ;;   ;; Do not allow the cursor in the minibuffer prompt
+  ;;   (minibuffer-prompt-properties
+  ;;    '(read-only t cursor-intangible t face minibuffer-prompt)))
 
-  Completion at Point 
+    
+#+END_SRC
+
+*** Cape
+  https://github.com/minad/cape A Completion at Point Framework
 #+BEGIN_SRC elisp :load no
   (use-package cape
     :ensure t
+    :init
     :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
     :after corfu)
 #+END_SRC
-*** Orderless
+*** Embark
 #+BEGIN_SRC elisp :load no
-  (use-package orderless
-    :ensure t
-    :custom
-    (completion--styles '(orderless basic))
-    (completion-category-defaults nil)
-    (co mpletion-category-overrides '((file (styles basic partial-completion)))))
+   (use-package embark
+     :ensure t
+     :bind
+     (("C-." . embark-act)
+      ("C-;" . embark-dwim)))
 #+END_SRC
+*** Consult
+#+BEGIN_SRC elisp :load no
+   (use-package consult :ensure t)
+#+END_SRC
+
+*** Marginalia
+#+BEGIN_SRC elisp :load no
+  (use-package marginalia
+     :ensure t
+     :init (marginalia-mode))
+#+END_SRC
+
+*** Projectile
+#+BEGIN_SRC elisp :load no
+   (setq projectile-project-search-path '("~/p/" "~/apps/" ("~/repos" . 1)))
+#+END_SRC
+
 *** Kind Icon
 #+BEGIN_SRC elisp :load no
   (use-package kind-icon
-    :ensure t
-    :after corfu
-    :config
-    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+     :ensure t
+     :after corfu
+     :config
+     (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+END_SRC
-*** Embark
-#+BEGIN_SRC elisp :load no
-  (use-package embark
-    :ensure t
-    :bind
-    (("C-." . embark-act)
-     ("C-;" . embark-dwim)))
 
-  (use-package consult :ensure t)
-  (use-package marginalia
-    :ensure t
-    :init (marginalia-mode))
-
-  (setq projectile-project-search-path '("~/p/" "~/apps/" ("~/repos" . 1)))
-#+END_SRC
 *** pdf-tools
 #+BEGIN_SRC elisp :load no
   (message "PDF Tools")
@@ -209,23 +223,27 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+END_SRC
 *** lsp-mode
 #+BEGIN_SRC elisp :load no
-      (message "lsp-mode")
-      (use-package lsp-mode
-        :ensure t
-        :commands (lsp lsp-defered)
-        :hook ((python-mode . lsp)
-               (go-mode . lsp)
-               (c-mode . lsp)
-               (c++-mode . lsp))
-        :config
-        (with-eval-after-load 'lsp-mode
-          (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
-        :init
-        (setq lsp-keymap-prefix "C-c l"))
-        
-        (use-package lsp-ui :ensure t :commands lsp-ui-mode)
-        (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
-      
+  (message "lsp-mode")
+  ;; (use-package lsp-mode
+  ;;   :ensure t
+  ;;   :commands (lsp lsp-defered)
+  ;;   :hook ((python-mode . lsp)
+  ;;          (go-mode . lsp)
+  ;;          (c-mode . lsp)
+  ;;          (c++-mode . lsp)
+  ;;  (lsp-completion-mode . my/lsp-use-orderless))
+  ;;   :config
+  ;;   (with-eval-after-load 'lsp-mode
+  ;;     (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
+  ;;   :init
+  ;;   (setq lsp-keymap-prefix "C-c l")
+  ;;   (defun my/lsp-use-orderless ()
+  ;;     (setf (alist-get 'style (alist-get 'lsp-capf completion-category-defaults))
+  ;;       '(orderless))))
+    
+  ;;   (use-package lsp-ui :ensure t :commands lsp-ui-mode)
+  ;;   (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+
 #+END_SRC
 
 Some notes, not evaluated:
@@ -337,21 +355,21 @@ Some notes, not evaluated:
 
 *** Slime Common Lisp
 #+BEGIN_SRC elisp :load no
-  ;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;  ;; Replace "sbcl" with the path to your implementation
-  ;  (setq inferior-lisp-program "sbcl")
-
-  (use-package slime
-    :ensure true
-    :init
-    (setq inferior-lisp-program "sbcl")
-    :config
-    (slime-setup '(slime-fancy)))
-
+    ;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+    ;  ;; Replace "sbcl" with the path to your implementation
+  (setq inferior-lisp-program "sbcl")
+  (slime-setup '(slime-fancy))
+  (add-hook 'slime-load-hook
+  	    (lambda ()
+  	      (define-key
+  	       slime-prefix-map
+  	       (kbd "M-h")
+  	       'slime-documentation-lookup)))
+  (load "/home/vukini/quicklisp/clhs-use-local.el" t)
 
 #+END_SRC
 
-** paredit
+*** paredit
 https://paredit.org/cgit/paredit/tree/
 #+BEGIN_SRC elisp :load no
     (message "Paredit")
@@ -370,7 +388,7 @@ https://paredit.org/cgit/paredit/tree/
     (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 #+END_SRC
-** emacs-haskell-unicode-method
+*** emacs-haskell-unicode-method
 [[eww:https://github.com/roelvandijk/emacs-haskell-unicode-input-method][emacs-haskell-unicode-input-method
 https://github.com/roelvandijk/emacs-haskell-unicode-input-method]]
 
@@ -394,6 +412,112 @@ Typing it presents you with a choice. Type 1 or 2 to select an option or keep ty
     (lambda () (set-input-method "haskell-unicode")))
 
 #+END_SRC
-** I would like to read my gmail in emacs, please give detailed instructions for full set up.
-Assume I already have emacs on Void linux.
+*** Obsidian
+#+BEGIN_SRC elisp :load no
+  (use-package obsidian
+    :ensure t
+    :custom
+    ;; Your Obsidian vault root
+    (obsidian-directory "~/General")        ;; vault = ~/General 
+     ;; Inbox folder inside the vault
+    (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
+    (markdown-enable-wiki-links t)
+    (obsidian-create-unfound-files-in-inbox t)
+    (obsidian-use-update-timer`nil)
+    (obsidian-use-pcache t)
+    :config
+    (global-obsidian-mode t)
+    (obsidian-backlinks-mode t)
+    (markdown-enable-wiki-links t)
+    :bind
+    (:map obsidian-mode-map
+          ("C-c C-n" . obsidian-capture)
+          ("C-c C-l" . obsidian-insert-wikilink)
+          ("C-c C-o" . obsidian-follow-link-at-point)
+          ("C-c C-j" . obsidian-jump)
+          ("C-c C-b" . obsidian-backlink-jump)))
+
+  (defun my-obsidian-move-current-file ()
+  (interactive)
+  (let* ((vault obsidian-directory)
+         (name  (file-name-nondirectory (buffer-file-name)))
+         (new   (expand-file-name name vault)))
+    (write-file new)
+    (obsidian-update)))
+
+
+#+END_SRC
+*** Orderless
+https://github.com/oantolin/orderless
+#+BEGIN_SRC elisp :load no
+  (message "Orderless")
+  (use-package orderless
+    :ensure t
+    :custom
+    (setq completion--styles '(orderless basic))
+    (completion-category-defaults nil)
+    (completion-category-overrides '((file (styles basic partial-completion))))
+    (completion-pcm-leading-wildcard t))
+  (setq completion-styles '(orderless basic))
+#+END_SRC
+*** Emacs Reader
+
+#+BEGIN_SRC elisp :load no
+  (message "emacs reader")
+  ;(setq package-vc-allow-build-commands t)
+  ;(add-to-list 'load-path "~/.emacs.d/local/emacs-reader")
+  ;(require 'reader)    
+#+END_SRC
+
+*** nov.el for epubs
+#+BEGIN_SRC elisp :load no
+(message "nov.el")
+;  (use-package nov
+;    :ensure t
+;    :mode '("\\.epub\\'" . nov-mode))
+(message "nov.el")
+
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode))
+
+#+END_SRC
+*** python-mode
+#+BEGIN_SRC elisp :load no
+  (message "python mode")
+  (use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :custom
+  ;; Always use python3 REPL
+  (python-shell-interpreter "ipython")
+  (python-shell-interpreter-args "-i --simple-prompt")
+  ;; Disable native shell completion; let LSP/Corfu handle it
+  (python-shell-completion-native-enable nil)
+  (python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
+  :hook
+  ;; LSP on Python files
+  (python-mode . eglot-ensure)
+  ;; Example: enable indentation, etc. here if you want
+  )
+
+#+END_SRC
+*** speedbar
+(message "Speedbar")
+(setq speedbar-show-unknown-files t)
+(setq speedbar-directory-unshown-regexp "^$")
+(setq speedbar-ignored-directory-expressions nil)
+
+*** polymode
+(use-package polymode
+  :ensure t)
+*** Racket mode
+#+BEGIN_SRC elisp :load no
+  (rc/require 'racket-mode)
+  (setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
+  (add-hook 'racket-mode-hook #'racket-xp-mode)
+  (add-hook 'racket-repl-mode-hook
+  	  (lambda ()
+  	    (keymap-set racket-repl-mode-map (kbd "RET") 'racket-repl-submit)))
+#+END_SRC
 

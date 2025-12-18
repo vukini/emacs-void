@@ -8,14 +8,18 @@
  '(custom-safe-themes
    '("01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
      default))
+ '(ein:jupyter-server-use-subcommand "server")
  '(package-selected-packages
-   '(avy cape consult corfu dash-functional embark ess evil
-	 evil-collection exec-path-from-shell go-mode gptel
-	 gruber-darker-theme kind-icon lsp-ivy lsp-mode lsp-ui
-	 lua-mode magit marginalia markdown-mode obsidian orderless
-	 pdf-tools php-mode projectile purescript-mode racket-mode
-	 rfc-mode slime true vertico vterm yasnippet
-	 yasnippet-snippets)))
+   '(avy cape consult corfu dash-docs dash-functional dot-env dotenv ein
+	 embark envrc ess evil-collection exec-path-from-shell go-mode
+	 gptel gruber-darker-theme kind-icon load-env-vars lsp-ivy
+	 lsp-ui lua-mode magit marginalia nov obsidian orderless
+	 pdf-tools php-mode projectile purescript-mode python-mode
+	 pyvenv racket-mode rfc-mode s-buffer slime vertico vterm
+	 yasnippet-snippets))
+ '(package-vc-selected-packages
+   '((reader :url "https://codeberg.org/divyaranjan/emacs-reader" :make
+	     "all"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
