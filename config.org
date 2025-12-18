@@ -414,36 +414,36 @@ Typing it presents you with a choice. Type 1 or 2 to select an option or keep ty
 #+END_SRC
 *** Obsidian
 #+BEGIN_SRC elisp :load no
-  (use-package obsidian
-    :ensure t
-    :custom
-    ;; Your Obsidian vault root
-    (obsidian-directory "~/General")        ;; vault = ~/General 
-     ;; Inbox folder inside the vault
-    (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
-    (markdown-enable-wiki-links t)
-    (obsidian-create-unfound-files-in-inbox t)
-    (obsidian-use-update-timer`nil)
-    (obsidian-use-pcache t)
-    :config
-    (global-obsidian-mode t)
-    (obsidian-backlinks-mode t)
-    (markdown-enable-wiki-links t)
-    :bind
-    (:map obsidian-mode-map
-          ("C-c C-n" . obsidian-capture)
-          ("C-c C-l" . obsidian-insert-wikilink)
-          ("C-c C-o" . obsidian-follow-link-at-point)
-          ("C-c C-j" . obsidian-jump)
-          ("C-c C-b" . obsidian-backlink-jump)))
+  ;; (use-package obsidian
+  ;;   :ensure t
+  ;;   :custom
+  ;;   ;; Your Obsidian vault root
+  ;;   (obsidian-directory "~/General")        ;; vault = ~/General 
+  ;;    ;; Inbox folder inside the vault
+  ;;   (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
+  ;;   (markdown-enable-wiki-links t)
+  ;;   (obsidian-create-unfound-files-in-inbox t)
+  ;;   (obsidian-use-update-timer`nil)
+  ;;   (obsidian-use-pcache t)
+  ;;   :config
+  ;;   (global-obsidian-mode t)
+  ;;   (obsidian-backlinks-mode t)
+  ;;   (markdown-enable-wiki-links t)
+  ;;   :bind
+  ;;   (:map obsidian-mode-map
+  ;;         ("C-c C-n" . obsidian-capture)
+  ;;         ("C-c C-l" . obsidian-insert-wikilink)
+  ;;         ("C-c C-o" . obsidian-follow-link-at-point)
+  ;;         ("C-c C-j" . obsidian-jump)
+  ;;         ("C-c C-b" . obsidian-backlink-jump)))
 
-  (defun my-obsidian-move-current-file ()
-  (interactive)
-  (let* ((vault obsidian-directory)
-         (name  (file-name-nondirectory (buffer-file-name)))
-         (new   (expand-file-name name vault)))
-    (write-file new)
-    (obsidian-update)))
+  ;; (defun my-obsidian-move-current-file ()
+  ;; (interactive)
+  ;; (let* ((vault obsidian-directory)
+  ;;        (name  (file-name-nondirectory (buffer-file-name)))
+  ;;        (new   (expand-file-name name vault)))
+  ;;   (write-file new)
+  ;;   (obsidian-update)))
 
 
 #+END_SRC
@@ -486,20 +486,24 @@ https://github.com/oantolin/orderless
 #+BEGIN_SRC elisp :load no
   (message "python mode")
   (use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :custom
-  ;; Always use python3 REPL
-  (python-shell-interpreter "ipython")
-  (python-shell-interpreter-args "-i --simple-prompt")
-  ;; Disable native shell completion; let LSP/Corfu handle it
-  (python-shell-completion-native-enable nil)
-  (python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
-  :hook
-  ;; LSP on Python files
-  (python-mode . eglot-ensure)
-  ;; Example: enable indentation, etc. here if you want
-  )
+    :mode ("\\.py\\'" . python-mode)
+    :interpreter ("python" . python-mode)
+    :custom
+    ;; Always use python3 REPL
+    (python-shell-interpreter "ipython")
+    (python-shell-interpreter-args "-i --simple-prompt")
+    ;; Disable native shell completion; let LSP/Corfu handle it
+    (python-shell-completion-native-enable nil)
+    (python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
+    :hook
+    ;; LSP on Python files
+    (python-mode . eglot-ensure)
+    ;; Example: enable indentation, etc. here if you want
+    )
+  (setq pyvenv-mode-line-indicator
+        '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+
+  (pyvenv-mode 1)
 
 #+END_SRC
 *** speedbar
@@ -521,3 +525,12 @@ https://github.com/oantolin/orderless
   	    (keymap-set racket-repl-mode-map (kbd "RET") 'racket-repl-submit)))
 #+END_SRC
 
+*** Odin
+#+BEGIN_SRC elisp :load no
+  (message "Odin Mode")
+  ;;(package-vc-install "https://github.com/Sampie159/odin-ts-mode") ;; Enable when needed. 
+
+  (use-package odin-ts-mode
+    :mode "\\.odin\\'")
+
+#+END_SRC

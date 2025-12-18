@@ -2,15 +2,21 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("lovinglisp.pdf"
-  (filename . "~/Books/common-lisp/lovinglisp.pdf")
-  (position . 1)
-  (last-modified 26938 13578 195337 478000)
-  (page . 23)
-  (slice)
-  (size . 2.43921568627451)
-  (origin 0.08042895442359249 . 0.20248575867426202)
-  (handler . pdf-view-bookmark-jump-handler))
+(("repos"
+  (filename . "~/repos/")
+  (front-context-string . "stumpwm\n  drwxr-")
+  (rear-context-string . "96 Dec  6 21:18 ")
+  (position . 982)
+  (last-modified 26947 55990 638540 706000))
+("lovinglisp.pdf"
+ (filename . "~/Books/common-lisp/lovinglisp.pdf")
+ (position . 1)
+ (last-modified 26938 13578 195337 478000)
+ (page . 23)
+ (slice)
+ (size . 2.43921568627451)
+ (origin 0.08042895442359249 . 0.20248575867426202)
+ (handler . pdf-view-bookmark-jump-handler))
 ("Practical Common Lisp"
  (front-context-string . "ntroduction: Why")
  (rear-context-string . "s legs yet.\n\n1 I")

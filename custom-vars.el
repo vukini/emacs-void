@@ -13,13 +13,15 @@
    '(avy cape consult corfu dash-docs dash-functional dot-env dotenv ein
 	 embark envrc ess evil-collection exec-path-from-shell go-mode
 	 gptel gruber-darker-theme kind-icon load-env-vars lsp-ivy
-	 lsp-ui lua-mode magit marginalia nov obsidian orderless
-	 pdf-tools php-mode projectile purescript-mode python-mode
-	 pyvenv racket-mode rfc-mode s-buffer slime vertico vterm
-	 yasnippet-snippets))
+	 lsp-ui lua-mode magit marginalia nov obsidian odin-ts-mode
+	 orderless pdf-tools php-mode projectile purescript-mode
+	 python-mode pyvenv racket-mode rfc-mode s-buffer slime
+	 vertico vterm yasnippet-snippets))
  '(package-vc-selected-packages
-   '((reader :url "https://codeberg.org/divyaranjan/emacs-reader" :make
-	     "all"))))
+   '((odin-ts-mode :vc-backend Git :url
+		   "https://github.com/Sampie159/odin-ts-mode")
+     (reader :url "https://codeberg.org/divyaranjan/emacs-reader"
+	     :make "all"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
