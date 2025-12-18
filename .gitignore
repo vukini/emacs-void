@@ -33,3 +33,5 @@ emacs-haskell-unicode-input-method/
 # Org / misc noise
 .org-id-locations
 *_archive
+tramp
+config.el
