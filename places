@@ -1,9 +1,6 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/vukini/Downloads/"
-  (dired-filename
-   . "/home/vukini/Downloads/Abu-hashish-2025-12-09-PROPOSAL"))
- ("/home/vukini/General/"
-  (dired-filename . "/home/vukini/General/home"))
+(("/home/vukini/General/"
+  (dired-filename . "/home/vukini/General/copilot-conversations"))
  ("/home/vukini/General/Computing/Linux/"
   (dired-filename . "/home/vukini/General/Computing/Linux/.."))
  ("/home/vukini/General/Computing/"
@@ -15,7 +12,7 @@
  ("/home/vukini/General/Daily/2025-12-07.md" . 70)
  ("/home/vukini/quicklisp/slime-helper.el" . 1342)
  ("/home/vukini/quicklisp/"
-  (dired-filename . "/home/vukini/quicklisp/quicklisp"))
+  (dired-filename . "/home/vukini/quicklisp/local-projects"))
  ("/home/vukini/General/Daily/2025/"
   (dired-filename
    . "/home/vukini/General/Daily/2025/2025-11-India-Jaipur-Delhi-Travel.md"))
@@ -37,15 +34,19 @@
  ("/home/vukini/General/void-notes.md" . 8812)
  ("/home/vukini/General/Daily/2025-12-12-perplexity-numpy.md" . 4996)
  ("/home/vukini/General/Computing/Python/README.md" . 91)
+ ("/home/vukini/.stumpwmrc" . 2447)
+ ("/home/vukini/Downloads/"
+  (dired-filename
+   . "/home/vukini/Downloads/Abu-hashish-2025-12-09-PROPOSAL"))
  ("/home/vukini/Downloads/books-temp/"
-  (dired-filename . "/home/vukini/Downloads/books-temp/.."))
- ("/home/vukini/.stumpwmrc" . 3234)
+  (dired-filename . "/home/vukini/Downloads"))
+ ("/home/vukini/" (dired-filename . "/home/vukini/p"))
+ ("/home/vukini/p/odin/" . 125)
  ("/home/vukini/Books/modern-networking.epub" . 468)
  ("/home/vukini/Downloads/lispworks/"
   (dired-filename . "/home/vukini/Downloads"))
  ("/home/vukini/NewPackages/" (dired-filename . "/home/vukini"))
  ("/home/vukini/UserChanges/" (dired-filename . "/home/vukini"))
- ("/home/vukini/" (dired-filename . "/home/vukini/Books"))
  ("/home/vukini/Books/odin/"
   (dired-filename . "/home/vukini/Books/odin/odin_book_1_8.html"))
  ("/home/vukini/Books/" . 1491)

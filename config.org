@@ -1,5 +1,5 @@
 # -*- mode: org; eval: (org-src-mode); -*-
-* Emacs Initialization
+`* Emacs Initialization
 ** Setup
 *** On loading
 When Emacs first loaded, it loaded ~/.emacs.d/init.el, which then in turn loads, this file.
@@ -108,6 +108,19 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
    'php-mode
    'rfc-mode)
 
+(with-eval-after-load 'org
+  ;; Background + brighter foreground for all src blocks
+  (set-face-attribute 'org-block nil
+                      :background "#202020"
+                      :foreground "#e0e0e0")  ;; or nil to inherit
+  ;; Optional: begin/end lines
+  (set-face-attribute 'org-block-begin-line nil
+                      :foreground "#888888"
+                      :background "#181818")
+  (set-face-attribute 'org-block-end-line nil
+                      :foreground "#888888"
+                      :background "#181818"))
+  
   #+END_SRC
 *** Corfu
 #+BEGIN_SRC elisp :load no
@@ -414,36 +427,36 @@ Typing it presents you with a choice. Type 1 or 2 to select an option or keep ty
 #+END_SRC
 *** Obsidian
 #+BEGIN_SRC elisp :load no
-  ;; (use-package obsidian
-  ;;   :ensure t
-  ;;   :custom
-  ;;   ;; Your Obsidian vault root
-  ;;   (obsidian-directory "~/General")        ;; vault = ~/General 
-  ;;    ;; Inbox folder inside the vault
-  ;;   (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
-  ;;   (markdown-enable-wiki-links t)
-  ;;   (obsidian-create-unfound-files-in-inbox t)
-  ;;   (obsidian-use-update-timer`nil)
-  ;;   (obsidian-use-pcache t)
-  ;;   :config
-  ;;   (global-obsidian-mode t)
-  ;;   (obsidian-backlinks-mode t)
-  ;;   (markdown-enable-wiki-links t)
-  ;;   :bind
-  ;;   (:map obsidian-mode-map
-  ;;         ("C-c C-n" . obsidian-capture)
-  ;;         ("C-c C-l" . obsidian-insert-wikilink)
-  ;;         ("C-c C-o" . obsidian-follow-link-at-point)
-  ;;         ("C-c C-j" . obsidian-jump)
-  ;;         ("C-c C-b" . obsidian-backlink-jump)))
+   (use-package obsidian
+     :ensure t
+     :custom
+     ;; Your Obsidian vault root
+     (obsidian-directory "~/General")        ;; vault = ~/General 
+      ;; Inbox folder inside the vault
+     (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
+     (markdown-enable-wiki-links t)
+     (obsidian-create-unfound-files-in-inbox t)
+     (obsidian-use-update-timer`nil)
+     (obsidian-use-pcache t)
+     :config
+     (global-obsidian-mode t)
+     (obsidian-backlinks-mode t)
+     (markdown-enable-wiki-links t)
+     :bind
+     (:map obsidian-mode-map
+           ("C-c C-n" . obsidian-capture)
+           ("C-c C-l" . obsidian-insert-wikilink)
+           ("C-c C-o" . obsidian-follow-link-at-point)
+           ("C-c C-j" . obsidian-jump)
+           ("C-c C-b" . obsidian-backlink-jump)))
 
-  ;; (defun my-obsidian-move-current-file ()
-  ;; (interactive)
-  ;; (let* ((vault obsidian-directory)
-  ;;        (name  (file-name-nondirectory (buffer-file-name)))
-  ;;        (new   (expand-file-name name vault)))
-  ;;   (write-file new)
-  ;;   (obsidian-update)))
+   (defun my-obsidian-move-current-file ()
+   (interactive)
+   (let* ((vault obsidian-directory)
+          (name  (file-name-nondirectory (buffer-file-name)))
+          (new   (expand-file-name name vault)))
+     (write-file new)
+    (obsidian-update)))
 
 
 #+END_SRC
@@ -483,6 +496,7 @@ https://github.com/oantolin/orderless
 
 #+END_SRC
 *** python-mode
+remember to use M-x pyvenv-activate, before hacking in python. 
 #+BEGIN_SRC elisp :load no
   (message "python mode")
   (use-package python
