@@ -1,8 +1,10 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/vukini/General/"
+(("/home/vukini/.emacs.d/config.org" . 3785)
+ ("/home/vukini/p/odin/hellope.odin" . 37)
+ ("/home/vukini/General/"
   (dired-filename . "/home/vukini/General/copilot-conversations"))
  ("/home/vukini/General/Computing/Linux/"
-  (dired-filename . "/home/vukini/General/Computing/Linux/.."))
+  (dired-filename . "/home/vukini/General/Computing"))
  ("/home/vukini/General/Computing/"
   (dired-filename . "/home/vukini/General/Computing/Linux"))
  ("/home/vukini/.emacs.d/.saves/"
@@ -17,7 +19,7 @@
   (dired-filename
    . "/home/vukini/General/Daily/2025/2025-11-India-Jaipur-Delhi-Travel.md"))
  ("/home/vukini/.xinitrc" . 138)
- ("/home/vukini/p/c/" (dired-filename . "/home/vukini/p/c/.."))
+ ("/home/vukini/p/c/" (dired-filename . "/home/vukini/p"))
  ("/home/vukini/p/" (dired-filename . "/home/vukini/p/c"))
  ("/home/vukini/p/lisp/"
   (dired-filename . "/home/vukini/p/lisp/guess-my-number.lisp"))
@@ -28,7 +30,6 @@
  ("/home/vukini/General/Notes/learning obsidian mode in emacs.md"
   . 781)
  ("/home/vukini/General/Daily/2025-12-09.md" . 1098)
- ("/home/vukini/.emacs.d/config.org" . 3785)
  ("/home/vukini/.emacs.d/"
   (dired-filename . "/home/vukini/.emacs.d/local"))
  ("/home/vukini/General/void-notes.md" . 8812)

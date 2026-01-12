@@ -1,19 +1,16 @@
 (message "This is from config.org --> config.el")
-  (message "you are in %s" (shell-command-to-string "uname -a")) 
-  (message "Sytem type %s %s" system-type system-configuration)
-  (message "----------------------------")
-
+(message "you are in %s" (shell-command-to-string "uname -a")) 
+(message "Sytem type %s %s" system-type system-configuration)
+(message "----------------------------")
 ;;  (setq debug-on-error t)
-
-  (add-to-list 'load-path "~/.emacs.d/local")
-  (global-set-key (kbd "C-=") 'text-scale-increase)
-  (global-set-key (kbd "C--") 'text-scale-decrease)
-  ;;(global-set-key (kbd "C-\\") 'comment-region)
-  ;;(global-set-key (kbd "C-M-\\") 'uncomment-region)
-  ;;currently commented as using M-; 'comment-dwim (do what i mean)
-  ;;(evil-mode nil) 
-  ;;(server-start)                                    ;; Do I really need this?  
-  (hl-line-mode t)
+(add-to-list 'load-path "~/.emacs.d/local")
+(add-to-list 'load-path "~/.emacs.d/local/skewer-mode")
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+;;currently commented as using M-; 'comment-dwim (do what i mean)
+;;(evil-mode nil) 
+;;(server-start)                                    ;; Do I really need this?  
+(hl-line-mode t)
 
 (require 'uniquify)
 
@@ -25,7 +22,7 @@
         ("org"       . "https://orgmode.org/elpa/")))
 
 (package-initialize) ;this loads the installed packages and activates them
-(setq use-package-always-ensure t) ; ensures that packages not installed are
+(setq use-package-always-ensure t) ; ensures that packages not installed are installed
 (require 'package) ; use C-h P (to describe packages)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -33,32 +30,6 @@
 (message "Window Management")
 ;(global-set-key (kbd "M-\\") 'other-window)
 (global-set-key (kbd "M-\\") (lambda () (interactive) (other-window -1)))
-
-(load "rc.el")
-(message "Setting Theme")
-(rc/require-theme 'gruber-darker)
-;;(load-theme 'leuven-dark)
-
-(rc/require 'which-key)
-(which-key-mode)			
-
-(rc/require 'projectile)
-
-(rc/require
- 'lua-mode
- 'less-css-mode
- 'cmake-ts-mode
- 'markdown-mode
- ;'purescript-mode
- 'go-mode
- 'php-mode
- 'racket-mode
- 'rfc-mode) 
-(setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
-(add-hook 'racket-mode-hook #'racket-xp-mode)
-(add-hook 'racket-repl-mode-hook
-	  (lambda ()
-	    (keymap-set racket-repl-mode-map (kbd "RET") 'racket-repl-submit)))
 
 (message "Loading custom-file")
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
@@ -73,6 +44,39 @@
    kept-new-versions 6
    kept-old-versions 2
    version-control t)       ; use versioned backups
+
+(load "rc.el")
+  (message "Setting Theme")
+  (rc/require-theme 'gruber-darker)
+  ;;(load-theme 'leuven-dark)
+
+  (rc/require 'which-key)
+  (which-key-mode)			
+
+  (rc/require 'projectile)
+
+  (rc/require
+   'lua-mode
+   'less-css-mode
+   'cmake-ts-mode
+   'markdown-mode
+   ;'purescript-mode
+   'go-mode
+   'php-mode
+   'rfc-mode)
+
+(with-eval-after-load 'org
+  ;; Background + brighter foreground for all src blocks
+  (set-face-attribute 'org-block nil
+                      :background "#202020"
+                      :foreground "#e0e0e0")  ;; or nil to inherit
+  ;; Optional: begin/end lines
+  (set-face-attribute 'org-block-begin-line nil
+                      :foreground "#888888"
+                      :background "#181818")
+  (set-face-attribute 'org-block-end-line nil
+                      :foreground "#888888"
+                      :background "#181818"))
 
 (message "Corfu!")
 (use-package corfu
@@ -216,34 +220,58 @@
   :ensure t)
 
 (message "gptel")
+  ;; (use-package gptel
+  ;;   :ensure t
+  ;;   :config
+  ;;   ;; Perplexity backend
+  ;;    (setq my-gptel-openai
+  ;;         (gptel-make-openai "OpenAI"
+  ;;           :key (exec-path-from-shell-getenv "OPENAI_API_KEY")
+  ;; 	  ;;:endpoint "/vi/chat/completions"
+  ;;           :models '(gpt-4o gpt-4o-mini)))
+  ;;   ;; Perplexity backend
+  ;;   (setq my-gptel-perplexity
+  ;;         (gptel-make-perplexity "Perplexity"
+  ;;           :key (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")
+  ;;           :models '(sonar sonar-pro)))  ;; example models
+  ;;   (setq gptel-backend my-gptel-openai
+  ;;       gptel-model 'gpt-4o)
+  ;;   (setq gptel-backend my-gptel-perplexity
+  ;;       gptel-model 'sonar-pro))
+
+  ;; (defun gp (alternative)
+  ;; "choose your ai"
+  ;; (interactive "MChoose backend: ")
+  ;; (message alternative)
+  ;; (if (equal alternative "o")
+  ;;     (setq gptel-backend my-gptel-openai
+  ;;         gptel-model 'gpt-4o))
+  ;;     (setq gptel-backend my-gptel-perplexity
+  ;;           gptel-model 'sonar-pro))
+
 (use-package gptel
   :ensure t
   :config
-  ;; Perplexity backend
-   (setq my-gptel-openai
+  ;; Ensure keys are in Emacs env
+  ;; (exec-path-from-shell is fine if you already use it globally)
+  (setenv "OPENAI_API_KEY" (or (getenv "OPENAI_API_KEY")
+                               (exec-path-from-shell-getenv "OPENAI_API_KEY")))
+  (setenv "PERPLEXITY_API_KEY" (or (getenv "PERPLEXITY_API_KEY")
+                                   (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")))
+
+  (setq my-gptel-openai
         (gptel-make-openai "OpenAI"
-          :key (exec-path-from-shell-getenv "OPENAI_API_KEY")
-	  ;;:endpoint "/vi/chat/completions"
+          :key (lambda () (getenv "OPENAI_API_KEY"))
           :models '(gpt-4o gpt-4o-mini)))
-  ;; Perplexity backend
+
   (setq my-gptel-perplexity
         (gptel-make-perplexity "Perplexity"
-          :key (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")
-          :models '(sonar sonar-pro)))  ;; example models
-  (setq gptel-backend my-gptel-openai
-      gptel-model 'gpt-4o)
-  (setq gptel-backend my-gptel-perplexity
-      gptel-model 'sonar-pro))
+          :key (lambda () (getenv "PERPLEXITY_API_KEY"))
+          :models '(sonar sonar-pro)))
 
-(defun gp (alternative)
-"choose your ai"
-(interactive "MChoose backend: ")
-(message alternative)
-(if (equal alternative "o")
-    (setq gptel-backend my-gptel-openai
-        gptel-model 'gpt-4o))
-    (setq gptel-backend my-gptel-perplexity
-          gptel-model 'sonar-pro))
+  ;; Default
+  (setq gptel-backend my-gptel-perplexity
+        gptel-model 'sonar-pro))
 
 (message "Avy")
 (use-package avy
@@ -320,7 +348,7 @@
        (name  (file-name-nondirectory (buffer-file-name)))
        (new   (expand-file-name name vault)))
   (write-file new)
-  (obsidian-update)))
+ (obsidian-update)))
 
 (message "Orderless")
 (use-package orderless
@@ -349,19 +377,59 @@
 
 (message "python mode")
 (use-package python
-:mode ("\\.py\\'" . python-mode)
-:interpreter ("python" . python-mode)
-:custom
-;; Always use python3 REPL
-(python-shell-interpreter "ipython")
-(python-shell-interpreter-args "-i --simple-prompt")
-;; Disable native shell completion; let LSP/Corfu handle it
-(python-shell-completion-native-enable nil)
-(python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
-:hook
-;; LSP on Python files
-(python-mode . eglot-ensure)
-;; Example: enable indentation, etc. here if you want
-)
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :custom
+  ;; Always use python3 REPL
+  (python-shell-interpreter "ipython")
+  (python-shell-interpreter-args "-i --simple-prompt")
+  ;; Disable native shell completion; let LSP/Corfu handle it
+  (python-shell-completion-native-enable nil)
+  (python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
+  :hook
+  ;; LSP on Python files
+  (python-mode . eglot-ensure)
+  ;; Example: enable indentation, etc. here if you want
+  )
+(setq pyvenv-mode-line-indicator
+      '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+
+(pyvenv-mode 1)
+
+(rc/require 'racket-mode)
+(setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
+(add-hook 'racket-mode-hook #'racket-xp-mode)
+(add-hook 'racket-repl-mode-hook
+	  (lambda ()
+	    (keymap-set racket-repl-mode-map (kbd "RET") 'racket-repl-submit)))
+
+(message "Odin Mode")
+;;(package-vc-install "https://github.com/Sampie159/odin-ts-mode") ;; Enable when needed. 
+
+(use-package odin-ts-mode
+  :mode "\\.odin\\'")
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '((odin-mode odin-ts-mode) . ("ols"))))
+(setq eglot-events-buffer-size 0)   ;; keep full log
+(setq debug-on-error t)
 
 
+(add-hook 'odin-mode-hook #'eglot-ensure)
+;;(add-hook 'odin-ts-mode-hook #'eglot-ensure) ;; if you use TS
+
+(when (boundp 'treesit-extra-load-path)
+  (add-to-list 'treesit-extra-load-path
+               (expand-file-name "tree-sitter" user-emacs-directory)))
+
+(message "CSV mode")
+(use-package csv-mode
+:ensure t)
+
+(message "jinja loading")
+(use-package jinja2-mode
+:mode ("\\.jinja\\'" "\\.j2\\'" "\\.tmpl\\'")
+:hook (jinja2-mode . (lambda ()
+                       (setq-local comment-start "{# "
+                                   comment-end " #}"))))

@@ -10,13 +10,14 @@
      default))
  '(ein:jupyter-server-use-subcommand "server")
  '(package-selected-packages
-   '(avy cape consult corfu dash-docs dash-functional dot-env dotenv ein
-	 embark envrc ess evil-collection exec-path-from-shell go-mode
-	 gptel gruber-darker-theme kind-icon load-env-vars lsp-ivy
+   '(avy cape consult corfu csv-mode dash-docs dash-functional dot-env
+	 dotenv ein embark envrc ess evil-collection
+	 exec-path-from-shell go-mode gptel gruber-darker-theme
+	 jinja2-mode js2-mode js2mode kind-icon load-env-vars lsp-ivy
 	 lsp-ui lua-mode magit marginalia nov obsidian odin-ts-mode
 	 orderless pdf-tools php-mode projectile purescript-mode
 	 python-mode pyvenv racket-mode rfc-mode s-buffer slime
-	 vertico vterm yasnippet-snippets))
+	 vertico vterm yasnippet-snippets zig-mode))
  '(package-vc-selected-packages
    '((odin-ts-mode :vc-backend Git :url
 		   "https://github.com/Sampie159/odin-ts-mode")

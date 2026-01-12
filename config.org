@@ -1,5 +1,5 @@
 # -*- mode: org; eval: (org-src-mode); -*-
-`* Emacs Initialization
+* Emacs Initialization
 ** Setup
 *** On loading
 When Emacs first loaded, it loaded ~/.emacs.d/init.el, which then in turn loads, this file.
@@ -23,6 +23,7 @@ Finally we start the server process.
   (message "----------------------------")
   ;;  (setq debug-on-error t)
   (add-to-list 'load-path "~/.emacs.d/local")
+  (add-to-list 'load-path "~/.emacs.d/local/skewer-mode")
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
   ;;currently commented as using M-; 'comment-dwim (do what i mean)
@@ -184,6 +185,16 @@ Currently commented out
     :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
     :after corfu)
 #+END_SRC
+*** eglot
+#+BEGIN_SRC elisp :load no
+      (use-package eglot
+        :ensure t
+        :config
+        (add-to-list 'eglot-server-programs
+    		 '(zig-mode . ("zls")))
+        (add-hook 'zig-mode-hook #'eglot-ensure))
+#+END_SRC
+
 *** Embark
 #+BEGIN_SRC elisp :load no
    (use-package embark
@@ -320,36 +331,63 @@ Some notes, not evaluated:
 #+END_SRC
 **** gptel
 #+BEGIN_SRC elisp :load no
-    (message "gptel")
+      (message "gptel")
+    ;; (use-package gptel
+    ;;   :ensure t
+    ;;   :config
+    ;;   ;; Perplexity backend
+    ;;    (setq my-gptel-openai
+    ;;         (gptel-make-openai "OpenAI"
+    ;;           :key (exec-path-from-shell-getenv "OPENAI_API_KEY")
+    ;; 	  ;;:endpoint "/vi/chat/completions"
+    ;;           :models '(gpt-4o gpt-4o-mini)))
+    ;;   ;; Perplexity backend
+    ;;   (setq my-gptel-perplexity
+    ;;         (gptel-make-perplexity "Perplexity"
+    ;;           :key (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")
+    ;;           :models '(sonar sonar-pro)))  ;; example models
+    ;;   (setq gptel-backend my-gptel-openai
+    ;;       gptel-model 'gpt-4o)
+    ;;   (setq gptel-backend my-gptel-perplexity
+    ;;       gptel-model 'sonar-pro))
+
+    ;; (defun gp (alternative)
+    ;; "choose your ai"
+    ;; (interactive "MChoose backend: ")
+    ;; (message alternative)
+    ;; (if (equal alternative "o")
+    ;;     (setq gptel-backend my-gptel-openai
+    ;;         gptel-model 'gpt-4o))
+    ;;     (setq gptel-backend my-gptel-perplexity
+    ;;           gptel-model 'sonar-pro))
+
   (use-package gptel
     :ensure t
     :config
-    ;; Perplexity backend
-     (setq my-gptel-openai
+    ;; Ensure keys are in Emacs env
+    ;; (exec-path-from-shell is fine if you already use it globally)
+    (setenv "OPENAI_API_KEY" (or (getenv "OPENAI_API_KEY")
+                                 (exec-path-from-shell-getenv "OPENAI_API_KEY")))
+    (setenv "PERPLEXITY_API_KEY" (or (getenv "PERPLEXITY_API_KEY")
+                                     (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")))
+
+    (setq my-gptel-openai
           (gptel-make-openai "OpenAI"
-            :key (exec-path-from-shell-getenv "OPENAI_API_KEY")
-  	  ;;:endpoint "/vi/chat/completions"
+            :key (lambda () (getenv "OPENAI_API_KEY"))
             :models '(gpt-4o gpt-4o-mini)))
-    ;; Perplexity backend
+
     (setq my-gptel-perplexity
           (gptel-make-perplexity "Perplexity"
-            :key (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")
-            :models '(sonar sonar-pro)))  ;; example models
-    (setq gptel-backend my-gptel-openai
-        gptel-model 'gpt-4o)
-    (setq gptel-backend my-gptel-perplexity
-        gptel-model 'sonar-pro))
+            :key (lambda () (getenv "PERPLEXITY_API_KEY"))
+            :models '(sonar sonar-pro)))
 
-  (defun gp (alternative)
-  "choose your ai"
-  (interactive "MChoose backend: ")
-  (message alternative)
-  (if (equal alternative "o")
-      (setq gptel-backend my-gptel-openai
-          gptel-model 'gpt-4o))
-      (setq gptel-backend my-gptel-perplexity
-            gptel-model 'sonar-pro))
-      
+    ;; Default
+    (setq gptel-backend my-gptel-perplexity
+          gptel-model 'sonar-pro))
+
+
+
+    
 #+END_SRC
 *** Avy - jump to characters on screen
 #+BEGIN_SRC elisp :load no
@@ -547,4 +585,43 @@ remember to use M-x pyvenv-activate, before hacking in python.
   (use-package odin-ts-mode
     :mode "\\.odin\\'")
 
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '((odin-mode odin-ts-mode) . ("ols"))))
+  (setq eglot-events-buffer-size 0)   ;; keep full log
+  (setq debug-on-error t)
+
+
+  (add-hook 'odin-mode-hook #'eglot-ensure)
+  ;;(add-hook 'odin-ts-mode-hook #'eglot-ensure) ;; if you use TS
+
+  (when (boundp 'treesit-extra-load-path)
+    (add-to-list 'treesit-extra-load-path
+                 (expand-file-name "tree-sitter" user-emacs-directory)))
+
+
+#+END_SRC
+*** csv mode
+#+BEGIN_SRC elisp :load no
+  (message "CSV mode")
+  (use-package csv-mode
+  :ensure t)
+
+#+END_SRC
+*** Jinja
+#+BEGIN_SRC elisp :load no
+  (message "jinja loading")
+  (use-package jinja2-mode
+  :mode ("\\.jinja\\'" "\\.j2\\'" "\\.tmpl\\'")
+  :hook (jinja2-mode . (lambda ()
+                         (setq-local comment-start "{# "
+                                     comment-end " #}"))))
+
+#+END_SRC
+*** zig
+#+BEGIN_SRC elisp :load no
+  (use-package zig-mode
+    :ensure t
+    :mode "\\.zig\\'"
+    :hook ((zig-mode . eglot-ensure)))
 #+END_SRC
