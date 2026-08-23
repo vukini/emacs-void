@@ -14,6 +14,7 @@
 auto-save-list/
 tramp/
 eshell/history
+history
 projectile-bookmarks.eld
 recentf
 url/cache/
