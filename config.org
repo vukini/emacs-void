@@ -458,6 +458,30 @@ hook where they are defined.
     (add-to-list 'eglot-server-programs '((odin-mode odin-ts-mode) . ("ols"))))
 #+END_SRC
 
+*** Modes that start eglot automatically
+
+C and C++ are served by =ccls=, JavaScript and TypeScript by
+=typescript-language-server=; eglot's own defaults already map these, so only
+the hooks are needed here. Python, Odin and Zig add their own =eglot-ensure=
+in their sections below.
+
+The =-ts-mode= variants are listed for completeness. =.c=, =.cpp= and =.js=
+currently open in the classic modes, so those hooks are the ones that fire;
+the tree-sitter entries cost nothing and take effect if =major-mode-remap-alist=
+is ever used to switch over.
+
+#+BEGIN_SRC elisp
+  (dolist (hook '(c-mode-hook
+                  c-ts-mode-hook
+                  c++-mode-hook
+                  c++-ts-mode-hook
+                  js-mode-hook
+                  js-ts-mode-hook
+                  typescript-ts-mode-hook
+                  tsx-ts-mode-hook))
+    (add-hook hook #'eglot-ensure))
+#+END_SRC
+
 ** Tree-sitter grammars
 
 Grammars built into =~/.emacs.d/tree-sitter=.

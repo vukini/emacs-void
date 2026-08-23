@@ -231,6 +231,16 @@
   (add-to-list 'eglot-server-programs '(zig-mode . ("zls")))
   (add-to-list 'eglot-server-programs '((odin-mode odin-ts-mode) . ("ols"))))
 
+(dolist (hook '(c-mode-hook
+                c-ts-mode-hook
+                c++-mode-hook
+                c++-ts-mode-hook
+                js-mode-hook
+                js-ts-mode-hook
+                typescript-ts-mode-hook
+                tsx-ts-mode-hook))
+  (add-hook hook #'eglot-ensure))
+
 (when (boundp 'treesit-extra-load-path)
   (add-to-list 'treesit-extra-load-path
                (expand-file-name "tree-sitter" user-emacs-directory)))
