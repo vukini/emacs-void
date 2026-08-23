@@ -1,3 +1,5 @@
+;;; config.el --- generated from config.org  -*- lexical-binding: t; -*-
+
 (message "== Bootstrap ==")
 (message "This is from config.org --> config.el")
 (message "you are in %s" (shell-command-to-string "uname -a"))
@@ -39,6 +41,41 @@
       version-control t)               ; use versioned backups
 
 (require 'uniquify)
+
+(defun my/face-attrs-nil->unspecified (attrs)
+  "In face attribute plist ATTRS, replace nil values with `unspecified'."
+  (if (and (consp attrs) (keywordp (car attrs)))
+      (let (out)
+        (while attrs
+          (push (car attrs) out)
+          (push (if (null (cadr attrs)) 'unspecified (cadr attrs)) out)
+          (setq attrs (cddr attrs)))
+        (nreverse out))
+    attrs))
+
+(defun my/face-spec-nil->unspecified (spec)
+  "Sanitize a defface-style SPEC, replacing nil attribute values."
+  (if (consp spec)
+      (mapcar (lambda (entry)
+                (if (and (consp entry) (cdr entry))
+                    (cons (car entry)
+                          (mapcar #'my/face-attrs-nil->unspecified (cdr entry)))
+                  entry))
+              spec)
+    spec))
+
+(defun my/sanitize-theme-faces (args)
+  "Filter-args advice for `custom-theme-set-faces'."
+  (cons (car args)
+        (mapcar (lambda (a)
+                  (if (and (consp a) (cdr a))
+                      (cons (car a)
+                            (cons (my/face-spec-nil->unspecified (cadr a))
+                                  (cddr a)))
+                    a))
+                (cdr args))))
+
+(advice-add 'custom-theme-set-faces :filter-args #'my/sanitize-theme-faces)
 
 (use-package gruber-darker-theme
   :ensure t

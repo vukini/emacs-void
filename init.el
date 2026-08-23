@@ -1,3 +1,5 @@
+;;; init.el --- personal Emacs init  -*- lexical-binding: t; -*-
+
 (message "init.el is loading...")
 
 ;; We stop annoy bell noises and inhibit all start screens.
