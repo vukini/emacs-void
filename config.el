@@ -1,20 +1,13 @@
+(message "== Bootstrap ==")
 (message "This is from config.org --> config.el")
-(message "you are in %s" (shell-command-to-string "uname -a")) 
+(message "you are in %s" (shell-command-to-string "uname -a"))
 (message "Sytem type %s %s" system-type system-configuration)
 (message "----------------------------")
-;;  (setq debug-on-error t)
+
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/local/skewer-mode")
-(global-set-key (kbd "C-=") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-;;currently commented as using M-; 'comment-dwim (do what i mean)
-;;(evil-mode nil) 
-;;(server-start)                                    ;; Do I really need this?  
-(global-hl-line-mode 1)
 
-(require 'uniquify)
-
-(require 'package) ; use C-h P (to describe packages)
+(require 'package) ; use C-h P to describe packages
 
 (setq package-archives
       '(("gnu"       . "https://elpa.gnu.org/packages/")
@@ -23,56 +16,43 @@
         ("elpa-devel". "https://elpa.gnu.org/devel/")
         ("org"       . "https://orgmode.org/elpa/")))
 
-(package-initialize) ;this loads the installed packages and activates them
-(setq use-package-always-ensure t) ; ensures that packages not installed are installed
+(package-initialize)
+(setq use-package-always-ensure t)
+
 (unless package-archive-contents
   (package-refresh-contents))
 
-(message "Window Management")
-;(global-set-key (kbd "M-\\") 'other-window)
-(global-set-key (kbd "M-\\") (lambda () (interactive) (other-window -1)))
+(use-package exec-path-from-shell
+  :ensure t)
 
-(message "Loading custom-file")
+(message "== Core ==")
+
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
 
-(message "Backup Directories")
-  (setq
-   backup-by-copying t			; don't clobber symlinks
-   backup-directory-alist
-   '(("." . "~/.emacs.d/.saves/"))			; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+(setq backup-by-copying t              ; don't clobber symlinks
+      backup-directory-alist '(("." . "~/.emacs.d/.saves/"))
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)               ; use versioned backups
 
-(load "rc.el")
-  (message "Setting Theme")
-  (rc/require-theme 'gruber-darker)
-  ;;(load-theme 'leuven-dark)
+(require 'uniquify)
 
-  (rc/require 'which-key)
-  (which-key-mode)			
+(use-package gruber-darker-theme
+  :ensure t
+  :config
+  (load-theme 'gruber-darker t))
 
-  (rc/require 'projectile)
-
-  (rc/require
-   'lua-mode
-   'less-css-mode
-   'cmake-ts-mode
-   'markdown-mode
-   ;'purescript-mode
-   'go-mode
-   'php-mode
-   'rfc-mode)
+(global-hl-line-mode 1)
 
 (with-eval-after-load 'org
   ;; Background + brighter foreground for all src blocks
   (set-face-attribute 'org-block nil
                       :background "#202020"
-                      :foreground "#e0e0e0")  ;; or nil to inherit
-  ;; Optional: begin/end lines
+                      :foreground "#e0e0e0")
+  ;; begin/end lines
   (set-face-attribute 'org-block-begin-line nil
                       :foreground "#888888"
                       :background "#181818")
@@ -80,192 +60,254 @@
                       :foreground "#888888"
                       :background "#181818"))
 
-(message "Corfu!")
-(use-package corfu
-  :ensure t
-  :init
-  (global-corfu-mode)
-  :custom
-  (corfu-auto t)
-  (corfu-cycle t)
-  (corfu-preselect-first t))
+(global-set-key (kbd "C-=") #'text-scale-increase)
+(global-set-key (kbd "C--") #'text-scale-decrease)
+(global-set-key (kbd "M-\\") (lambda () (interactive) (other-window -1)))
 
-;  (rc/require 'vertico)
-;  (vertico-mode 1)
+(use-package which-key
+  :ensure nil
+  :config
+  (which-key-mode))
+
+(message "== Completion ==")
+
 (use-package vertico
+  :ensure t
   :custom
-  (vertico-scroll-margin 0) ;; Different scroll margin
-  (vertico-count 15) ;; Show more candidates
-  (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
-  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  (vertico-scroll-margin 0)
+  (vertico-count 15)                   ; show more candidates
+  (vertico-resize t)                   ; grow and shrink the minibuffer
+  (vertico-cycle t)                    ; cycle with vertico-next/previous
   :init
   (vertico-mode))
 
 (use-package savehist
-      :init
-      (savehist-mode))
+  :ensure nil
+  :init
+  (savehist-mode))
 
-;; ;; Emacs minibuffer configurations.
-;; (use-package emacs
-;;   :custom
-;;   ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
-;;   ;; to switch display modes.
-;;   (context-menu-mode t)
-;;   ;; Support opening new minibuffers from inside existing minibuffers.
-;;   (enable-recursive-minibuffers t)
-;;   ;; Hide commands in M-x which do not work in the current mode.  Vertico
-;;   ;; commands are hidden in normal buffers. This setting is useful beyond
-;;   ;; Vertico.
-;;   (read-extended-command-predicate #'command-completion-default-include-p)
-;;   ;; Do not allow the cursor in the minibuffer prompt
-;;   (minibuffer-prompt-properties
-;;    '(read-only t cursor-intangible t face minibuffer-prompt)))
-
-(use-package cape
+(use-package orderless
   :ensure t
-  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
-  :after corfu)
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-pcm-leading-wildcard t))
 
-(use-package eglot
+(use-package marginalia
   :ensure t
-  :config
-  (add-to-list 'eglot-server-programs
-		 '(zig-mode . ("zls")))
-  (add-hook 'zig-mode-hook #'eglot-ensure))
+  :init
+  (marginalia-mode))
+
+(use-package consult
+  :ensure t)
 
 (use-package embark
   :ensure t
   :bind
-  (("C-." . embark-act)
-   ("C-;" . embark-dwim)))
+  (("C-."   . embark-act)
+   ("C-;"   . embark-dwim)))
 
-(use-package consult :ensure t)
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-auto t)
+  (corfu-cycle t)
+  (corfu-preselect-first t)
+  :init
+  (global-corfu-mode))
 
-(use-package marginalia
-   :ensure t
-   :init (marginalia-mode))
-
-(setq projectile-project-search-path '("~/p/" "~/apps/" ("~/repos" . 1)))
+(use-package cape
+  :ensure t
+  :after corfu
+  :bind ("C-c p" . cape-prefix-map))   ; alternatives: M-<tab>, M-p, M-+
 
 (use-package kind-icon
-   :ensure t
-   :after corfu
-   :config
-   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  :ensure t
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(message "PDF Tools")
+(message "== Navigation ==")
+
+(use-package avy
+  :ensure t
+  :bind (("C-:"     . avy-goto-char)
+         ("C-'"     . avy-goto-char-2)
+         ("M-g f"   . avy-goto-line)
+         ("M-g w"   . avy-goto-word-1)
+         ("M-g e"   . avy-goto-word-0)
+         ("C-c C-j" . avy-resume))
+  :config
+  (avy-setup-default))
+
+(use-package projectile
+  :ensure t
+  :defer t
+  :custom
+  (projectile-project-search-path '("~/p/" "~/apps/" ("~/repos" . 1))))
+
+(use-package speedbar
+  :ensure nil
+  :defer t
+  :custom
+  (speedbar-show-unknown-files t)
+  (speedbar-directory-unshown-regexp "^$")
+  (speedbar-ignored-directory-expressions nil))
+
+(message "== Editing ==")
+
+(add-to-list 'load-path "/home/vukini/repos/paredit")
+(autoload 'enable-paredit-mode "paredit"
+  "Turn on pseudo-structural editing of Lisp code."
+  t)
+
+(dolist (hook '(emacs-lisp-mode-hook
+                lisp-mode-hook
+                racket-mode-hook
+                racket-repl-mode-hook))
+  (add-hook hook #'enable-paredit-mode))
+
+(use-package yasnippet
+  :ensure t
+  :hook ((prog-mode text-mode conf-mode) . yas-minor-mode)
+  :custom
+  (yas-snippet-dirs '("~/.emacs.d/snippets")))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+(add-to-list 'load-path "~/.emacs.d/local/emacs-haskell-unicode-input-method")
+(require 'haskell-unicode-input-method)
+
+(add-hook 'haskell-mode-hook
+          (lambda () (set-input-method "haskell-unicode")))
+
+(message "== Languages ==")
+
+(use-package eglot
+  :ensure nil
+  :custom
+  (eglot-events-buffer-size 0)         ; 0 = unlimited event log
+  :config
+  (add-to-list 'eglot-server-programs '(zig-mode . ("zls")))
+  (add-to-list 'eglot-server-programs '((odin-mode odin-ts-mode) . ("ols"))))
+
+(when (boundp 'treesit-extra-load-path)
+  (add-to-list 'treesit-extra-load-path
+               (expand-file-name "tree-sitter" user-emacs-directory)))
+
+(use-package slime
+  :ensure t
+  :init
+  (setq inferior-lisp-program "sbcl")
+  :config
+  (slime-setup '(slime-fancy))
+  (add-hook 'slime-load-hook
+            (lambda ()
+              (define-key slime-prefix-map (kbd "M-h")
+                          #'slime-documentation-lookup))))
+
+;; Local HyperSpec, if quicklisp has set one up. Missing file is not an error.
+(load "/home/vukini/quicklisp/clhs-use-local.el" t)
+
+(use-package racket-mode
+  :ensure t
+  :hook (racket-mode . racket-xp-mode)
+  :bind (:map racket-repl-mode-map
+              ("RET" . racket-repl-submit)))
+
+(use-package python
+  :ensure nil
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :hook (python-mode . eglot-ensure)
+  :custom
+  (python-shell-interpreter "ipython")
+  (python-shell-interpreter-args "-i --simple-prompt")
+  ;; Let eglot/corfu handle completion instead of the native REPL protocol.
+  (python-shell-completion-native-enable nil)
+  (python-shell-completion-native-disabled-interpreters
+   '("python" "python3" "ipython")))
+
+(use-package pyvenv
+  :ensure t
+  :custom
+  (pyvenv-mode-line-indicator
+   '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+  :config
+  (pyvenv-mode 1))
+
+(use-package odin-ts-mode
+  :ensure nil
+  :mode "\\.odin\\'"
+  :hook (odin-mode . eglot-ensure))
+
+(use-package zig-mode
+  :ensure t
+  :mode "\\.zig\\'"
+  :hook (zig-mode . eglot-ensure))
+
+(use-package jinja2-mode
+  :ensure t
+  :mode ("\\.jinja\\'" "\\.j2\\'" "\\.tmpl\\'")
+  :hook (jinja2-mode . (lambda ()
+                         (setq-local comment-start "{# "
+                                     comment-end   " #}"))))
+
+(use-package csv-mode
+  :ensure t
+  :defer t)
+
+(use-package lua-mode      :ensure t :defer t)
+(use-package go-mode       :ensure t :defer t)
+(use-package php-mode      :ensure t :defer t)
+(use-package markdown-mode :ensure t :defer t)
+(use-package rfc-mode      :ensure t :defer t)
+
+(message "== Tools ==")
+
+(use-package magit
+  :ensure t
+  :commands (magit-status magit-blame-addition)
+  :bind ("C-x g" . magit-status)
+  :custom
+  (magit-save-repository-buffers 'dontask)   ; save without asking
+  (magit-no-confirm '(stage-all-changes))    ; fewer prompts
+  (magit-display-buffer-function
+   #'magit-display-buffer-fullframe-status-topleft-v1)
+  (magit-section-visibility-indicator nil)
+  (magit-diff-refine-hunk 'all)
+  (magit-bury-buffer-function 'magit-restore-window-configuration)
+  (magit-repository-directories '(("~/p"     . 2)
+                                  ("~/repos" . 2))))
+
 (use-package pdf-tools
   :ensure t
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init
-  ;; Enable lazy loading for PDFs
+  ;; pdf-loader ships with pdf-tools and enables lazy loading.
   (use-package pdf-loader
-    :ensure nil              ;; comes from pdf-tools
+    :ensure nil
     :commands (pdf-loader-install)
     :init (pdf-loader-install))
   :config
-  ;; Optional defaults
   (setq-default pdf-view-display-size 'fit-page))
 
-(message "lsp-mode")
-;; (use-package lsp-mode
-;;   :ensure t
-;;   :commands (lsp lsp-defered)
-;;   :hook ((python-mode . lsp)
-;;          (go-mode . lsp)
-;;          (c-mode . lsp)
-;;          (c++-mode . lsp)
-;;  (lsp-completion-mode . my/lsp-use-orderless))
-;;   :config
-;;   (with-eval-after-load 'lsp-mode
-;;     (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server"))
-;;   :init
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   (defun my/lsp-use-orderless ()
-;;     (setf (alist-get 'style (alist-get 'lsp-capf completion-category-defaults))
-;;       '(orderless))))
-  
-;;   (use-package lsp-ui :ensure t :commands lsp-ui-mode)
-;;   (use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
-
-(message "Yasnippet")
-  (use-package yasnippet
-    :ensure t
-    :hook ((prog-mode text-mode conf-mode) . yas-minor-mode)
-    :init
-    (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
-  
-  (use-package yasnippet-snippets
-    :ensure t
-    :after yasnippet)
-
-(message "go-mode")
-;; (message ”this is from go lsp”)
-;; (use-package go-mode
-;;   :ensure t
-;;   :mode "\.go\'")
-
-(message "Magit")
-(use-package magit
+(use-package nov
   :ensure t
-  :commands (magit-status magit-blame-addition)
-  :init
-  (setq magit-save-repository-buffers 'dontask ; save without asking
-	  magit-no-confirm '(stage-all-changes)) ; fewer prompts
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1
-	  magit-section-visibility-indicator nil
-	  magit-diff-refine-hunk 'all)
-  (setq magit-bury-buffer-function 'magit-restore-window-configuration)
-  (setq magit-repository-directories '(("~/p" . 2)
-					 ("~/repos" . 2)))
-  :config
-  (global-set-key (kbd "C-x g") #'magit-status))
-
-(message "PureScript")
-
-(message "exec-path-from-shell")
-(use-package exec-path-from-shell
-  :ensure t)
-
-(message "gptel")
-  ;; (use-package gptel
-  ;;   :ensure t
-  ;;   :config
-  ;;   ;; Perplexity backend
-  ;;    (setq my-gptel-openai
-  ;;         (gptel-make-openai "OpenAI"
-  ;;           :key (exec-path-from-shell-getenv "OPENAI_API_KEY")
-  ;; 	  ;;:endpoint "/vi/chat/completions"
-  ;;           :models '(gpt-4o gpt-4o-mini)))
-  ;;   ;; Perplexity backend
-  ;;   (setq my-gptel-perplexity
-  ;;         (gptel-make-perplexity "Perplexity"
-  ;;           :key (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")
-  ;;           :models '(sonar sonar-pro)))  ;; example models
-  ;;   (setq gptel-backend my-gptel-openai
-  ;;       gptel-model 'gpt-4o)
-  ;;   (setq gptel-backend my-gptel-perplexity
-  ;;       gptel-model 'sonar-pro))
-
-  ;; (defun gp (alternative)
-  ;; "choose your ai"
-  ;; (interactive "MChoose backend: ")
-  ;; (message alternative)
-  ;; (if (equal alternative "o")
-  ;;     (setq gptel-backend my-gptel-openai
-  ;;         gptel-model 'gpt-4o))
-  ;;     (setq gptel-backend my-gptel-perplexity
-  ;;           gptel-model 'sonar-pro))
+  :mode ("\\.epub\\'" . nov-mode))
 
 (use-package gptel
   :ensure t
   :config
-  ;; Ensure keys are in Emacs env
-  ;; (exec-path-from-shell is fine if you already use it globally)
-  (setenv "OPENAI_API_KEY" (or (getenv "OPENAI_API_KEY")
-                               (exec-path-from-shell-getenv "OPENAI_API_KEY")))
-  (setenv "PERPLEXITY_API_KEY" (or (getenv "PERPLEXITY_API_KEY")
-                                   (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")))
+  (setenv "OPENAI_API_KEY"
+          (or (getenv "OPENAI_API_KEY")
+              (exec-path-from-shell-getenv "OPENAI_API_KEY")))
+  (setenv "PERPLEXITY_API_KEY"
+          (or (getenv "PERPLEXITY_API_KEY")
+              (exec-path-from-shell-getenv "PERPLEXITY_API_KEY")))
 
   (setq my-gptel-openai
         (gptel-make-openai "OpenAI"
@@ -277,163 +319,6 @@
           :key (lambda () (getenv "PERPLEXITY_API_KEY"))
           :models '(sonar sonar-pro)))
 
-  ;; Default
+  ;; Default backend
   (setq gptel-backend my-gptel-perplexity
         gptel-model 'sonar-pro))
-
-(message "Avy")
-(use-package avy
-  :ensure t
-  :config
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  (global-set-key (kbd "C-'") 'avy-goto-char-2)
-  (global-set-key (kbd "M-g f") 'avy-goto-line)
-  (global-set-key (kbd "M-g w") 'avy-goto-word-1)
-  (global-set-key (kbd "M-g e") 'avy-goto-word-0)
-  (avy-setup-default)
-  (global-set-key (kbd "C-c C-j") 'avy-resume))
-
-;  (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;  ;; Replace "sbcl" with the path to your implementation
-(setq inferior-lisp-program "sbcl")
-(slime-setup '(slime-fancy))
-(add-hook 'slime-load-hook
-	    (lambda ()
-	      (define-key
-	       slime-prefix-map
-	       (kbd "M-h")
-	       'slime-documentation-lookup)))
-(load "/home/vukini/quicklisp/clhs-use-local.el" t)
-
-(message "Paredit")
-(add-to-list 'load-path "/home/vukini/repos/paredit")
-(autoload 'enable-paredit-mode "paredit"
-  "Turn on pseudo-structural editing of Lisp Code"
-  t)
-(add-hook 'racket-mode-hook #'enable-paredit-mode)
-(add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
-(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook #'enable-paredit-mode)
-
-(message "Haskell Unicode")
-(add-to-list 'load-path "~/.emacs.d/local/emacs-haskell-unicode-input-method")
-(require 'haskell-unicode-input-method)
-(add-hook 'haskell-mode-hook 
-  (lambda () (set-input-method "haskell-unicode")))
-
-;   (use-package obsidian
-;     :ensure t
-;     :custom
-;     ;; Your Obsidian vault root
-;     (obsidian-directory "~/General")        ;; vault = ~/General 
-;      ;; Inbox folder inside the vault
-;     (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
-;     (markdown-enable-wiki-links t)
-;     (obsidian-create-unfound-files-in-inbox t)
-;     (obsidian-use-update-timer`nil)
-;     (obsidian-use-pcache t)
-;     :config
-;     (global-obsidian-mode t)
-;     (obsidian-backlinks-mode t)
-;     (markdown-enable-wiki-links t)
-;     :bind
-;     (:map obsidian-mode-map
-;           ("C-c C-n" . obsidian-capture)
-;           ("C-c C-l" . obsidian-insert-wikilink)
-;           ("C-c C-o" . obsidian-follow-link-at-point)
-;           ("C-c C-j" . obsidian-jump)
-;           ("C-c C-b" . obsidian-backlink-jump)))
-;
-;   (defun my-obsidian-move-current-file ()
-;   (interactive)
-;   (let* ((vault obsidian-directory)
-;          (name  (file-name-nondirectory (buffer-file-name)))
-;          (new   (expand-file-name name vault)))
-;     (write-file new)
-;    (obsidian-update)))
-
-(message "Orderless")
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  (completion-pcm-leading-wildcard t))
-(setq completion-styles '(orderless basic))
-
-(message "emacs reader")
-;(setq package-vc-allow-build-commands t)
-;(add-to-list 'load-path "~/.emacs.d/local/emacs-reader")
-;(require 'reader)
-
-(message "nov.el")
-;  (use-package nov
-;    :ensure t
-;    :mode '("\\.epub\\'" . nov-mode))
-
-(use-package nov
-  :ensure t
-  :mode ("\\.epub\\'" . nov-mode))
-
-(message "python mode")
-(use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :custom
-  ;; Always use python3 REPL
-  (python-shell-interpreter "ipython")
-  (python-shell-interpreter-args "-i --simple-prompt")
-  ;; Disable native shell completion; let LSP/Corfu handle it
-  (python-shell-completion-native-enable nil)
-  (python-shell-completion-native-disabled-interpreters '("python" "python3" "ipython"))
-  :hook
-  ;; LSP on Python files
-  (python-mode . eglot-ensure)
-  ;; Example: enable indentation, etc. here if you want
-  )
-(setq pyvenv-mode-line-indicator
-      '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
-
-(pyvenv-mode 1)
-
-(rc/require 'racket-mode)
-(add-hook 'racket-mode-hook #'racket-xp-mode)
-(add-hook 'racket-repl-mode-hook
-	  (lambda ()
-	    (keymap-set racket-repl-mode-map (kbd "RET") 'racket-repl-submit)))
-
-(message "Odin Mode")
-;;(package-vc-install "https://github.com/Sampie159/odin-ts-mode") ;; Enable when needed. 
-
-(use-package odin-ts-mode
-  :mode "\\.odin\\'")
-
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '((odin-mode odin-ts-mode) . ("ols"))))
-(setq eglot-events-buffer-size 0)   ;; keep full log
-;; (setq debug-on-error t)  ; enable temporarily when debugging startup
-
-
-(add-hook 'odin-mode-hook #'eglot-ensure)
-;;(add-hook 'odin-ts-mode-hook #'eglot-ensure) ;; if you use TS
-
-(when (boundp 'treesit-extra-load-path)
-  (add-to-list 'treesit-extra-load-path
-               (expand-file-name "tree-sitter" user-emacs-directory)))
-
-(message "CSV mode")
-(use-package csv-mode
-:ensure t)
-
-(message "jinja loading")
-(use-package jinja2-mode
-:mode ("\\.jinja\\'" "\\.j2\\'" "\\.tmpl\\'")
-:hook (jinja2-mode . (lambda ()
-                       (setq-local comment-start "{# "
-                                   comment-end " #}"))))
-
-(use-package zig-mode
-  :ensure t
-  :mode "\\.zig\\'"
-  :hook ((zig-mode . eglot-ensure)))
