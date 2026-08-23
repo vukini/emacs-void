@@ -10,7 +10,7 @@
 ;; save position or not.
 ;; We remove menu bars, tool bars, and scroll bars. Re-enable them by commmenting out each line if you need.
 
-(setq ring-bell-function 'ingore)  ;Stop the bell sound
+(setq ring-bell-function 'ignore)  ;Stop the bell sound
 (setq visible-bell t)                ; Show a visible bell instead 
 (setq inhibit-startup-screen t)    ; Disables the startup splash screen
 (setq inhibit-splash-screen t)     ; Disables the splash screen (older Emacs)

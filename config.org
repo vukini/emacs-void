@@ -3,19 +3,7 @@
 ** Setup
 *** On loading
 When Emacs first loaded, it loaded ~/.emacs.d/init.el, which then in turn loads, this file.
-
-Here we continue to initialize Emacs.
-We start by issuing some Welcome Messages.
-These should show in *Messages* buffer.
-if you don't see any, the file needs to be translated / generated with:
-
-`M-x org-babel-load-file`
-
-Often we want to load files we have put there ourselves, manually.
-For example, rc.el in this repository in `~/.emacs.d/local`.
-
-Finally we start the server process.
-
+Here we continue to initialize Emacs...
 #+BEGIN_SRC elisp :load no
   (message "This is from config.org --> config.el")
   (message "you are in %s" (shell-command-to-string "uname -a")) 
@@ -29,9 +17,20 @@ Finally we start the server process.
   ;;currently commented as using M-; 'comment-dwim (do what i mean)
   ;;(evil-mode nil) 
   ;;(server-start)                                    ;; Do I really need this?  
-  (hl-line-mode t)
+  (global-hl-line-mode 1)
   #+END_SRC
 
+We start by issuing some Welcome Messages.
+These should show in *Messages* buffer.
+if you don't see any, the file needs to be translated / generated with:
+
+`M-x org-babel-load-file`
+
+Often we want to load files we have put there ourselves, manually.
+For example, rc.el in this repository in `~/.emacs.d/local`.
+
+Finally we start the server process.
+  
 *** Uniquify
 https://elpa.gnu.org/packages/uniquify-files.html
 
@@ -48,6 +47,8 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+END_SRC
 *** Setup packages
 #+BEGIN_SRC elisp :load no
+  (require 'package) ; use C-h P (to describe packages)
+
   (setq package-archives
         '(("gnu"       . "https://elpa.gnu.org/packages/")
           ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
@@ -57,7 +58,6 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 
   (package-initialize) ;this loads the installed packages and activates them
   (setq use-package-always-ensure t) ; ensures that packages not installed are installed
-  (require 'package) ; use C-h P (to describe packages)
   (unless package-archive-contents
     (package-refresh-contents))
 #+END_SRC
@@ -72,7 +72,8 @@ different directories, uniquify adjusts the buffer names so you can tell them ap
 #+BEGIN_SRC elisp :load no
   (message "Loading custom-file")
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-  (load-file custom-file)
+  (when (file-exists-p custom-file)
+    (load custom-file))
 #+END_SRC
 *** Backup Directory
 #+BEGIN_SRC elisp :load no
@@ -181,7 +182,6 @@ Currently commented out
 #+BEGIN_SRC elisp :load no
   (use-package cape
     :ensure t
-    :init
     :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
     :after corfu)
 #+END_SRC
@@ -428,16 +428,10 @@ https://paredit.org/cgit/paredit/tree/
     (autoload 'enable-paredit-mode "paredit"
       "Turn on pseudo-structural editing of Lisp Code"
       t)
-    (add-hook 'M-mode-hook 'enable-paredit-mode)
-
-      (eval-after-load 'paredit
-        '(progn
-           (define-key paredit-mode-map (kbd "ESC M-A-C-s-)")
-            'paredit-dwim)))
-    (add-hook 'racket-mode-hook #'paredit-mode)
-    (add-hook 'racket-repl-mode-hook #'paredit-mode)
-    (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+    (add-hook 'racket-mode-hook #'enable-paredit-mode)
+    (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
+    (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+    (add-hook 'lisp-mode-hook #'enable-paredit-mode)
 #+END_SRC
 *** emacs-haskell-unicode-method
 [[eww:https://github.com/roelvandijk/emacs-haskell-unicode-input-method][emacs-haskell-unicode-input-method
@@ -465,36 +459,36 @@ Typing it presents you with a choice. Type 1 or 2 to select an option or keep ty
 #+END_SRC
 *** Obsidian
 #+BEGIN_SRC elisp :load no
-   (use-package obsidian
-     :ensure t
-     :custom
-     ;; Your Obsidian vault root
-     (obsidian-directory "~/General")        ;; vault = ~/General 
-      ;; Inbox folder inside the vault
-     (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
-     (markdown-enable-wiki-links t)
-     (obsidian-create-unfound-files-in-inbox t)
-     (obsidian-use-update-timer`nil)
-     (obsidian-use-pcache t)
-     :config
-     (global-obsidian-mode t)
-     (obsidian-backlinks-mode t)
-     (markdown-enable-wiki-links t)
-     :bind
-     (:map obsidian-mode-map
-           ("C-c C-n" . obsidian-capture)
-           ("C-c C-l" . obsidian-insert-wikilink)
-           ("C-c C-o" . obsidian-follow-link-at-point)
-           ("C-c C-j" . obsidian-jump)
-           ("C-c C-b" . obsidian-backlink-jump)))
-
-   (defun my-obsidian-move-current-file ()
-   (interactive)
-   (let* ((vault obsidian-directory)
-          (name  (file-name-nondirectory (buffer-file-name)))
-          (new   (expand-file-name name vault)))
-     (write-file new)
-    (obsidian-update)))
+;   (use-package obsidian
+;     :ensure t
+;     :custom
+;     ;; Your Obsidian vault root
+;     (obsidian-directory "~/General")        ;; vault = ~/General 
+;      ;; Inbox folder inside the vault
+;     (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
+;     (markdown-enable-wiki-links t)
+;     (obsidian-create-unfound-files-in-inbox t)
+;     (obsidian-use-update-timer`nil)
+;     (obsidian-use-pcache t)
+;     :config
+;     (global-obsidian-mode t)
+;     (obsidian-backlinks-mode t)
+;     (markdown-enable-wiki-links t)
+;     :bind
+;     (:map obsidian-mode-map
+;           ("C-c C-n" . obsidian-capture)
+;           ("C-c C-l" . obsidian-insert-wikilink)
+;           ("C-c C-o" . obsidian-follow-link-at-point)
+;           ("C-c C-j" . obsidian-jump)
+;           ("C-c C-b" . obsidian-backlink-jump)))
+;
+;   (defun my-obsidian-move-current-file ()
+;   (interactive)
+;   (let* ((vault obsidian-directory)
+;          (name  (file-name-nondirectory (buffer-file-name)))
+;          (new   (expand-file-name name vault)))
+;     (write-file new)
+;    (obsidian-update)))
 
 
 #+END_SRC
@@ -505,7 +499,6 @@ https://github.com/oantolin/orderless
   (use-package orderless
     :ensure t
     :custom
-    (setq completion--styles '(orderless basic))
     (completion-category-defaults nil)
     (completion-category-overrides '((file (styles basic partial-completion))))
     (completion-pcm-leading-wildcard t))
@@ -526,7 +519,6 @@ https://github.com/oantolin/orderless
 ;  (use-package nov
 ;    :ensure t
 ;    :mode '("\\.epub\\'" . nov-mode))
-(message "nov.el")
 
 (use-package nov
   :ensure t
@@ -570,7 +562,6 @@ remember to use M-x pyvenv-activate, before hacking in python.
 *** Racket mode
 #+BEGIN_SRC elisp :load no
   (rc/require 'racket-mode)
-  (setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
   (add-hook 'racket-mode-hook #'racket-xp-mode)
   (add-hook 'racket-repl-mode-hook
   	  (lambda ()
@@ -589,7 +580,7 @@ remember to use M-x pyvenv-activate, before hacking in python.
     (add-to-list 'eglot-server-programs
                  '((odin-mode odin-ts-mode) . ("ols"))))
   (setq eglot-events-buffer-size 0)   ;; keep full log
-  (setq debug-on-error t)
+  ;; (setq debug-on-error t)  ; enable temporarily when debugging startup
 
 
   (add-hook 'odin-mode-hook #'eglot-ensure)

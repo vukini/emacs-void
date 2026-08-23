@@ -10,9 +10,11 @@
 ;;currently commented as using M-; 'comment-dwim (do what i mean)
 ;;(evil-mode nil) 
 ;;(server-start)                                    ;; Do I really need this?  
-(hl-line-mode t)
+(global-hl-line-mode 1)
 
 (require 'uniquify)
+
+(require 'package) ; use C-h P (to describe packages)
 
 (setq package-archives
       '(("gnu"       . "https://elpa.gnu.org/packages/")
@@ -23,7 +25,6 @@
 
 (package-initialize) ;this loads the installed packages and activates them
 (setq use-package-always-ensure t) ; ensures that packages not installed are installed
-(require 'package) ; use C-h P (to describe packages)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -33,7 +34,8 @@
 
 (message "Loading custom-file")
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-(load-file custom-file)
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 (message "Backup Directories")
   (setq
@@ -121,9 +123,15 @@
 
 (use-package cape
   :ensure t
-  :init
   :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
   :after corfu)
+
+(use-package eglot
+  :ensure t
+  :config
+  (add-to-list 'eglot-server-programs
+		 '(zig-mode . ("zls")))
+  (add-hook 'zig-mode-hook #'eglot-ensure))
 
 (use-package embark
   :ensure t
@@ -298,20 +306,14 @@
 (load "/home/vukini/quicklisp/clhs-use-local.el" t)
 
 (message "Paredit")
-  (add-to-list 'load-path "/home/vukini/repos/paredit")
-  (autoload 'enable-paredit-mode "paredit"
-    "Turn on pseudo-structural editing of Lisp Code"
-    t)
-  (add-hook 'M-mode-hook 'enable-paredit-mode)
-
-    (eval-after-load 'paredit
-      '(progn
-         (define-key paredit-mode-map (kbd "ESC M-A-C-s-)")
-          'paredit-dwim)))
-  (add-hook 'racket-mode-hook #'paredit-mode)
-  (add-hook 'racket-repl-mode-hook #'paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-(add-hook 'lisp-mode-hook 'enable-paredit-mode)
+(add-to-list 'load-path "/home/vukini/repos/paredit")
+(autoload 'enable-paredit-mode "paredit"
+  "Turn on pseudo-structural editing of Lisp Code"
+  t)
+(add-hook 'racket-mode-hook #'enable-paredit-mode)
+(add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook #'enable-paredit-mode)
 
 (message "Haskell Unicode")
 (add-to-list 'load-path "~/.emacs.d/local/emacs-haskell-unicode-input-method")
@@ -319,42 +321,41 @@
 (add-hook 'haskell-mode-hook 
   (lambda () (set-input-method "haskell-unicode")))
 
-(use-package obsidian
-  :ensure t
-  :custom
-  ;; Your Obsidian vault root
-  (obsidian-directory "~/General")        ;; vault = ~/General 
-   ;; Inbox folder inside the vault
-  (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
-  (markdown-enable-wiki-links t)
-  (obsidian-create-unfound-files-in-inbox t)
-  (obsidian-use-update-timer`nil)
-  (obsidian-use-pcache t)
-  :config
-  (global-obsidian-mode t)
-  (obsidian-backlinks-mode t)
-  (markdown-enable-wiki-links t)
-  :bind
-  (:map obsidian-mode-map
-        ("C-c C-n" . obsidian-capture)
-        ("C-c C-l" . obsidian-insert-wikilink)
-        ("C-c C-o" . obsidian-follow-link-at-point)
-        ("C-c C-j" . obsidian-jump)
-        ("C-c C-b" . obsidian-backlink-jump)))
-
-(defun my-obsidian-move-current-file ()
-(interactive)
-(let* ((vault obsidian-directory)
-       (name  (file-name-nondirectory (buffer-file-name)))
-       (new   (expand-file-name name vault)))
-  (write-file new)
- (obsidian-update)))
+;   (use-package obsidian
+;     :ensure t
+;     :custom
+;     ;; Your Obsidian vault root
+;     (obsidian-directory "~/General")        ;; vault = ~/General 
+;      ;; Inbox folder inside the vault
+;     (obsidian-inbox-directory "Notes")      ;; inbox = ~/General/Notes
+;     (markdown-enable-wiki-links t)
+;     (obsidian-create-unfound-files-in-inbox t)
+;     (obsidian-use-update-timer`nil)
+;     (obsidian-use-pcache t)
+;     :config
+;     (global-obsidian-mode t)
+;     (obsidian-backlinks-mode t)
+;     (markdown-enable-wiki-links t)
+;     :bind
+;     (:map obsidian-mode-map
+;           ("C-c C-n" . obsidian-capture)
+;           ("C-c C-l" . obsidian-insert-wikilink)
+;           ("C-c C-o" . obsidian-follow-link-at-point)
+;           ("C-c C-j" . obsidian-jump)
+;           ("C-c C-b" . obsidian-backlink-jump)))
+;
+;   (defun my-obsidian-move-current-file ()
+;   (interactive)
+;   (let* ((vault obsidian-directory)
+;          (name  (file-name-nondirectory (buffer-file-name)))
+;          (new   (expand-file-name name vault)))
+;     (write-file new)
+;    (obsidian-update)))
 
 (message "Orderless")
 (use-package orderless
   :ensure t
   :custom
-  (setq completion--styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles basic partial-completion))))
   (completion-pcm-leading-wildcard t))
@@ -369,7 +370,6 @@
 ;  (use-package nov
 ;    :ensure t
 ;    :mode '("\\.epub\\'" . nov-mode))
-(message "nov.el")
 
 (use-package nov
   :ensure t
@@ -397,7 +397,6 @@
 (pyvenv-mode 1)
 
 (rc/require 'racket-mode)
-(setq lsp-racket-server-command '("racket" "-l" "racket-langserver"))
 (add-hook 'racket-mode-hook #'racket-xp-mode)
 (add-hook 'racket-repl-mode-hook
 	  (lambda ()
@@ -413,7 +412,7 @@
   (add-to-list 'eglot-server-programs
                '((odin-mode odin-ts-mode) . ("ols"))))
 (setq eglot-events-buffer-size 0)   ;; keep full log
-(setq debug-on-error t)
+;; (setq debug-on-error t)  ; enable temporarily when debugging startup
 
 
 (add-hook 'odin-mode-hook #'eglot-ensure)
@@ -433,3 +432,8 @@
 :hook (jinja2-mode . (lambda ()
                        (setq-local comment-start "{# "
                                    comment-end " #}"))))
+
+(use-package zig-mode
+  :ensure t
+  :mode "\\.zig\\'"
+  :hook ((zig-mode . eglot-ensure)))
