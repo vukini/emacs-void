@@ -257,7 +257,7 @@
                           #'slime-documentation-lookup))))
 
 ;; Local HyperSpec, if quicklisp has set one up. Missing file is not an error.
-(load "/home/vukini/quicklisp/clhs-use-local.el" t)
+(load (expand-file-name "~/quicklisp/clhs-use-local.el") t)
 
 (use-package racket-mode
   :ensure t
