@@ -36,3 +36,10 @@ emacs-haskell-unicode-input-method/
 *_archive
 tramp
 config.el
+
+# Per-machine state (was tracked; untracked 2026-09-25). Emacs recreates
+# each of these; committing them makes two machines conflict.
+bookmarks
+elgrep-data.el
+custom-vars.el
+racket-mode/input-history-*
