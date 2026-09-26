@@ -173,6 +173,20 @@ the theme registers them, so nothing ever stores =nil=.
   (advice-add 'custom-theme-set-faces :filter-args #'my/sanitize-theme-faces)
 #+END_SRC
 
+*** Third-party packages without a =lexical-binding= cookie
+
+Emacs 31 warns about every Elisp file that lacks the =lexical-binding=
+cookie on its first line. =gruber-darker-theme= (MELPA) is one, so each
+start ended with that warning, twice. The fix belongs upstream; patching
+=elpa/= would be undone by the next update. So that one warning type is
+silenced, and only it. Files of our own all carry the cookie.
+
+#+BEGIN_SRC elisp
+  (with-eval-after-load 'warnings
+    (add-to-list 'warning-suppress-types '(files missing-lexbind-cookie))
+    (add-to-list 'warning-suppress-log-types '(files missing-lexbind-cookie)))
+#+END_SRC
+
 *** Theme and frame appearance
 
 #+BEGIN_SRC elisp
@@ -420,8 +434,9 @@ Snippets live in =~/.emacs.d/snippets=.
 
 https://github.com/roelvandijk/emacs-haskell-unicode-input-method
 
-Clone this repo into =~/.emacs.d/local=. (Still to work out how to add it as a
-submodule.)
+Not on MELPA, so =use-package :vc= installs it straight from GitHub the first
+time Emacs starts (Emacs 30+), into =elpa/= like any other package. No clone
+by hand, and a new machine gets it too.
 
 Type =->= and it is immediately replaced with =→=. Use =C-\= to toggle the input
 method; =M-x describe-input-method haskell-unicode= shows the full table. An
@@ -432,11 +447,15 @@ To enable manually: =M-x set-input-method= or =C-x RET C-\= with
 =haskell-unicode=.
 
 #+BEGIN_SRC elisp
-  (add-to-list 'load-path "~/.emacs.d/local/emacs-haskell-unicode-input-method")
-  (require 'haskell-unicode-input-method)
-
-  (add-hook 'haskell-mode-hook
-            (lambda () (set-input-method "haskell-unicode")))
+  (use-package haskell-unicode-input-method
+    :vc (:url "https://github.com/roelvandijk/emacs-haskell-unicode-input-method"
+         :rev :newest)
+    ;; Loaded now, not deferred: the hook below needs the input method
+    ;; already registered when the first Haskell buffer opens.
+    :demand t
+    :config
+    (add-hook 'haskell-mode-hook
+              (lambda () (set-input-method "haskell-unicode"))))
 #+END_SRC
 
 * Languages
