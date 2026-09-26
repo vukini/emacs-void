@@ -58,8 +58,9 @@ package if it is missing. Built-in packages therefore need an explicit
         '(("gnu"       . "https://elpa.gnu.org/packages/")
           ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
           ("melpa"     . "https://melpa.org/packages/")
-          ("elpa-devel". "https://elpa.gnu.org/devel/")
-          ("org"       . "https://orgmode.org/elpa/")))
+          ("elpa-devel". "https://elpa.gnu.org/devel/")))
+  ;; No "org" archive: orgmode.org/elpa closed in 2021, and Org itself
+  ;; is on GNU ELPA.
 
   (package-initialize)
   (setq use-package-always-ensure t)
@@ -397,21 +398,19 @@ first use. =projectile-mode= is intentionally not enabled globally.
 
 https://paredit.org/cgit/paredit/tree/
 
-Loaded from a local clone rather than an archive.
+Installed from NonGNU ELPA. It used to load from a local clone in
+=~/repos/paredit=; on a machine without that clone, every Emacs Lisp buffer
+failed to turn paredit on -- including the ones package.el opens while it
+installs a package, so installs broke half way (no autoloads), and the
+packages then failed to load at every start.
 
 #+BEGIN_SRC elisp
   (message "== Editing ==")
 
-  (add-to-list 'load-path "/home/vukini/repos/paredit")
-  (autoload 'enable-paredit-mode "paredit"
-    "Turn on pseudo-structural editing of Lisp code."
-    t)
-
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  racket-mode-hook
-                  racket-repl-mode-hook))
-    (add-hook hook #'enable-paredit-mode))
+  (use-package paredit
+    :ensure t
+    :hook ((emacs-lisp-mode lisp-mode racket-mode racket-repl-mode)
+           . enable-paredit-mode))
 #+END_SRC
 
 ** Yasnippet
@@ -513,7 +512,19 @@ Grammars built into =~/.emacs.d/tree-sitter=.
 
 ** Common Lisp (SLIME)
 
+=xterm-color= goes in first. SLIME's =contrib/slime-xterm-color.el= (MELPA,
+2026-09-25) has a top-level =(use-package xterm-color :ensure t)=, which runs
+while package.el byte-compiles SLIME. On a machine without =xterm-color=, that
+installs it from inside the compiler, which leaves a position-tagged symbol in
+package.el's state -- and every later install in the same session then fails
+with =Wrong type argument: stringp, #<symbol xterm-color at 685>=. Installed
+beforehand, SLIME's line finds it present and does nothing.
+
 #+BEGIN_SRC elisp
+  (use-package xterm-color
+    :ensure t
+    :defer t)
+
   (use-package slime
     :ensure t
     :init
