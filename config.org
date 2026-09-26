@@ -506,8 +506,18 @@ Grammars built into =~/.emacs.d/tree-sitter=.
                 (define-key slime-prefix-map (kbd "M-h")
                             #'slime-documentation-lookup))))
 
-  ;; Local HyperSpec, if quicklisp has set one up. Missing file is not an error.
-  (load (expand-file-name "~/quicklisp/clhs-use-local.el") t)
+  ;; Local HyperSpec.  Deliberately NOT via quicklisp's clhs-use-local.el: that
+  ;; file locates the spec through dists/quicklisp/installed/systems/clhs.txt,
+  ;; which is absent here, so it falls back to a relative path, expands it
+  ;; against whatever default-directory happens to be at load time, and
+  ;; symlinks ~/quicklisp/HyperSpec at the result.  That link was dangling and
+  ;; was rewritten to a different dead path on every restart.  Point straight
+  ;; at the copy that is actually on disk instead.  The copy is not in git
+  ;; (20 MB), so a fresh machine without it keeps the online HyperSpec.
+  (let ((local (expand-file-name "HyperSpec-7-0/HyperSpec/"
+                                 user-emacs-directory)))
+    (when (file-directory-p local)
+      (setq common-lisp-hyperspec-root (concat "file://" local))))
 #+END_SRC
 
 ** Racket
@@ -626,6 +636,30 @@ deliberately not declared here — they need no installation.
                                     ("~/repos" . 2))))
 #+END_SRC
 
+** vterm
+
+The Emacs daemon is started by runit (=~/service/emacs-daemon/run=) with a
+deliberately minimal environment: =PATH=/usr/bin:/usr/sbin= and no =SHELL=.
+Emacs derives =shell-file-name= from =$SHELL=, so with it unset the fallback is
+=/bin/sh= -- dash on this machine -- and =vterm= inherits that. dash never
+reads =~/.bashrc=, so none of the =add_path= lines there run and the terminal
+only ever sees =/usr/bin:/usr/sbin=; that is why =claude= (installed under
+=~/.npm-global/bin=) is not found inside vterm.
+
+Pinning =vterm-shell= to bash is enough: bash on a pty with no arguments is
+interactive, so it sources =~/.bashrc= and the full PATH comes back.
+
+#+BEGIN_SRC elisp
+  (use-package vterm
+    :ensure t
+    :commands (vterm vterm-other-window)
+    :custom
+    ;; Not `shell-file-name': under the runit daemon $SHELL is unset, so that
+    ;; resolves to /bin/sh (dash), which never sources ~/.bashrc.
+    (vterm-shell "/bin/bash")
+    (vterm-max-scrollback 10000))
+#+END_SRC
+
 ** PDF Tools
 
 #+BEGIN_SRC elisp
@@ -659,6 +693,8 @@ lambdas can read them lazily.
 #+BEGIN_SRC elisp
   (use-package gptel
     :ensure t
+    :bind (("C-c g" . gptel)        ; open/switch to a chat buffer
+           ("C-c G" . gptel-menu))  ; transient menu; -m picks backend:model
     :config
     (setenv "OPENAI_API_KEY"
             (or (getenv "OPENAI_API_KEY")
@@ -680,6 +716,13 @@ lambdas can read them lazily.
     ;; Default backend
     (setq gptel-backend my-gptel-perplexity
           gptel-model 'sonar-pro))
+#+END_SRC
+
+** elisp-slime-nav
+#+BEGIN_SRC elisp
+(use-package elisp-slime-nav
+  :ensure t
+  :hook ((emacs-lisp-mode ielm-mode) . elisp-slime-nav-mode))
 #+END_SRC
 
 * Attic (disabled)
