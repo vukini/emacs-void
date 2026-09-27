@@ -553,11 +553,17 @@ beforehand, SLIME's line finds it present and does nothing.
 ** Racket
 
 #+BEGIN_SRC elisp
-  (use-package racket-mode
-    :ensure t
-    :hook (racket-mode . racket-xp-mode)
-    :bind (:map racket-repl-mode-map
-                ("RET" . racket-repl-submit)))
+  ;; Only where Racket is installed: without it, racket-mode stops the
+  ;; first start with "Cannot executable-find Racket". Vikix installs
+  ;; Racket with its Lisp languages, which can be left out. A `when`
+  ;; around it, not :if, since use-package installs (:ensure) before it
+  ;; looks at :if.
+  (when (executable-find "racket")
+    (use-package racket-mode
+      :ensure t
+      :hook (racket-mode . racket-xp-mode)
+      :bind (:map racket-repl-mode-map
+                  ("RET" . racket-repl-submit))))
 #+END_SRC
 
 ** Python
