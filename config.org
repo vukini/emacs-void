@@ -763,6 +763,26 @@ changes.
   (load (expand-file-name "~/.local/share/vikix/emacs/vikix-ai") t t)
 #+END_SRC
 
+** agent-shell
+
+An agent (Claude Code, Codex, Gemini CLI, OpenCode) in a chat buffer, over
+ACP. =C-c a= opens a chat with it. On Vikix, that is your agent (Super+a's),
+started by =vikix agent= (the guide, no API keys, a snapshot first), and
+=C-c A= runs it in a terminal; elsewhere =C-c a= is agent-shell's own
+picker.
+
+#+BEGIN_SRC elisp
+  (use-package agent-shell
+    :ensure t
+    :defer t)
+
+  (if (fboundp 'vikix-ai-agent)
+      (progn
+        (keymap-global-set "C-c a" #'vikix-ai-agent)
+        (keymap-global-set "C-c A" #'vikix-ai-agent-terminal))
+    (keymap-global-set "C-c a" #'agent-shell))
+#+END_SRC
+
 ** elisp-slime-nav
 #+BEGIN_SRC elisp
 (use-package elisp-slime-nav
