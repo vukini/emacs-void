@@ -297,7 +297,13 @@ Annotations in the minibuffer margin.
 
 #+BEGIN_SRC elisp
   (use-package consult
-    :ensure t)
+    :ensure t
+    :bind
+    (("C-x b" . consult-buffer)          ; buffers, recent files, bookmarks
+     ("C-s"   . consult-line)            ; search the current buffer
+     ("M-s r" . consult-ripgrep)         ; live grep the project
+     ("M-s f" . consult-fd)              ; find files in the project
+     ("M-g i" . consult-imenu)))         ; jump to a definition or heading
 #+END_SRC
 
 ** Embark
