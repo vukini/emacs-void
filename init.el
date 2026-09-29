@@ -30,3 +30,11 @@
 (org-babel-load-file (expand-file-name "config.org" user-emacs-directory)) ;launch config.org
 
 (put 'set-goal-column 'disabled nil)
+
+;; New frames (emacs, and emacsclient -c from Super+x) open *scratch* in ~,
+;; not whatever buffer desktop-save-mode restored or was last used.
+(defun my/home-scratch ()
+  (with-current-buffer (get-scratch-buffer-create)
+    (setq default-directory "~/")
+    (current-buffer)))
+(setq initial-buffer-choice #'my/home-scratch)
