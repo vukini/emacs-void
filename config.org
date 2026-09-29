@@ -749,9 +749,18 @@ lambdas can read them lazily.
             :key (lambda () (getenv "PERPLEXITY_API_KEY"))
             :models '(sonar sonar-pro)))
 
-    ;; Default backend
+    ;; Default backend (on Vikix, the one below follows `vikix ai use')
     (setq gptel-backend my-gptel-perplexity
           gptel-model 'sonar-pro))
+#+END_SRC
+
+On Vikix, =vikix-ai.el= adds Claude and the local models (Ollama), and makes the
+default the model Super+i uses (=vikix ai use=), read again at each =C-c g= /
+=C-c G=. Vikix keeps the file current; elsewhere it isn't there and nothing
+changes.
+
+#+BEGIN_SRC elisp
+  (load (expand-file-name "~/.local/share/vikix/emacs/vikix-ai") t t)
 #+END_SRC
 
 ** elisp-slime-nav
