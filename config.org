@@ -634,6 +634,31 @@ Not on an archive — install once with:
     :defer t)
 #+END_SRC
 
+** Markdown
+
+Shown close to rendered: the markup (=**=, =#=, backticks) is hidden, links show
+only their text, headings are larger, code blocks are coloured by language and
+images show inline. =C-c C-x C-m= shows the markup again (and hides it),
+=C-c C-x C-l= the URLs, =C-c C-x C-i= the images. Wiki links (=[[Note]]=, as in
+Obsidian) are followed with =C-c C-o=.
+
+#+BEGIN_SRC elisp
+  (use-package markdown-mode
+    :ensure t
+    :defer t
+    :custom
+    (markdown-hide-markup t)
+    (markdown-hide-urls t)
+    (markdown-header-scaling t)
+    (markdown-fontify-code-blocks-natively t)
+    (markdown-enable-wiki-links t)
+    (markdown-display-remote-images t)
+    ;; Only where images can show: in a terminal (emacs -nw) it's an error.
+    :hook (markdown-mode . (lambda ()
+                             (when (display-images-p)
+                               (markdown-display-inline-images)))))
+#+END_SRC
+
 ** Other language modes
 
 Installed for their autoloads; no configuration beyond the defaults. Each
@@ -646,7 +671,6 @@ deliberately not declared here — they need no installation.
   (use-package lua-mode      :ensure t :defer t)
   (use-package go-mode       :ensure t :defer t)
   (use-package php-mode      :ensure t :defer t)
-  (use-package markdown-mode :ensure t :defer t)
   (use-package rfc-mode      :ensure t :defer t)
 #+END_SRC
 
