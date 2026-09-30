@@ -331,6 +331,16 @@ In-buffer completion popup.
     (global-corfu-mode))
 #+END_SRC
 
+Since Emacs 30, text buffers (Org, Markdown, a gptel chat) complete words
+from a word list. Void installs none (=/usr/share/dict/words=), so with
+=corfu-auto= every word typed logged an ispell error in =*Messages*=. Only
+when a list is there.
+
+#+BEGIN_SRC elisp
+  (unless (seq-some #'file-readable-p '("/usr/share/dict/words" "/usr/dict/words"))
+    (setq text-mode-ispell-word-completion nil))
+#+END_SRC
+
 ** Cape
 
 https://github.com/minad/cape — completion-at-point extensions.
