@@ -190,11 +190,18 @@ silenced, and only it. Files of our own all carry the cookie.
 
 *** Theme and frame appearance
 
+On Vikix, Emacs follows the desktop's theme (=vikix theme=): =vikix-theme.el=
+loads the theme made for it (Catppuccin for void and paper, Doom's for gruvbox,
+nord and tokyo-night, Modus Vivendi for contrast), or the theme's own colours,
+and =vikix theme NAME= switches a running Emacs too. Elsewhere it isn't there,
+and gruber-darker is the theme.
+
 #+BEGIN_SRC elisp
-  (use-package gruber-darker-theme
-    :ensure t
-    :config
-    (load-theme 'gruber-darker t))
+  (unless (load (expand-file-name "~/.local/share/vikix/emacs/vikix-theme") t t)
+    (use-package gruber-darker-theme
+      :ensure t
+      :config
+      (load-theme 'gruber-darker t)))
 
   (global-hl-line-mode 1)
 
