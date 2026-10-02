@@ -107,6 +107,23 @@ Versioned backups, kept out of the source tree in =~/.emacs.d/.saves/=.
         version-control t)               ; use versioned backups
 #+END_SRC
 
+** Open files read-only
+
+Files that already exist open read-only, so a stray key can't change one;
+=C-x C-q= makes the buffer editable (and read-only again). New files open
+editable, and so does anything under a =.git= directory (commit messages,
+rebase lists), or Magit couldn't use them.
+
+#+BEGIN_SRC elisp
+  (defun my/open-read-only ()
+    "Make a buffer visiting an existing file read-only."
+    (when (and buffer-file-name
+               (file-exists-p buffer-file-name)
+               (not (string-match-p "/\\.git/" buffer-file-name)))
+      (read-only-mode 1)))
+  (add-hook 'find-file-hook #'my/open-read-only)
+#+END_SRC
+
 ** Uniquify
 
 https://elpa.gnu.org/packages/uniquify-files.html
