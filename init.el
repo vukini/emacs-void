@@ -31,10 +31,37 @@
 
 (put 'set-goal-column 'disabled nil)
 
-;; New frames (emacs, and emacsclient -c from Super+x) open *scratch* in ~,
-;; not whatever buffer desktop-save-mode restored or was last used.
+;; New frames (emacs, and emacsclient -c from Super+x) come back as the last
+;; frame closed (Super+q) left them: its windows, buffers and places. With
+;; nothing to come back to, *scratch* in ~. Esploro's frames are left out.
+;; desktop-save-mode keeps the layout across Emacs restarts too.
+(defvar my/last-frame-state nil
+  "Window layout of the last frame closed, for the next new frame.")
+(add-to-list 'desktop-globals-to-save 'my/last-frame-state)
+
+(defun my/remember-frame (frame)
+  (when (and (display-graphic-p frame)
+             (not (frame-parameter frame 'esploro))
+             (not (frame-parameter frame 'parent-frame)))
+    (setq my/last-frame-state
+          (cons (window-state-get (frame-root-window frame) t)
+                (seq-position (window-list frame 'nomini (frame-first-window frame))
+                              (frame-selected-window frame))))))
+(add-hook 'delete-frame-functions #'my/remember-frame)
+
 (defun my/home-scratch ()
   (with-current-buffer (get-scratch-buffer-create)
     (setq default-directory "~/")
     (current-buffer)))
-(setq initial-buffer-choice #'my/home-scratch)
+
+(defun my/last-frame-or-scratch ()
+  (if (and (consp my/last-frame-state)
+           (ignore-errors
+             (window-state-put (car my/last-frame-state) (frame-root-window) 'safe)
+             t))
+      (let ((window (nth (or (cdr my/last-frame-state) 0)
+                         (window-list nil 'nomini (frame-first-window)))))
+        (when (window-live-p window) (select-window window))
+        (window-buffer (selected-window)))
+    (my/home-scratch)))
+(setq initial-buffer-choice #'my/last-frame-or-scratch)
