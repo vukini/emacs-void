@@ -43,3 +43,17 @@ bookmarks
 elgrep-data.el
 custom-vars.el
 racket-mode/input-history-*
+
+# Local state and downloads, not config
+eww-bookmarks
+ielm-history.eld
+nov-places
+projects
+request/
+image-dired/
+tree-sitter/
+HyperSpec-7-0/
+# Packages cloned from their own repositories
+local/emacs-reader/
+local/emacs-web-server/
+local/skewer-mode/

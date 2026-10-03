@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: bsbash
+# key: bsbash
+# --
+#+BEGIN_SRC bash :results output
+$1
+#+END_SRC

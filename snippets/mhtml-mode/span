@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: span
+# key: span
+# --
+<span id="$1"></span>
