@@ -881,6 +881,18 @@ graph on 127.0.0.1 only).
   (load (expand-file-name "~/.local/share/vikix/emacs/vikix-notes") t t)
 #+END_SRC
 
+** Esploro (the file explorer, on Vikix)
+
+Esploro's window is an Emacs frame (Super+e). Its loader makes it known
+before it's first opened, without loading it: =M-x esploro=, and with
+embark, =C-.= then =X= on any file name for Esploro's commands (copy its
+path, compress, shrink a picture...), =J= to show it in Esploro. Where
+Esploro isn't installed, nothing changes.
+
+#+BEGIN_SRC elisp
+  (load (expand-file-name "~/.local/opt/esploro/emacs/esploro-loaddefs") t t)
+#+END_SRC
+
 ** elisp-slime-nav
 #+BEGIN_SRC elisp
 (use-package elisp-slime-nav
