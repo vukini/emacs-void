@@ -885,7 +885,7 @@ graph on 127.0.0.1 only).
 
 Esploro's window is an Emacs frame (Super+e). Its loader makes it known
 before it's first opened, without loading it: =M-x esploro=, and with
-embark, =C-.= then =X= on any file name for Esploro's commands (copy its
+embark, =C-.= then =,= (comma) on any file name for Esploro's commands (copy its
 path, compress, shrink a picture...), =J= to show it in Esploro. Where
 Esploro isn't installed, nothing changes.
 
