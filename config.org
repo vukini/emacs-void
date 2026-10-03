@@ -859,12 +859,25 @@ picker.
 The notes in =~/Dropbox/notes=: what Super+Alt+i takes into the inbox and
 =inbox sort= files away. =vikix-notes.el= puts them under =C-c n=: =a= the
 agenda (this week, then every TODO), =t= the TODOs, =c= a note into the
-inbox, =o= a notes file, =j= today's journal page, and with org-roam
-(installed from MELPA the first time, after asking) =f= find or start a
-note, =i= link to one, =l= its backlinks, =g= the graph in the browser.
-Vikix keeps the file current; elsewhere it isn't there and nothing changes.
+inbox, =o= a notes file, =j= today's journal page, and with org-roam =f=
+find or start a note, =i= link to one, =l= its backlinks, =g= the graph in
+the browser (org-roam-ui). Vikix keeps the file current; elsewhere it isn't
+there and nothing changes.
+
+org-roam and org-roam-ui are installed here, like the other packages; they
+load when a =C-c n= key first needs them. =vikix-notes.el= sets them up on
+the notes (the folder, the journal, the index in =~/.cache/vikix=, the
+graph on 127.0.0.1 only).
 
 #+BEGIN_SRC elisp
+  (use-package org-roam
+    :ensure t
+    :defer t)
+
+  (use-package org-roam-ui
+    :ensure t
+    :defer t)
+
   (load (expand-file-name "~/.local/share/vikix/emacs/vikix-notes") t t)
 #+END_SRC
 
