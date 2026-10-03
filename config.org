@@ -112,14 +112,21 @@ Versioned backups, kept out of the source tree in =~/.emacs.d/.saves/=.
 Files that already exist open read-only, so a stray key can't change one;
 =C-x C-q= makes the buffer editable (and read-only again). New files open
 editable, and so does anything under a =.git= directory (commit messages,
-rebase lists), or Magit couldn't use them.
+rebase lists), or Magit couldn't use them. So do the notes, which are for
+writing (the agenda ticks TODOs done in them, the journal adds to them):
+=my/editable-directories=.
 
 #+BEGIN_SRC elisp
+  (defvar my/editable-directories '("~/Dropbox/notes/")
+    "Folders whose files open editable all the same.")
+
   (defun my/open-read-only ()
     "Make a buffer visiting an existing file read-only."
     (when (and buffer-file-name
                (file-exists-p buffer-file-name)
-               (not (string-match-p "/\\.git/" buffer-file-name)))
+               (not (string-match-p "/\\.git/" buffer-file-name))
+               (not (seq-some (lambda (d) (file-in-directory-p buffer-file-name d))
+                              my/editable-directories)))
       (read-only-mode 1)))
   (add-hook 'find-file-hook #'my/open-read-only)
 #+END_SRC
@@ -845,6 +852,20 @@ picker.
         (keymap-global-set "C-c a" #'vikix-ai-agent)
         (keymap-global-set "C-c A" #'vikix-ai-agent-terminal))
     (keymap-global-set "C-c a" #'agent-shell))
+#+END_SRC
+
+** Notes (Org, on Vikix)
+
+The notes in =~/Dropbox/notes=: what Super+Alt+i takes into the inbox and
+=inbox sort= files away. =vikix-notes.el= puts them under =C-c n=: =a= the
+agenda (this week, then every TODO), =t= the TODOs, =c= a note into the
+inbox, =o= a notes file, =j= today's journal page, and with org-roam
+(installed from MELPA the first time, after asking) =f= find or start a
+note, =i= link to one, =l= its backlinks, =g= the graph in the browser.
+Vikix keeps the file current; elsewhere it isn't there and nothing changes.
+
+#+BEGIN_SRC elisp
+  (load (expand-file-name "~/.local/share/vikix/emacs/vikix-notes") t t)
 #+END_SRC
 
 ** elisp-slime-nav
