@@ -20,6 +20,7 @@ recentf
 url/cache/
 .lsp-session-v1
 places
+places.eld
 transient
 url
 
@@ -49,6 +50,7 @@ eww-bookmarks
 ielm-history.eld
 nov-places
 projects
+projects.eld
 request/
 image-dired/
 tree-sitter/

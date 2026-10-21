@@ -881,6 +881,18 @@ graph on 127.0.0.1 only).
   (load (expand-file-name "~/.local/share/vikix/emacs/vikix-notes") t t)
 #+END_SRC
 
+** Python as an IDE (on Vikix)
+
+On Vikix, =vikix-python.el= makes a =.py= file an IDE: the project's =.venv=
+found by itself for pyright, the REPL, pytest and ruff; ruff's findings
+beside pyright's and the buffer formatted on save; and the keys under
+=C-c p= (tests, a run, the REPL, the venv, the layout, the docs). Vikix
+keeps the file current, and this loads it when it's there.
+
+#+BEGIN_SRC elisp
+  (load (expand-file-name "~/.local/share/vikix/emacs/vikix-python") t t)
+#+END_SRC
+
 ** Esploro (the file explorer, on Vikix)
 
 Esploro's window is an Emacs frame (Super+e). Its loader makes it known
